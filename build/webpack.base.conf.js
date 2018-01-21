@@ -3,6 +3,9 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
+const px2rem = require('postcss-px2rem')
+const postcss = require('postcss')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -17,7 +20,7 @@ const createLintingRule = () => ({
     formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
-})
+});
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -38,6 +41,13 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      vue: {
+        postcss: [require('postcss-px2rem')({ remUnit: 75, propWhiteList: [] })]
+      },
+    })
+  ],
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
@@ -46,6 +56,18 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
+      {
+        test: /\.(css|less|scss)(\?.*)?$/,
+        loader: 'style-loader!css-loader!sass-loader!less-loader!postcss-loader'
+      },
+
+
+      {
+        test:/\.css$/,
+        loader:'css-loader!style-loader',
+      },
+
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -89,4 +111,4 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   }
-}
+};
