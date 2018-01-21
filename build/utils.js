@@ -18,10 +18,16 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
+      importLoaders:2
     }
   }
-
+  const px2remLoader = {
+    loader: 'px2rem-loader',
+    options: {
+      remUnit: 75
+    }
+  }
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
@@ -31,7 +37,25 @@ exports.cssLoaders = function (options) {
 
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
-    const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
+    var px2remLoader = {
+      loader: 'px2rem-loader',
+      options: {
+        remUnit: 75
+      }
+    }
+    // generate loader string to be used with extract text plugin
+    function generateLoaders (loader, loaderOptions) {
+      var loaders = [cssLoader, px2remLoader]
+      if (loader) {
+        loaders.push({
+          loader: loader + '-loader',
+          options: Object.assign({}, loaderOptions, {
+            sourceMap: options.sourceMap
+          })
+        })
+      }
+    }
+    const loaders = options.usePostCSS ? [cssLoader, px2remLoader] : [cssLoader]
 
     if (loader) {
       loaders.push({
@@ -65,7 +89,6 @@ exports.cssLoaders = function (options) {
     styl: generateLoaders('stylus')
   }
 }
-
 // Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function (options) {
   const output = []
