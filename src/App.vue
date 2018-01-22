@@ -1,23 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <pay></pay>
     <router-view/>
   </div>
 </template>
 
 <script>
+import pay from './components/pay/pay.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {pay}
 }
 </script>
 
 <style>
-#app {
+  #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  justify-content: center;
+  /*color: #2c3e50;*/
 }
+  body{
+    margin: 0;
+    padding: 0;
+  }
 </style>
