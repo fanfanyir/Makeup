@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <login></login>
+    <register></register>
     <!--实现跳转<router-view/>-->
   </div>
 </template>
 <script>
-import login from './components/login'
+import login from './components/login/login'
+import register from './components/register/register'
 export default {
   name: 'app',
   data () {
@@ -14,6 +16,7 @@ export default {
     }
   },
   components: {
+    register,
     login
   }
 }
