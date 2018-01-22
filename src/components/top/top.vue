@@ -17,7 +17,7 @@
 
 </script>
 
-<style>
+<style scoped>
   #top{
     display:flex;
     justify-content:space-around;
