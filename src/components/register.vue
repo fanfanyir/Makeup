@@ -4,24 +4,25 @@
       欢迎注册
     </p>
     <div id="register-pic">
-      <img src="../.././assets/login/person.png"/>
+      <img src=".././assets/login/person.png"/>
     </div>
     <changeimg></changeimg>
-    <div id="register-input">
+    <form method="" action="" id="register-input">
       <input type="text" placeholder="账户名"/>
+      <input type="text" placeholder="请输入身份证号"/>
       <input type="text" placeholder="性别"/>
       <input type="text" placeholder="邮箱"/>
       <input type="text" placeholder="电话号码"/>
       <input type="text" placeholder="密码"/>
-      <input type="text" placeholder="确认密码"/>
-    </div>
-    <div id="register-footer">
-      <input type="button" value="立即注册" />
-    </div>
+      <input type="password" placeholder="确认密码"/>
+    </form>
+    <form id="register-footer">
+      <input type="submit" value="立即注册" />
+    </form>
   </div>
 </template>
 <script>
-import changeimg from '../changeimg/changeimg.vue'
+import changeimg from './changeimg/changeimg.vue'
 export default {
   name: 'register',
   data () {
@@ -38,6 +39,7 @@ export default {
   *{padding:0;margin:0;}
   #register{
     width:100%;
+    height:100%;
   }
   #register-header{
     height:100px;
@@ -60,7 +62,7 @@ export default {
     justify-content: center;
     flex-wrap:wrap;
     width:100%;
-    height:700px;
+    height:770px;
   }
   #register-input input{
     border:none;

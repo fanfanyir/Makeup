@@ -1,9 +1,9 @@
 <template>
   <div id="changeimg">
-    <div id="changeimg-select">
-      <input type="file" value="从相册选择"/>
-      <input type="button" value="取 消"/>
-    </div>
+    <form id="changeimg-select">
+      <input type="file" value="从相册选择" size="1000" id="change1"/>
+      <input type="reset" value="取 消"/>
+    </form>
   </div>
 </template>
 <script>
@@ -33,12 +33,5 @@ export default {
     display:flex;
     justify-content:center;
     align-items:flex-end;
-  }
-  #changeimg-select input{
-    width:200px;
-    height:80px;
-    font-size:30px;
-    font-weight: bold;
-    /*background-color: #ff0000;*/
   }
 </style>
