@@ -6,6 +6,7 @@
     <brand></brand>
     <hot></hot>
     <subclass></subclass>
+    <bottom></bottom>
   </div>
 </template>
 
@@ -16,11 +17,10 @@ import goods from './goods/goods.vue'
 import brand from './brand/brand.vue'
 import hot from './hot/hot.vue'
 import subclass from './subclass/subclass.vue'
+import bottom from './bottom/bottom.vue'
 
 export default {
-  data () {
-  },
-  components: { top, banner, goods, brand, hot, subclass }
+  components: { top, banner, goods, brand, hot, subclass, bottom }
 }
 </script>
 

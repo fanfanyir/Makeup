@@ -1,52 +1,58 @@
 <template>
   <div id="brand">
-    <div id="title"><p>品牌分类</p></div>
+    <div id="title"><p>{{ message }}</p></div>
     <div id="brandcon">
-      <div><a href="#"><img src="../../assets/brand/timg.jpg"><span>迪奥</span></a></div>
-      <div><a href="#"><img src="../../assets/brand/timg.jpg"><span>迪奥</span></a></div>
-      <div><a href="#"><img src="../../assets/brand/timg.jpg"><span>迪奥</span></a></div>
-      <div><a href="#"><img src="../../assets/brand/timg.jpg"><span>迪奥</span></a></div>
-      <div><a href="#"><img src="../../assets/brand/timg.jpg"><span>迪奥</span></a></div>
-      <div><a href="#"><img src="../../assets/brand/timg.jpg"><span>迪奥</span></a></div>
+      <div v-for="item in items" v-bind:key="item.id">
+        <a href="#"><img v-bind:src="item.src"><span >{{ item.id }}</span></a>
+      </div>
     </div>
-
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
+export default{
+  data () {
+    return {
+      message: '品牌分类',
+      items: [
+        {id: '迪奥', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
+        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
+        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
+        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
+        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
+        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'}
+      ]
+    }
+  }
+}
 </script>
 
 <style>
   #brand{
+    margin:15px 10px 0 10px;
     font-size:30px;
-    margin:0 10px;
     background-color:#fff;
     border-bottom:3px solid #e6e6e6;
   }
-  #title{
-    margin-top:15px;
+  #title p{
     text-align:center;
     color:#ff0000;
   }
   #brandcon{
+    height:350px;
     display:flex;
-    margin:0 100px;
     flex-wrap:wrap;
     justify-content:space-around;
-    align-content:space-around;
   }
   #brandcon div{
-    width:120px;
-    height:125px;
+    width:33%;
+    height:150px;
     border-radius:50%;
-    margin:30px 20px;
+    text-align:center;
   }
   #brandcon a{
     text-decoration:none;
     font-size:14px;
-  }
-  a:link{
-    color:#000;
   }
   a:hover{
     color:#ff0000;
@@ -57,6 +63,7 @@
     border-radius:50%;
   }
   #brandcon span{
+    margin-top:5px;
     font-size:20px;
     display:block;
     text-align:center;
