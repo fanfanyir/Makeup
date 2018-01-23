@@ -1,11 +1,11 @@
 <template>
   <div id="makesure">
     <!--头部代码-->
-    <header>
-      <img src="../../assets/pay/箭头左粗.png" id="arrow_left">
-      <span>
-        {{message}}
-      </span>
+    <header class="clearfix">
+        <img src="../../assets/pay/箭头左粗.png" id="arrow_left">
+      <p>
+        {{title}}
+      </p>
       <div></div>
     </header>
     <!--地址代码-->
@@ -31,17 +31,16 @@
           {{telephone}}
         </span>
         <br>
-        <img src="../../assets/pay/箭头-右.png">
+        <!--<img src="../../assets/pay/箭头-右.png">-->
       </div>
     </div>
     <!--分割线-->
     <div class="lines"></div>
     <!--商品信息-->
-    <div id="goods" v-on:click="detials">
+    <div id="goods"  class="clearfix">
       <img src="../../assets/pay/WechatIMG21.jpeg" id="goods_picture"/>
       <div id="goods_infor_right">
-        <p id="goods_information">杜先生杜先生杜先生杜先生杜先生杜先生杜先生杜先生杜先生杜先生
-          杜先生杜先生杜先生杜先生杜先生杜先生杜先生杜先生杜先生杜先生杜先生</p>
+        <p id="goods_information">张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹</p>
         <span>
           {{message3}}
         </span>
@@ -52,6 +51,43 @@
         <p id="goods_number">x1</p>
       </div>
     </div>
+    <!--底部信息-->
+    <footer class="clearfix">
+      <!--底部左边的信息-->
+      <div id="footer_left" >
+        <p v-for="item in footer_left_message"  v-bind:key="item.footer_left_message">
+            {{item.message}}
+         </p>
+        <input type="text" placeholder="选填:填写内容已和商家协商确定" id="leave_word">
+      </div>
+      <!--底部右边的信息-->
+      <div id="footer_right">
+        <p>
+          <span>X</span>
+          <span id="footer_right_number">
+            {{message9}}
+          </span>
+        </p>
+        <p>
+          {{message10}}
+        </p>
+      </div>
+    </footer>
+    <!--分割线-->
+    <div class="lines2 line"></div>
+    <!--结算-->
+    <div id="last"></div>
+    <div id="accounts" class="clearfix">
+      <input type="button" value="确认订单" id="makesure_order"/>
+      <p>
+        <span>
+          {{total_money}}
+        </span>
+        <span id="total_money">
+          ¥368.00
+        </span>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -60,101 +96,181 @@ export default {
   name: 'pay',
   data () {
     return {
-      message: '确认订单',
+      title: '确认订单',
       message1: '收货人:',
       message2: '收货地址:',
       telephone: '17691045044',
-      message3: '产品规格:'
+      message3: '产品规格:',
+      message4: '购买数量',
+      footer_left_message: [
+        {message: '配送方式'},
+        {message: '7天无理由退货'},
+        {message: '买家留言'}
+      ],
+      message9: '1',
+      message10: '快递免邮',
+      total_money: '合计金额:'
     }
   }
 }
+
 </script>
 <meta name="keywords" content="" />
 <style  lang="scss" scoped>
   /*@import "~@/assets/common.scss";*/
-  /**{*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-  /*}*/
   /*重复样式*/
-  #makesure header,#makesure #address{
+  #makesure header,#makesure #address, #makesure footer{
     padding: 0 20px 0 20px;
   }
-  /*这里是头部样式*/
-  #makesure header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ff0000;
-    height: 80px;
-    margin-bottom: 20px;
-    padding: 0 20px 0 10px;
-
+  #makesure {
+    .lines{
+        width: 100%;
+        background-color: #ff0000;
+        height: 2px;
+        margin-bottom: 20px;
+      }
+    .lines2{
+      background-color: #d7d7d7;
+      height: 2px;
+      margin: 0;
+    }
+    /*这里是头部样式*/
+    header {
+      z-index: 3;
+      width: 100%;
+      background-color: #ff0000;
+      height: 80px;
+      margin-bottom: 20px;
+      padding: 0 20px 0 10px;
+      position: relative;
+      position: fixed;
+      top:0;
+      left:0;
+      #arrow_left{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        margin-top: -15px;
+        top: 50%;
+      }
+      p {
+        line-height: 80px;
+        width: 200px;
+        font-size: 30px;
+        color: #ffffff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -100px;
+        margin-top: -40px;
+      }
+    }
+    /*这里是收货地址样式*/
+    #address{
+      margin-top: 80px;
+      width: 100%;
+      display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 25px;
+        height: 80px;
+      #address_picture{
+        width: 30px;
+        height: 30px;
+      }
+      #address_leftpart{
+          flex-grow: 2;
+          #address_infortitle{
+            margin-left: 55px;
+          }
+        }
+        #address_picture{
+          width: 50px;
+          height: 50px;
+        }
+        #address_rightpart{
+          width: 115px;
+          flex-wrap: wrap;
+          flex-direction: row-reverse;
+          display: flex;
+          /*img{*/
+            /*width: 30px;*/
+            /*height: 30px;*/
+          /*}*/
+        }
+      }
+    /*商品信息样式*/
+    #goods{
+      width: 100%;
+      background-color: #f7f7f7;
+      padding: 10px;
+      margin-bottom: 20px;
+      #goods_picture{
+        width: 130px;
+        height: 130px;
+        margin-right: 10px;
+        float: left;
+      }
+      #goods_infor_right{
+        float: left;
+        width: 80%;
+        padding-top: 10px;
+      }
+      span:nth-of-type(1), #makesure #goods  span:nth-of-type(2),#goods_number{
+        color: #898989;
+      }
+      #goods_price{
+        color: #ff0000;
+      }
+    }
+    /*底部信息样式*/
+    footer{
+      width: 100%;
+      line-height: 33px;
+      font-size: 20px;
+      #footer_left{
+        float: left;
+        width: 575px;
+        input{
+          margin-left: 105px;
+          width: 600px;
+        }
+      }
+      #footer_right{
+          width: 80px;
+          float: right;
+        }
+    }
+    /*结算*/
+    #accounts{
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      padding:20px 0 0 325px;
+      #total_money{
+        color: #ff0000;
+      }
+      p{
+        display: inline-block;
+        width: 220px;
+        line-height: 50px;
+        font-size: 20px;
+        float: right;
+      }
+      #makesure_order{
+        float: right;
+        width: 130px;
+        height: 50px;
+        background-color: #ff0000;
+        color: #ffffff;
+        /*margin-left: 88px;*/
+      }
+    }
+    #last{
+      width: 700px;
+      height: 1700px;
+      background-color: red;
   }
-  #makesure header #arrow_left,#address #address_picture{
-    width: 50px;
-    height: 50px;
   }
-  #makesure header span{
-    font-size: 30px;
-    color: #ffffff;
-  }
-  #makesure header div{
-    width: 100px;
-  }
-  /*这里是收货地址样式*/
-  #makesure #address{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 25px;
-    height: 80px;
-  }
-  #makesure #address #address_leftpart{
-    flex-grow: 2;
-  }
-  #makesure #address #address_picture{
-    width: 50px;
-    height: 50px;
-  }
-  #makesure #address #address_rightpart{
-    width: 115px;
-    flex-wrap: wrap;
-    flex-direction: row-reverse;
-    display: flex;
-  }
-  #makesure #address #address_leftpart  #address_infortitle{
-    margin-left: 55px;
-  }
-  #makesure #address #address_rightpart img{
-    width: 30px;
-    height: 30px;
-  }
-  #makesure .lines{
-    width: 100%;
-    background-color: #ff0000;
-    height: 2px;
-    margin-bottom: 20px;
-  }
-  /*商品信息样式*/
-  #makesure #goods{
-    display: flex;
-    height: 155px;
-    background-color: #f7f7f7;
-    padding-left: 10px;
-    align-items: center;
-  }
-  #makesure #goods #goods_picture{
-    width: 130px;
-    height: 130px;
-    margin-right: 5px;
-  }
-  #makesure #goods span:nth-of-type(1), #makesure #goods  span:nth-of-type(2),
-  #makesure #goods #goods_number{
-    color: #898989;
-  }
-  #makesure #goods #goods_price{
-    color: #ff0000;
-  }
-
 </style>
