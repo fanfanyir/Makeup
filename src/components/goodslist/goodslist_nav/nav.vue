@@ -1,0 +1,72 @@
+<template>
+  <div id="navv">
+    <ul id="nav1">
+      <li class="tab" @click="toggleTab('brand')"><a>品牌</a></li>
+      <li class="tab" @click="toggleTab('sort')"><a>排序方式▼</a></li>
+      <li class="tab" @click="toggleTab('classify')"><a>全部分类</a></li>
+      <li><img id="view" src="../../../assets/goodslist/Viewlist.png"/></li>
+      <li class="right_shai"><span id="lineshai">筛选</span><img id="seclect" src="../../../assets/goodslist/筛选.png"/></li>
+    </ul>
+    <!--<brand :is="currentTab" keep-alive></brand>-->
+    <brand :is="currentTab" keep-alive></brand>
+  </div>
+</template>
+
+<script>
+import brand from './brand/brand'
+import classify from './classify/classify'
+import sort from './sort/sort'
+export default{
+  name: 'banner',
+  data () {
+    return {
+      currentTab: 'brand'
+    }
+  },
+  components: {
+    brand,
+    classify,
+    sort
+  },
+  methods: {
+    toggleTab: function (tab) {
+      this.currentTab = tab
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+  #nav1{
+      border-bottom: 1px #cccccc solid;
+      /*height: 80px;*/
+      display: flex;
+      font-size: 25px;
+      justify-content: space-around;
+      align-items: center;
+      padding: 5px;
+      padding-left: 30px;
+      padding-right: 0;
+    #view{
+      width:35px;
+      height: 35px;
+    }
+    .right_shai{
+      width: 150px;
+      text-align: center;
+      overflow: hidden;
+      border-left: 1px #cccccc solid
+    }
+    #lineshai{
+      padding-left:10px;
+    }
+    #seclect{
+      width:50px;
+      height: 50px;
+    }
+  }
+  #tabs{
+    height: 155px;
+    background: #ffffff;
+    /*padding: 15px;*/
+  }
+</style>
