@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'lib-flexible/flexible'
+import VueResource from 'vue-resource'
+import '../static/pay.js'
+Vue.use(VueResource)
 // import  commom from '../static/common.css'
 Vue.config.productionTip = false
 

@@ -9,7 +9,7 @@
       <div></div>
     </header>
     <!--地址代码-->
-    <div id="address">
+    <div id="address" @click="address()">
       <div id="address_leftpart">
         <img src="../../assets/pay/地址-2.png" id="address_picture"/>
             <span>
@@ -76,9 +76,9 @@
     <!--分割线-->
     <div class="lines2 line"></div>
     <!--结算-->
-    <div id="last"></div>
+    <!--<div id="last"></div>-->
     <div id="accounts" class="clearfix">
-      <input type="button" value="确认订单" id="makesure_order"/>
+        <input type="submit" value="确认订单" id="makesure_order"/>
       <p>
         <span>
           {{total_money}}
@@ -90,7 +90,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: 'pay',
@@ -111,6 +110,25 @@ export default {
       message10: '快递免邮',
       total_money: '合计金额:'
     }
+  },
+  methods: {
+    address: function () {
+      // this.$http.get('http://localhost:8080',{}).then(function (res) {
+      //   alert(res.body)
+      // }, function () {
+      //   console.log('请求失败')
+      // }
+      // )
+      this.$http.jsonp('https://www.baidu.com/', {word: 'a'}, {jsonp: 'callback'}).then(function (res) {
+        console.log(res.data)
+      }, function (res) {
+        console.log(res.status)
+      })
+    }
+
+    // fn1: function (obj) {
+    //   obj.style.background = 'red'
+    // }
   }
 }
 
@@ -142,7 +160,7 @@ export default {
       height: 80px;
       margin-bottom: 20px;
       padding: 0 20px 0 10px;
-      position: relative;
+      /*position: relative;*/
       position: fixed;
       top:0;
       left:0;
@@ -234,10 +252,12 @@ export default {
         input{
           margin-left: 105px;
           width: 600px;
+          border: none;
+          outline: none;
         }
       }
       #footer_right{
-          width: 80px;
+          width: 100px;
           float: right;
         }
     }
@@ -267,10 +287,10 @@ export default {
         /*margin-left: 88px;*/
       }
     }
-    #last{
-      width: 700px;
-      height: 1700px;
-      background-color: red;
-  }
+    /*#last{*/
+      /*width: 700px;*/
+      /*height: 1700px;*/
+      /*background-color: red;*/
+  /*}*/
   }
 </style>
