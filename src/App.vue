@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <login></login>
+    <!--<login></login>-->
     <!--<register></register>-->
-    <!--<person></person>-->
+    <person></person>
     <!--实现跳转<router-view/>-->
   </div>
 </template>

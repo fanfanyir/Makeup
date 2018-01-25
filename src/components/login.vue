@@ -4,13 +4,15 @@
       <img v-bind:src="item.src"/>
     </div>
     <form id="login-input" name="login" action="" >
-      <input type="text" placeholder="请输入账户名"  id="username"  name="username"/><span id="user"></span>
-      <input type="password" placeholder="请输入密码" id="password" name="password"/><span id="pass"></span>
+      <input type="text" placeholder="请输入账户名"  id="username"  name="username" v-on:blur="login()" />
+      <p></p>
+      <input type="password" placeholder="请输入密码" id="password" name="password"  v-on:blur="login1()"/>
+      <p></p>
       <p id="forget">
         <a href="register.vue" id="forget-register">立即注册 ?</a>
-        <a href="#" >忘记密码</a>
+        <a href="#"  id="forget-register2">忘记密码</a>
       </p>
-      <input type="submit" value="登 录" id="login-btn" @click="login()"/>
+      <input type="submit" value="登 录" id="login-btn" />
     </form>
   </div>
 </template>
@@ -20,22 +22,32 @@ export default {
   data () {
     return {
       items: [
-        {src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg'}
+        {src: 'http://ozxb0em6i.bkt.clouddn.com/person.png'}
       ],
       msg: ''
     }
   },
   methods: {
     login: function () {
-      let reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
-      let reg2 = /^[a-zA-Z0-9]{6,15}$/
-      let username = document.login.username
-      let password = document.login.password
-      let user = document.getElementById('user')
-      if (!reg.test(username.value) || !reg2.test(password.value)) {
-        user.innerHTML = '用户名输入错误'
-        username.onfocus()
+      var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
+      var username = document.login.username
+      var aP = document.getElementsByTagName('p')
+      if (!reg.test(username.value)) {
+        aP[0].innerHTML = '请输入由字母数字中文组成的6-15位账户名'
         return false
+      } else {
+        aP[0].innerHTML = ''
+      }
+    },
+    login1: function () {
+      var reg1 = /^[a-zA-Z0-9]{6,15}$/
+      var password = document.login.password
+      var aP = document.getElementsByTagName('p')
+      if (!reg1.test(password.value)) {
+        aP[1].innerHTML = '密码错误'
+        return false
+      } else {
+        aP[1].innerHTML = ''
       }
     }
   }
@@ -65,7 +77,7 @@ export default {
    align-items: flex-end;
    flex-wrap: wrap;
    width:100%;
-   height:500px;
+   height:400px;
  }
  #login-input input{
    width:70%;
@@ -76,6 +88,10 @@ export default {
    height:60px;
    outline: none;
  }
+  #login-input p{
+    width:70%;
+    height:30px;
+  }
  #login-input #user{
    color:#ff0000;
  }
@@ -88,12 +104,12 @@ export default {
     font-size:35px;
     color:#666;
     display:flex;
-    padding:0 10%;
+    padding:0 15%;
     justify-content: space-between;
     align-content: center;
   }
   #login-input #login-btn {
-    width: 80%;
+    width: 70%;
     height: 70px;
     background-color: #ff0000;
     border-radius: 55px;
@@ -102,5 +118,9 @@ export default {
   }
   #forget-register{
     color:#ff0000;
+    font-size:20px;
+  }
+  #forget-register2{
+    font-size:20px;
   }
 </style>

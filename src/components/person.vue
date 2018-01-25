@@ -37,7 +37,7 @@ export default {
   data () {
     return {
       items: [
-        {src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg'}
+        {src: 'http://ozxb0em6i.bkt.clouddn.com/person.png'}
       ],
       msg1: 'xcs',
       msg2: '25',
@@ -74,8 +74,8 @@ export default {
     flex-wrap: wrap;
   }
   #person-pic img{
-    width:100px;
-    height:100px;
+    width:50px;
+    height:50px;
   }
   #person-pic li{
     width:100%;

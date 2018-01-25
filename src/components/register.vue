@@ -3,18 +3,28 @@
     <p id="register-header">
       欢迎注册
     </p>
-    <div id="register-pic">
-      <img src=".././assets/login/person.png"/>
+    <div id="register-pic" v-for ='item in items' v-bind:key="item.id">
+      <img v-bind:src="item.src"/>
     </div>
-    <changeimg></changeimg>
-    <form method="post" action="" id="register-input">
-      <input type="text" placeholder="账户名"/>
-      <input type="text" placeholder="请输入身份证号"/>
-      <input type="text" placeholder="性别"/>
-      <input type="text" placeholder="邮箱"/>
-      <input type="text" placeholder="电话号码"/>
-      <input type="text" placeholder="密码"/>
-      <input type="password" placeholder="确认密码"/>
+    <!--<changeimg></changeimg>-->
+    <form method="post" action="" id="register-input" name="register">
+      <input type="text" placeholder="账户名" name="u1" v-on:blur="user1()"/>
+      <p></p>
+      <input type="text" placeholder="请输入身份证号" name="u2" v-on:blur="user2()"/>
+      <p></p>
+      <select>
+        <option >男</option>
+        <option>女</option>
+      </select>
+      <p></p>
+      <input type="text" placeholder="邮箱" name="u4" v-on:blur="user4()"/>
+      <p></p>
+      <input type="text" placeholder="电话号码" name="u5" v-on:blur="user5()"/>
+      <p></p>
+      <input type="text" placeholder="密码" name="u6" v-on:blur="user6()"/>
+      <p></p>
+      <input type="password" placeholder="确认密码" name="u7" v-on:blur="user7()"/>
+      <p></p>
     </form>
     <form id="register-footer">
       <input type="submit" value="立即注册" />
@@ -27,7 +37,78 @@ export default {
   name: 'register',
   data () {
     return {
-      msg: ''
+      items: [
+        {src: 'http://ozxb0em6i.bkt.clouddn.com/person.png'}
+      ]
+    }
+  },
+  methods: {
+    user1: function () {
+      var oReg1 = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
+      var oU1 = document.register.u1
+      var aP = document.getElementsByTagName('p')
+      if (!oReg1.test(oU1.value)) {
+        aP[1].innerHTML = '请输入由字母或数字或中文组成的6-15位账户名'
+        return false
+      } else {
+        aP[1].innerHTML = ''
+      }
+    },
+    user2: function () {
+      var oReg1 = /[1-9]\d{14}|[1-9]\d{17}|[1-9]\d{16}x/
+      var oU2 = document.register.u2
+      var aP = document.getElementsByTagName('p')
+      if (!oReg1.test(oU2.value)) {
+        aP[2].innerHTML = '请输入正确的身份证号格式'
+        return false
+      } else {
+        aP[2].innerHTML = ''
+      }
+    },
+    user4: function () {
+      var oReg1 = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/
+      var oU4 = document.register.u4
+      var aP = document.getElementsByTagName('p')
+      if (!oReg1.test(oU4.value)) {
+        aP[4].innerHTML = '请输入正确的邮箱格式'
+        return false
+      } else {
+        aP[4].innerHTML = ''
+      }
+    },
+    user5: function () {
+      var oReg1 = /^[1][3,4,5,7,8][0-9]{9}$/
+      var oU5 = document.register.u5
+      var aP = document.getElementsByTagName('p')
+      if (!oReg1.test(oU5.value)) {
+        aP[5].innerHTML = '请输入正确的手机号码'
+        return false
+      } else {
+        aP[5].innerHTML = ''
+      }
+    },
+    user6: function () {
+      var oReg1 = /^[a-zA-Z0-9]{6,15}$/
+      var oU6 = document.register.u6
+      var aP = document.getElementsByTagName('p')
+      if (!oReg1.test(oU6.value)) {
+        aP[6].innerHTML = '密码由6-15位数字字母组成'
+        return false
+      } else {
+        aP[6].innerHTML = ''
+      }
+    },
+    user7: function () {
+      var oU6 = document.register.u6
+      var oU7 = document.register.u7
+      var oU6v = oU6.value
+      var aP = document.getElementsByTagName('p')
+      if (oU7.value !== oU6v) {
+        aP[7].innerHTML = '两次输入密码不一致'
+        return false
+      } else {
+        aP[7].innerHTML = ''
+      }
     }
   },
   components: {
@@ -62,15 +143,29 @@ export default {
     justify-content: center;
     flex-wrap:wrap;
     width:100%;
-    height:770px;
+    height:800px;
   }
   #register-input input{
+    display:inline-block;
     border:none;
     width:80%;
-    height:70px;
+    height:75px;
     color:#666;
     border:1px solid #666;
     outline:none;
+  }
+  #register-input p{
+    width:80%;
+    height:30px;
+    font-size:20px;
+  }
+  #register-input select{
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    border:1px solid #666;
+    width:80%;
+    height:75px;
   }
   #register-footer{
     width:100%;
