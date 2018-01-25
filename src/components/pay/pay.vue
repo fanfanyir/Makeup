@@ -135,7 +135,7 @@ export default {
 </script>
 <meta name="keywords" content="" />
 <style  lang="scss" scoped>
-  /*@import "~@/assets/common.scss";*/
+  @import "../../assets/common1.css";
   /*重复样式*/
   #makesure header,#makesure #address, #makesure footer{
     padding: 0 20px 0 20px;
