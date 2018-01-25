@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <pay></pay>
+    <!--<pay></pay>-->
+    <chooseadress></chooseadress>
     <router-view/>
   </div>
 </template>
 
 <script>
 import pay from './components/pay/pay.vue'
+import Chooseadress from './components/choose_address/Choose_Adress'
 export default {
   name: 'App',
-  components: {pay}
+  components: {
+    pay,
+    Chooseadress
+  }
 }
 </script>
 

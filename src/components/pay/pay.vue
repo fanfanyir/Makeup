@@ -9,7 +9,7 @@
       <div></div>
     </header>
     <!--地址代码-->
-    <div id="address" @click="address()">
+    <div id="address" @click="address()" >
       <div id="address_leftpart">
         <img src="../../assets/pay/地址-2.png" id="address_picture"/>
             <span>
@@ -23,7 +23,7 @@
               {{message2}}
             </span>
             <span id="address_infor">
-              陕西省西安市长安区西安邮电大学西区
+              陕西省西安市长安区西安邮电大学陕西省西安市长安区西安邮电大学
             </span>
       </div>
       <div id="address_rightpart">
@@ -76,7 +76,7 @@
     <!--分割线-->
     <div class="lines2 line"></div>
     <!--结算-->
-    <!--<div id="last"></div>-->
+    <div id="last"></div>
     <div id="accounts" class="clearfix">
         <input type="submit" value="确认订单" id="makesure_order"/>
       <p>
@@ -113,29 +113,29 @@ export default {
   },
   methods: {
     address: function () {
-      // this.$http.get('http://localhost:8080',{}).then(function (res) {
-      //   alert(res.body)
-      // }, function () {
-      //   console.log('请求失败')
+      this.$http.get('http://192.168.0.200:8080/#/index', {}).then(function (res) {
+        alert(res.body)
+      }, function () {
+        console.log('请求失败')
+      }
+      )
+      //   this.$http.jsonp('https://www.baidu.com/', {word: 'a'}, {jsonp: 'callback'}).then(function (res) {
+      //     alert(res.data)
+      //   }, function (res) {
+      //     console.log(res.status)
+      //   })
       // }
-      // )
-      this.$http.jsonp('https://www.baidu.com/', {word: 'a'}, {jsonp: 'callback'}).then(function (res) {
-        console.log(res.data)
-      }, function (res) {
-        console.log(res.status)
-      })
-    }
 
-    // fn1: function (obj) {
-    //   obj.style.background = 'red'
-    // }
+      // fn1: function (obj) {
+      //   obj.style.background = 'red'
+      // }
+    }
   }
 }
-
 </script>
 <meta name="keywords" content="" />
 <style  lang="scss" scoped>
-  @import "../../assets/common1.css";
+  /*@import "../../../static/common.css";*/
   /*重复样式*/
   #makesure header,#makesure #address, #makesure footer{
     padding: 0 20px 0 20px;
@@ -157,9 +157,9 @@ export default {
       z-index: 3;
       width: 100%;
       background-color: #ff0000;
-      height: 80px;
-      margin-bottom: 20px;
-      padding: 0 20px 0 10px;
+      height: 100px;
+      /*margin-bottom: 20px;*/
+      padding: 0 20px ;
       /*position: relative;*/
       position: fixed;
       top:0;
@@ -172,35 +172,42 @@ export default {
         top: 50%;
       }
       p {
-        line-height: 80px;
+        line-height: 100px;
         width: 200px;
         font-size: 30px;
         color: #ffffff;
         position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -100px;
-        margin-top: -40px;
+        left: 0;
+        top:0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        text-align: center;
+        /*<!--margin-left: -100px;-->*/
+        /*<!--margin-top: -40px;-->*/
       }
     }
     /*这里是收货地址样式*/
     #address{
-      margin-top: 80px;
-      width: 100%;
-      display: flex;
+        margin:130px 0 30px 0;
+        width: 100%;
+        line-height: 30px;
+        display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 25px;
-        height: 80px;
       #address_picture{
         width: 30px;
         height: 30px;
       }
       #address_leftpart{
-          flex-grow: 2;
+          flex-grow: 2.2;
           #address_infortitle{
             margin-left: 55px;
           }
+        /*#address_infor{*/
+           /*height: 80px;*/
+         /*}*/
         }
         #address_picture{
           width: 50px;
@@ -221,18 +228,20 @@ export default {
     #goods{
       width: 100%;
       background-color: #f7f7f7;
-      padding: 10px;
+      padding: 20px;
       margin-bottom: 20px;
+      font-size: 25px;
       #goods_picture{
-        width: 130px;
-        height: 130px;
-        margin-right: 10px;
+        width: 150px;
+        height: 150px;
+        margin-right: 25px;
         float: left;
       }
       #goods_infor_right{
         float: left;
-        width: 80%;
+        width: 70%;
         padding-top: 10px;
+        line-height: 35px;
       }
       span:nth-of-type(1), #makesure #goods  span:nth-of-type(2),#goods_number{
         color: #898989;
@@ -244,11 +253,11 @@ export default {
     /*底部信息样式*/
     footer{
       width: 100%;
-      line-height: 33px;
-      font-size: 20px;
+      line-height: 70px;
+      font-size: 25px;
       #footer_left{
         float: left;
-        width: 575px;
+        width: 500px;
         input{
           margin-left: 105px;
           width: 600px;
@@ -257,7 +266,7 @@ export default {
         }
       }
       #footer_right{
-          width: 100px;
+          width: 150px;
           float: right;
         }
     }
@@ -275,8 +284,8 @@ export default {
         display: inline-block;
         width: 220px;
         line-height: 50px;
-        font-size: 20px;
         float: right;
+        font-size: 20px;
       }
       #makesure_order{
         float: right;
@@ -287,10 +296,10 @@ export default {
         /*margin-left: 88px;*/
       }
     }
-    /*#last{*/
-      /*width: 700px;*/
-      /*height: 1700px;*/
-      /*background-color: red;*/
-  /*}*/
+    #last{
+      width: 700px;
+      height: 1700px;
+      background-color: red;
+  }
   }
 </style>
