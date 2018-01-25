@@ -8,7 +8,7 @@
       <li class="right_shai"><span id="lineshai">筛选</span><img id="seclect" src="../../../assets/goodslist/筛选.png"/></li>
     </ul>
     <!--<brand :is="currentTab" keep-alive></brand>-->
-    <brand :is="currentTab" keep-alive></brand>
+    <brand :is="currentTab" @click="func1" v-if="seen"></brand>
   </div>
 </template>
 
@@ -17,7 +17,8 @@ import brand from './brand/brand'
 import classify from './classify/classify'
 import sort from './sort/sort'
 export default{
-  name: 'banner',
+  seen: 'false',
+  name: 'navv',
   data () {
     return {
       currentTab: 'brand'
@@ -31,12 +32,21 @@ export default{
   methods: {
     toggleTab: function (tab) {
       this.currentTab = tab
+    },
+    func1: function () {
+      this.seen = !this.seen
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-  #nav1{
+  #navv{
+    width: 100%;
+    top: 80px;
+    position: fixed;
+    z-index: 5;
+    background: #ffffff;
+    #nav1{
       border-bottom: 1px #cccccc solid;
       /*height: 80px;*/
       display: flex;
@@ -46,27 +56,23 @@ export default{
       padding: 5px;
       padding-left: 30px;
       padding-right: 0;
-    #view{
-      width:35px;
-      height: 35px;
+      #view{
+        width:35px;
+        height: 35px;
+      }
+      .right_shai{
+        width: 150px;
+        text-align: center;
+        overflow: hidden;
+        border-left: 1px #cccccc solid
+      }
+      #lineshai{
+        padding-left:10px;
+      }
+      #seclect{
+        width:50px;
+        height: 50px;
+      }
     }
-    .right_shai{
-      width: 150px;
-      text-align: center;
-      overflow: hidden;
-      border-left: 1px #cccccc solid
-    }
-    #lineshai{
-      padding-left:10px;
-    }
-    #seclect{
-      width:50px;
-      height: 50px;
-    }
-  }
-  #tabs{
-    height: 155px;
-    background: #ffffff;
-    /*padding: 15px;*/
   }
 </style>

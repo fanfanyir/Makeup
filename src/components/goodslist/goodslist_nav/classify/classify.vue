@@ -5,7 +5,7 @@
       <li id="classify2" class="tab" @click="toggleTab('classify2')"><a>彩妆</a><span>＞</span></li>
       <li v-for='item in itemleft' v-bind:key="item.big"><span>{{item.big}}</span><span>＞</span></li>
     </ul>
-    <classify1 :is="classTab" keep-alive></classify1>
+    <classify1 :is="classTab"></classify1>
     <div></div>
   </div>
 </template>
@@ -40,14 +40,17 @@ export default{
 }
 </script>
 <style lang="scss" scoped>
+  @import '../../../../../static/common.css';
   #classify{
     width: 100%;
-    position: absolute;
+    position: relative;
+    z-index: 5;
     height: 320px;
     background: #ffffff;
     display: flex;
     font-size: 25px;
     justify-content: space-between;
+    border-bottom: 1px #aeaaaa solid;
     /*padding: 15px;*/
     ul{
       width: 23% ;
@@ -60,6 +63,9 @@ export default{
         display: flex;
         border-bottom: 1px #aeaaaa solid;
         justify-content: space-between;
+      }
+      li:nth-last-child(1){
+        border-bottom:none;
       }
     }
   }

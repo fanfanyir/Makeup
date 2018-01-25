@@ -8,7 +8,7 @@
 
 <script>
 export default{
-  name: 'brand',
+  name: 'sort',
   data () {
     return {
       items: [

@@ -2,7 +2,7 @@
   <div id="app">
     <banner></banner>
     <navv></navv>
-    <waterfall></waterfall>
+    <waterfall1></waterfall1>
     <router-view/>
   </div>
 </template>
@@ -10,13 +10,13 @@
 <script>
 import banner from './components/goodslist/goodslist_banner/banner.vue'
 import navv from './components/goodslist/goodslist_nav/nav.vue'
-import waterfall from './components/goodslist/waterfall/waterfall.vue'
+import waterfall1 from './components/goodslist/waterfall/waterfall_b.vue'
 export default {
   name: 'App',
   components: {
     banner,
     navv,
-    waterfall
+    waterfall1
   }
 }
 </script>

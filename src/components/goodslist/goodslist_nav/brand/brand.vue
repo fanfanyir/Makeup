@@ -35,7 +35,8 @@ export default{
 <style lang="scss" scoped>
   #brand{
     background: #ffffff;
-    position: absolute;
+    position: relative;
+    z-index: 5;
     flex-wrap: wrap;
     display: flex;
     width: 100%;
