@@ -2,7 +2,9 @@
   <div id="app">
     <banner></banner>
     <navv></navv>
-    <waterfall1></waterfall1>
+    <div id="marginn">
+      <waterfall1></waterfall1>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -27,5 +29,9 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     justify-content: center;
     /*color: #2c3e50;*/
+  }
+  #marginn{
+    position: relative;
+    margin-top: 150px;
   }
 </style>

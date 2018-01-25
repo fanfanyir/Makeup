@@ -6,6 +6,7 @@
       <p>{{lit.small}}</p>
       <p><span>{{lit.price}}</span><span>{{lit.num}}人付款</span></p>
     </div>
+    <div></div>
   </div>
   <!--<div class="right" v-for="lit in lits" v-bind:key="lit.id">-->
     <!--<img :src="lit.src"/>-->
@@ -68,6 +69,27 @@ export default{
           small: '迪奥17新款forever 粉底气 垫bb底妆 拷贝 8',
           price: '￥88',
           num: '100'
+        },
+        {
+          id: 'fall8',
+          src: 'http://www.quanjing.com/image/2017index/lx3.png',
+          small: '迪奥17新款forever 粉底气 垫bb底妆 拷贝 8',
+          price: '￥88',
+          num: '100'
+        },
+        {
+          id: 'fall9',
+          src: 'http://pic.qiantucdn.com/58pic/11/62/42/97G58PIC7hc.jpg!/fw/780/watermark/url/L3dhdGVybWFyay12MS4zLnBuZw==/align/center',
+          small: '迪奥17新款forever 粉底气 垫bb底妆 拷贝 8',
+          price: '￥88',
+          num: '100'
+        },
+        {
+          id: 'fall10',
+          src: 'http://ozxb0em6i.bkt.clouddn.com/315982_205.jpg',
+          small: '迪奥17新款forever 粉底气 垫bb底妆 拷贝 8',
+          price: '￥88',
+          num: '100'
         }
       ]
     }
@@ -77,11 +99,11 @@ export default{
 
 <style lang="scss" scoped>
   #waterfall1{
-    padding-top: 150px;
     z-index: -1;
-    overflow: hidden;
+    /*position: relative;*/
     .waterfall1_box{
       padding: 5px;
+      /*position: relative;*/
       float: left;
       .box_img{
         padding: 5px;
@@ -89,14 +111,18 @@ export default{
         box-shadow: 0 0 5px #ccc;
         border-radius: 5px;
         img{
-          width: 350px;
+          width: 296px;
           height: auto;
         }
         p{
+          width: 290px;
           padding: 5px;
           span{
             display: inline-block;
             padding: 5px;
+          }
+          span:nth-last-child(1){
+            color: #ff0000;
           }
         }
       }

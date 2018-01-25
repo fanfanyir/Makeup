@@ -23,7 +23,7 @@ export default{
 </script>
 <style lang="scss" scoped>
   #sort{
-    position: absolute;
+    /*position: relative;*/
     height: 243px;
     width: 100%;
     background: #ffffff;

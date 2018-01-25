@@ -7,8 +7,7 @@
       <li><img id="view" src="../../../assets/goodslist/Viewlist.png"/></li>
       <li class="right_shai"><span id="lineshai">筛选</span><img id="seclect" src="../../../assets/goodslist/筛选.png"/></li>
     </ul>
-    <!--<brand :is="currentTab" keep-alive></brand>-->
-    <brand :is="currentTab" @click="func1" v-if="seen"></brand>
+    <brand :is="currentTab" keep-alive></brand>
   </div>
 </template>
 
@@ -17,7 +16,6 @@ import brand from './brand/brand'
 import classify from './classify/classify'
 import sort from './sort/sort'
 export default{
-  seen: 'false',
   name: 'navv',
   data () {
     return {
@@ -32,9 +30,6 @@ export default{
   methods: {
     toggleTab: function (tab) {
       this.currentTab = tab
-    },
-    func1: function () {
-      this.seen = !this.seen
     }
   }
 }

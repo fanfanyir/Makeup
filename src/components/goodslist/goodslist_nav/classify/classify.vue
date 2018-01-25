@@ -6,7 +6,6 @@
       <li v-for='item in itemleft' v-bind:key="item.big"><span>{{item.big}}</span><span>＞</span></li>
     </ul>
     <classify1 :is="classTab"></classify1>
-    <div></div>
   </div>
 </template>
 
@@ -40,10 +39,9 @@ export default{
 }
 </script>
 <style lang="scss" scoped>
-  @import '../../../../../static/common.css';
   #classify{
     width: 100%;
-    position: relative;
+    /*position: relative;*/
     z-index: 5;
     height: 320px;
     background: #ffffff;
