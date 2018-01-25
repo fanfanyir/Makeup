@@ -1,24 +1,42 @@
 <template>
   <div id="login">
-    <div id="login-pic">
-      <img src="../assets/login/person.png" />
+    <div v-for="item in items" v-bind:key="item.id" id="login-pic">
+      <img v-bind:src="item.src"/>
     </div>
-    <form id="login-input" name="login">
-      <input type="text" placeholder="请输入账户名" id="username"/>
-      <input type="password" placeholder="请输入密码" id="password"/>
+    <form id="login-input" name="login" action="" >
+      <input type="text" placeholder="请输入账户名"  id="username"  name="username"/><span id="user"></span>
+      <input type="password" placeholder="请输入密码" id="password" name="password"/><span id="pass"></span>
       <p id="forget">
+        <a href="register.vue" id="forget-register">立即注册 ?</a>
         <a href="#" >忘记密码</a>
       </p>
-      <input type="submit" value="登 录" @click="login()" id="login-btn"/>
+      <input type="submit" value="登 录" id="login-btn" @click="login()"/>
     </form>
   </div>
 </template>
-<script>
+<script type="text/javascript">
 export default {
   name: 'login',
   data () {
     return {
+      items: [
+        {src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg'}
+      ],
       msg: ''
+    }
+  },
+  methods: {
+    login: function () {
+      let reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
+      let reg2 = /^[a-zA-Z0-9]{6,15}$/
+      let username = document.login.username
+      let password = document.login.password
+      let user = document.getElementById('user')
+      if (!reg.test(username.value) || !reg2.test(password.value)) {
+        user.innerHTML = '用户名输入错误'
+        username.onfocus()
+        return false
+      }
     }
   }
 }
@@ -50,7 +68,7 @@ export default {
    height:500px;
  }
  #login-input input{
-   width:80%;
+   width:70%;
    border:none;
    border-bottom:1px #ff0000 solid;
    color:black;
@@ -58,13 +76,21 @@ export default {
    height:60px;
    outline: none;
  }
+ #login-input #user{
+   color:#ff0000;
+ }
+  #login-input #pass{
+    color:#ff0000;
+  }
   #login-input #forget{
     width:100%;
     height:60px;
     font-size:35px;
-    padding-right:10%;
     color:#666;
-    text-align: right;
+    display:flex;
+    padding:0 10%;
+    justify-content: space-between;
+    align-content: center;
   }
   #login-input #login-btn {
     width: 80%;
@@ -73,5 +99,8 @@ export default {
     border-radius: 55px;
     font-size: 40px;
     color: white;
+  }
+  #forget-register{
+    color:#ff0000;
   }
 </style>

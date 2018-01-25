@@ -7,7 +7,7 @@
       <img src=".././assets/login/person.png"/>
     </div>
     <changeimg></changeimg>
-    <form method="" action="" id="register-input">
+    <form method="post" action="" id="register-input">
       <input type="text" placeholder="账户名"/>
       <input type="text" placeholder="请输入身份证号"/>
       <input type="text" placeholder="性别"/>

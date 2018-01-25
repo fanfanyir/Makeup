@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import '@/assets/common/common.css'
 import 'lib-flexible/flexible.js'
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
 // import './assets/jq/jquery.min.js'
 Vue.config.productionTip = false
 /* eslint-disable no-new */

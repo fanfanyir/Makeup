@@ -24,9 +24,9 @@
           <p>手机</p>
           <p>{{msg4}}</p>
         </li>
-      <li>
-        <p>个性签名</p>
-        <p>{{msg5}}</p>
+      <li >
+        <p  id="person-special">个性签名</p>
+        <p id="person-space">{{msg5}}</p>
       </li>
     </ul>
   </div>
@@ -43,7 +43,7 @@ export default {
       msg2: '25',
       msg3: 'xcs',
       msg4: '25',
-      msg5: '的v比较好v减肥地方v额就和个人眼光放到程序程序就'
+      msg5: '的v比较好v减肥地方v额就和个人眼光放到程序程序就gthgb的的v美丽的反馈v金额v不感觉比较方便'
     }
   },
   components: {
@@ -83,4 +83,13 @@ export default {
     display:flex;
     justify-content: space-between;
    }
+  #person-special{
+    width:200px;
+    font-weight: bold;
+    font-size:20px;
+  }
+  #person-space{
+    width:400px;
+    text-align: center;
+  }
 </style>
