@@ -4,19 +4,20 @@
       <img v-bind:src="item.src"/>
     </div>
     <form id="login-input" name="login" action="" >
-      <input type="text" placeholder="请输入账户名"  id="username"  name="username" v-on:blur="login()" />
+      <input type="text" placeholder="请输入账户名"  id="username"  name="username" v-on:blur="login1()" />
       <p></p>
-      <input type="password" placeholder="请输入密码" id="password" name="password"  v-on:blur="login1()"/>
+      <input type="password" placeholder="请输入密码" id="password" name="password"  v-on:blur="login2()"/>
       <p></p>
       <p id="forget">
         <a href="register.vue" id="forget-register">立即注册 ?</a>
         <a href="#"  id="forget-register2">忘记密码</a>
       </p>
-      <input type="submit" value="登 录" id="login-btn" />
+      <input type="submit" value="登 录" id="login-btn"/>
     </form>
   </div>
 </template>
 <script type="text/javascript">
+import $ from 'jquery'
 export default {
   name: 'login',
   data () {
@@ -29,6 +30,20 @@ export default {
   },
   methods: {
     login: function () {
+      $.ajax({
+        url: 'User?username=' + $('#username').val() + '&password=' + $('#password').val(),
+        type: 'post',
+        dataType: 'json',
+        success: function (str) {
+          if (str) {
+            $('p').eq(0).innerHTML = '此用户名可以使用'
+          } else {
+            $('p').eq(0).innerHTML = '此用户名不存在'
+          }
+        }
+      })
+    },
+    login1: function () {
       var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
       var username = document.login.username
       var aP = document.getElementsByTagName('p')
@@ -37,13 +52,14 @@ export default {
         return false
       } else {
         aP[0].innerHTML = ''
+        this.login()
       }
     },
-    login1: function () {
+    login2: function () {
       var reg1 = /^[a-zA-Z0-9]{6,15}$/
       var password = document.login.password
       var aP = document.getElementsByTagName('p')
-      if (!reg1.test(password.value)) {
+      if (!reg1.test(password.value) && password.value) {
         aP[1].innerHTML = '密码错误'
         return false
       } else {
@@ -91,6 +107,7 @@ export default {
   #login-input p{
     width:70%;
     height:30px;
+    color:red;
   }
  #login-input #user{
    color:#ff0000;

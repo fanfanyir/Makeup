@@ -7,31 +7,33 @@
       <img v-bind:src="item.src"/>
     </div>
     <!--<changeimg></changeimg>-->
-    <form method="post" action="" id="register-input" name="register">
+    <form method="post" action="hg" id="register-input" name="register">
       <input type="text" placeholder="账户名" name="u1" v-on:blur="user1()"/>
       <p></p>
       <input type="text" placeholder="请输入身份证号" name="u2" v-on:blur="user2()"/>
       <p></p>
-      <select>
-        <option >男</option>
-        <option>女</option>
+      <select name="sex" style=" color:#aeaaaa;" id="register-select" v-on:blur="user8()">
+        <option name="man" id="sex" selected="selected" >性别</option>
+        <option name="man" value="男" style=" color:#000;">男</option>
+        <option name="woman" value="女" style=" color:#000;">女</option>
       </select>
       <p></p>
       <input type="text" placeholder="邮箱" name="u4" v-on:blur="user4()"/>
       <p></p>
       <input type="text" placeholder="电话号码" name="u5" v-on:blur="user5()"/>
       <p></p>
-      <input type="text" placeholder="密码" name="u6" v-on:blur="user6()"/>
+      <input type="password" placeholder="密码" name="u6" v-on:blur="user6()"/>
       <p></p>
       <input type="password" placeholder="确认密码" name="u7" v-on:blur="user7()"/>
       <p></p>
     </form>
     <form id="register-footer">
-      <input type="submit" value="立即注册" />
+      <input type="submit" value="立即注册" @click="register()" />
     </form>
   </div>
 </template>
 <script>
+import $ from 'jquery'
 import changeimg from './changeimg/changeimg.vue'
 export default {
   name: 'register',
@@ -43,6 +45,24 @@ export default {
     }
   },
   methods: {
+    register: function () {
+      $.ajax({
+        url: '',
+        dataType: '',
+        data: {
+          u1: $('input').eq(0).val(),
+          u2: $('input').eq(1),
+          u4: $('input').eq(2),
+          u5: $('input').eq(3).val(),
+          u6: $('input').eq(4),
+          u7: $('input').eq(5)},
+        success: function (str) {
+          if (str) {
+            alert('注册成功')
+          }
+        }
+      })
+    },
     user1: function () {
       var oReg1 = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
       var oU1 = document.register.u1
@@ -52,7 +72,20 @@ export default {
         return false
       } else {
         aP[1].innerHTML = ''
+        $.ajax({
+          url: '',
+          dataType: '',
+          data: {u1: $('input').eq(0).val()},
+          success: function (str) {
+            if (str) {
+              $('p').eq(1).innerHTML = '账户名已被注册过'
+            }
+          }
+        })
       }
+    },
+    user8: function () {
+      $('select').css('color', '#000')
     },
     user2: function () {
       var oReg1 = /[1-9]\d{14}|[1-9]\d{17}|[1-9]\d{16}x/
@@ -150,7 +183,7 @@ export default {
     border:none;
     width:80%;
     height:75px;
-    color:#666;
+    color:#000;
     border:1px solid #666;
     outline:none;
   }
@@ -158,6 +191,7 @@ export default {
     width:80%;
     height:30px;
     font-size:20px;
+    color:red;
   }
   #register-input select{
     appearance:none;
@@ -182,5 +216,8 @@ export default {
     border-radius:55px;
     font-size:36px;
     color:white;
+  }
+  #register-select option{
+    color:#000;
   }
 </style>

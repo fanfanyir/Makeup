@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <!--<login></login>-->
-    <!--<register></register>-->
-    <person></person>
+    <register></register>
+    <!--<person></person>-->
+    <!--<my></my>-->
+    <!--<manage></manage>-->
     <!--实现跳转<router-view/>-->
   </div>
 </template>
@@ -10,6 +12,8 @@
 import login from './components/login'
 import register from './components/register'
 import person from './components/person'
+import my from './components/my'
+import manage from './components/manage'
 export default {
   name: 'app',
   data () {
@@ -20,7 +24,9 @@ export default {
   components: {
     register,
     login,
-    person
+    person,
+    my,
+    manage
   }
 }
 </script>
