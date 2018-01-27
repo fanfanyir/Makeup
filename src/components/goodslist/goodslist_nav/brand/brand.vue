@@ -26,8 +26,28 @@ export default{
         {id: 'brand_12', brand: '早安日记'},
         {id: 'brand_13', brand: '韩都衣舍'},
         {id: 'brand_14', brand: '初语'},
-        {id: 'brand_15', brand: '索尔利'}
+        {id: 'brand_15', brand: '索尔利'},
+        {id: 'brand_16', brand: '初语'},
+        {id: 'brand_17', brand: '索尔利'},
+        {id: 'brand_18', brand: '南极人'},
+        {id: 'brand_19', brand: '早安日记'},
+        {id: 'brand_20', brand: '韩都衣舍'},
+        {id: 'brand_21', brand: '初语'},
+        {id: 'brand_22', brand: '索尔利'}
       ]
+    }
+  },
+  methods: {
+    price: function () {
+      this.$http({
+        method: 'GET',
+        url: ' https://easy-mock.com/mock/5a6b0d092007214d6db2c394/pinpai',
+        data: {'name': 'brand'}
+      }).then(function (response) {
+        this.items = response.data
+      }, function () {
+        console.log('请求失败')
+      })
     }
   }
 }
@@ -42,12 +62,15 @@ export default{
     width: 100%;
     height: 233px;
     padding-top: 10px;
-    overflow: hidden;
-    justify-content: space-around;
+    /*overflow: hidden;*/
+    overflow-y: auto;
+    /*justify-content: space-around;*/
+    flex-direction: row;
     /*padding: 15px;*/
     li{
       width: 18% ;
       height:50px;
+      margin: 5px;
       text-align: center;
       line-height: 50px;
       background: #e6e4e4;
