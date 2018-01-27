@@ -36,9 +36,8 @@ export default {
         dataType: 'json',
         success: function (str) {
           if (str) {
-            $('p').eq(0).innerHTML = '此用户名可以使用'
           } else {
-            $('p').eq(0).innerHTML = '此用户名不存在'
+            $('p').eq(0).innerHTML = '此用户名不存在，请先注册'
           }
         }
       })

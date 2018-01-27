@@ -59,6 +59,8 @@ export default {
         success: function (str) {
           if (str) {
             alert('注册成功')
+          } else {
+            alert('此账户名已经存在')
           }
         }
       })
