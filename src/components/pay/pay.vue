@@ -99,9 +99,6 @@ export default {
         }
       ],
       goods: [
-        // {'src1': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'infor': '张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹', 'goods_norms': '#010', 'goods_number': '2', 'price': '366'},
-        // {'src1': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'infor': '张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹', 'goods_norms': '#010', 'goods_number': '2', 'price': '366'},
-        // {'src1': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'infor': '张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹张梦莹', 'goods_norms': '#010', 'goods_number': '2', 'price': '366'}
         {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
         {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '25', 'cart_num': '4', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'}
       ],
@@ -127,5 +124,4 @@ export default {
 <meta name="keywords" content="" />
 <style  lang="scss" scoped>
   @import "../../../static/pay";
-  /*重复样式*/
 </style>
