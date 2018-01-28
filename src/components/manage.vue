@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import $ from 'jquery'
 export default {
   name: 'manage',
   data () {
@@ -31,7 +32,19 @@ export default {
       msg3: '陕西省西安市长安区'
     }
   },
-  components: {
+  methods: {
+    manage: function () {
+      $.ajax({
+        url: '',
+        type: 'post',
+        dataType: 'json',
+        success: function (Rdata) {
+          if (!Rdata) {
+            alert('')
+          }
+        }
+      })
+    }
   }
 }
 </script>

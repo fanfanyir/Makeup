@@ -48,16 +48,9 @@ export default {
     register: function () {
       $.ajax({
         url: '',
-        dataType: '',
-        data: {
-          u1: $('input').eq(0).val(),
-          u2: $('input').eq(1),
-          u4: $('input').eq(2),
-          u5: $('input').eq(3).val(),
-          u6: $('input').eq(4),
-          u7: $('input').eq(5)},
-        success: function (str) {
-          if (str) {
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
             alert('注册成功')
           } else {
             alert('此账户名已经存在')

@@ -36,6 +36,7 @@ export default {
         dataType: 'json',
         success: function (str) {
           if (str) {
+            alert('登陆成功')
           } else {
             $('p').eq(0).innerHTML = '此用户名不存在，请先注册'
           }
@@ -108,10 +109,10 @@ export default {
     height:30px;
     color:red;
   }
- #login-input #user{
+ #login-input #username{
    color:#ff0000;
  }
-  #login-input #pass{
+  #login-input #password{
     color:#ff0000;
   }
   #login-input #forget{

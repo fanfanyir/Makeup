@@ -1,6 +1,6 @@
 <template>
   <div id="person">
-    <p id="person-data">个人资料</p>
+    <p id="person-data">用户信息</p>
     <ul id="person-pic">
       <li>
         <p>妆淘头像</p>
@@ -27,8 +27,14 @@
       <li >
         <p  id="person-special">个性签名</p>
         <p id="person-space">{{msg5}}</p>
+      </li >
+      <li class = "person-name">
+        <a href="#">我的收藏</a>
+        <a href="#">我的足迹</a>
+        <a href="#">我的订单</a>
       </li>
     </ul>
+    <changeimg></changeimg>
   </div>
 </template>
 <script>
@@ -43,7 +49,7 @@ export default {
       msg2: '25',
       msg3: 'xcs',
       msg4: '25',
-      msg5: '的v比较好v减肥地方v额就和个人眼光放到程序程序就gthgb的的v美丽的反馈v金额v不感觉比较方便'
+      msg5: '的v比较好v减肥地方v额就和个人眼光放到程序程序就gthgb的的v美丽'
     }
   },
   components: {
@@ -83,13 +89,24 @@ export default {
     display:flex;
     justify-content: space-between;
    }
+  #person-pic li p{
+    color: #666;
+  }
   #person-special{
     width:200px;
-    font-weight: bold;
     font-size:20px;
   }
   #person-space{
     width:400px;
     text-align: center;
+  }
+  .person-name{
+    width:100%;
+    height:50px;
+    margin-top:20px;
+   line-height:50px;
+    font-size:36px;
+  }
+  .person-name a{
   }
 </style>
