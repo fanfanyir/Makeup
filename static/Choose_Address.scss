@@ -1,4 +1,7 @@
 #choose_address{
+  .input0 span{
+    color: #f19149;
+  }
   header{
     display: flex;
     justify-content: space-between;
@@ -35,11 +38,9 @@
         width: 100%;
         line-height: 40px;
       }
-      /*input:nth-of-type(1){*/
-      /*checked:checked;*/
-      /*}*/
       span{
         line-height: 80px;
+        color: black;
       }
       .line1{
         height: 3px;

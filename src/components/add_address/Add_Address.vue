@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'add_-address',
+  name: 'add_address',
   data () {
     return {
       title: '新增收货地址',

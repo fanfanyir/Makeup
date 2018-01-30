@@ -11,7 +11,6 @@
 
 <script>
 import {swiper, SwiperSlide} from 'vue-awesome-swiper'
-// import SwiperSlide from 'vue-awesome-swiper/src/slide'
 export default {
   components: {SwiperSlide, swiper},
   data () {

@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <!--<pay></pay>-->
     <!--<chooseadress></chooseadress>-->
     <!--<addaddress></addaddress>-->
-    <detailstotal></detailstotal>
+    <!--<detailstotal></detailstotal>-->
     <!--<detailsheader></detailsheader>-->
+    <!--<pay></pay>-->
     <router-view/>
   </div>
 </template>
@@ -12,17 +12,15 @@
 <script>
 import pay from './components/pay/pay.vue'
 import Chooseadress from './components/choose_address/Choose_Address'
-import Addaddress from './components/add_address/Add_Address'
+import addaddress from './components/add_address/Add_Address'
 import detailstotal from './components/details/details'
-// import detailsheader from './components/details-header/details-header'
 export default {
   name: 'App',
   components: {
-    // detailsheader,
     detailstotal,
-    Addaddress,
     pay,
-    Chooseadress
+    Chooseadress,
+    addaddress
   }
 }
 </script>

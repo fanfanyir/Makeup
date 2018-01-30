@@ -1,3 +1,5 @@
+#choose_address .input0 span {
+  color: #f19149; }
 #choose_address header {
   display: flex;
   justify-content: space-between;
@@ -18,10 +20,7 @@
   #choose_address footer .address_infor {
     background-color: white;
     padding: 0 20px;
-    margin-bottom: 15px;
-    /*input:nth-of-type(1){*/
-    /*checked:checked;*/
-    /*}*/ }
+    margin-bottom: 15px; }
     #choose_address footer .address_infor p {
       display: inline-block;
       width: 330px;
@@ -32,7 +31,8 @@
       width: 100%;
       line-height: 40px; }
     #choose_address footer .address_infor span {
-      line-height: 80px; }
+      line-height: 80px;
+      color: black; }
     #choose_address footer .address_infor .line1 {
       height: 3px;
       background-color: #e7e7e7e7; }

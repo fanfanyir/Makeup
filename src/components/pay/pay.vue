@@ -9,7 +9,8 @@
       <div></div>
     </header>
     <!--地址代码-->
-    <div id="address" @click="address()" >
+    <!--<router-link vue-v-bind:to="./components/choose_address/Choose_Address">-->
+      <div id="address" @click="address()" >
       <div id="address_leftpart">
         <img src="../../assets/pay/地址-2.png" id="address_picture"/>
             <span>
@@ -34,6 +35,7 @@
         <!--<img src="../../assets/pay/箭头-右.png">-->
       </div>
     </div>
+    <!--</router-link>-->
     <!--分割线-->
     <!--<div class="lines"></div>-->
     <!--商品信息-->
@@ -113,10 +115,13 @@ export default {
     address: function () {
       this.$http({
         method: 'get',
-        url: ''
+        url: 'http://192.168.0.200:8080'
       }).then(function (res) {
         alert(res.body)
       })
+      console.log(1)
+      // let id = this.$route.params.id
+      this.$router.push({path: 'Choose_Address/'})
     }
   }
 }
