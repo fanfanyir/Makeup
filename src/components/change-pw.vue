@@ -80,12 +80,13 @@ export default {
   }
   #change-pw-list div input{
     width:60%;
-    height:50px;
+    height:60px;
   }
   .changepw-sub{
     margin-top:20px;
+    margin-left:45%;
     border:none;
-    width:100%;
+    width:40%;
     background-color:#ff0000;
     font-size:36px;
     color:white;

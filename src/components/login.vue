@@ -12,7 +12,7 @@
         <a href="register.vue" id="forget-register">立即注册 ?</a>
         <a href="#"  id="forget-register2">忘记密码</a>
       </p>
-      <input type="submit" value="登 录" id="login-btn"/>
+      <input type="submit" value="登 录" id="login-btn" @click="loginP()"/>
     </form>
   </div>
 </template>
@@ -65,6 +65,11 @@ export default {
       } else {
         aP[1].innerHTML = ''
       }
+    },
+    loginP: function () {
+      var password = document.login.password
+      var loginp = $.md5(password)
+      console.log(loginp)
     }
   }
 }

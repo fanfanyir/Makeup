@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <!--<login></login>-->
+    <login></login>
     <!--<register></register>-->
     <!--<person></person>-->
     <!--<my></my>-->
     <!--<manage></manage>-->
-    <changepw></changepw>
+    <!--<changepw></changepw>-->
     <!--<changenum></changenum>-->
     <!--实现跳转<router-view/>-->
   </div>
