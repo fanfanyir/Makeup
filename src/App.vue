@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <div id="zyf_goodslist">
-      <banner></banner>
-      <navv></navv>
-      <div id="marginn">
-        <waterfall1></waterfall1>
-      </div>
+    <!--<div id="zyf_goodslist">-->
+      <!--<banner></banner>-->
+      <!--<navv></navv>-->
+      <!--<div id="marginn">-->
+        <!--<waterfall1></waterfall1>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div id="zyf_order">
+      <orderbanner></orderbanner>
+      <ordernav></ordernav>
     </div>
-    <!--<div id="zyf_order">-->
-      <!--<orderbanner></orderbanner>-->
-      <!--<ordernav></ordernav>-->
+    <!--<div id="zyf_detial">-->
+      <!--<orderdetail></orderdetail>-->
     <!--</div>-->
     <router-view/>
   </div>
@@ -18,8 +21,9 @@
 <script>
 import banner from './components/goodslist/goodslist_banner/banner.vue'
 import navv from './components/goodslist/goodslist_nav/nav.vue'
-import waterfall1 from './components/goodslist/waterfall/waterfall_b.vue'
+import waterfall1 from './components/goodslist/waterfall/waterfallb.vue'
 import orderbanner from './components/order/order_banner/order_banner.vue'
+import orderdetail from './components/order/order_detail/orderdetail.vue'
 import ordernav from './components/order/order_top/order_nav.vue'
 export default {
   name: 'App',
@@ -28,7 +32,8 @@ export default {
     navv,
     waterfall1,
     orderbanner,
-    ordernav
+    ordernav,
+    orderdetail
   }
 }
 </script>

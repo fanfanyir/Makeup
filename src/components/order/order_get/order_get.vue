@@ -21,7 +21,7 @@
         <p id="focendget">
           <input type="button" value="延长收货"/>
           <input type="button" value="查看物流"/>
-          <input type="button" value="确认收货"/>
+          <input type="button" value="确认收货" @click="del(endorder)"/>
         </p>
     </div>
     </div>
@@ -62,6 +62,11 @@ export default{
       }, function () {
         console.log('请求失败')
       })
+    },
+    del: function (endorder) {
+      if (confirm('确认收货?')) {
+        this.getorders.splice(endorder, 1)
+      }
     }
   }
 }

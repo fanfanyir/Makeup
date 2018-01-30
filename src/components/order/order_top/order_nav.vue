@@ -23,7 +23,7 @@ export default{
   name: 'ordernav',
   data () {
     return {
-      currentTab: 'main2'
+      currentTab: 'main1'
     }
   },
   components: {

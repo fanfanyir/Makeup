@@ -21,7 +21,7 @@
         <p id="focendmsg">
           <input type="button" value="删除订单"/>
           <input type="button" value="查看物流"/>
-          <input type="button" value="评价"/>
+          <input type="button" value="评价" @click="msg(msglist)"/>
         </p>
     </div>
     </div>
@@ -62,6 +62,9 @@ export default{
       }, function () {
         console.log('请求失败')
       })
+    },
+    del: function (msglist) {
+      prompt('请您评价')
     }
   }
 }

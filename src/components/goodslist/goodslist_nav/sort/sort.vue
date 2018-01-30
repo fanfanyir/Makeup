@@ -1,7 +1,7 @@
 <template>
   <!--<div id="brand">-->
   <ul id="sort">
-    <li v-for='item in items' v-bind:key="item.sortlist">{{item.sortlist}}</li>
+    <li v-for='(item,index) in items' :class="{'active':ind === index}" @click="changeBgc(index)" v-bind:key="item.sortlist">{{item.sortlist}}</li>
   </ul>
   <!--</div>-->
 </template>
@@ -16,7 +16,13 @@ export default{
         {sortlist: '价格降序'},
         {sortlist: '销量降序'},
         {sortlist: '最近上市'}
-      ]
+      ],
+      ind: ''
+    }
+  },
+  methods: {
+    changeBgc: function (index) {
+      this.ind = index
     }
   }
 }
@@ -40,6 +46,9 @@ export default{
       border-bottom: 1px #cccccc solid;
       height:60px;
       line-height: 60px;
+    }
+    .active{
+      color: #ff0000;
     }
   }
 </style>

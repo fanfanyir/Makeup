@@ -1,6 +1,6 @@
 <template>
     <ul id="brand">
-      <li v-for='item in items' v-bind:key="item.id">
+      <li v-for="(item,index) in items" :class="{'active':ind === index}" v-bind:key="item.id"  @click="changeBgc(index)">
         {{item.brand}}
       </li>
     </ul>
@@ -34,10 +34,14 @@ export default{
         {id: 'brand_20', brand: '韩都衣舍'},
         {id: 'brand_21', brand: '初语'},
         {id: 'brand_22', brand: '索尔利'}
-      ]
+      ],
+      ind: ''
     }
   },
   methods: {
+    changeBgc: function (index) {
+      this.ind = index
+    },
     price: function () {
       this.$http({
         method: 'GET',
@@ -74,6 +78,9 @@ export default{
       text-align: center;
       line-height: 50px;
       background: #e6e4e4;
+    }
+    .active{
+      color: #ff0000;
     }
   }
 </style>

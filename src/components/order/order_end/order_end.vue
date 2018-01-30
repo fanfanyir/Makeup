@@ -77,8 +77,9 @@ export default{
       })
     },
     del: function (endorder) {
-      alert('确认删除')
-      this.endorders.splice(endorder, 1)
+      if (confirm('确认删除?')) {
+        this.endorders.splice(endorder, 1)
+      }
     }
   }
 }

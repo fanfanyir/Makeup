@@ -1,10 +1,11 @@
 <template>
   <div id="orderpay">
     <div class="orderpaybox"  v-for='payorder in payorders' v-bind:key="payorder.id">
-      <p class="shoppay"><span>美妆品牌店 ＞</span><span>等待买家付款</span></p>
+      <p class="shoppay">
+        <span><input class="selectH" type="checkbox"/> 美妆品牌店 ＞</span><span>等待买家付款</span>
+      </p>
       <div class="boxpay" v-for='paylist in paylists' v-bind:key="paylist.id">
         <div class="imgboxpay clearfix">
-          <input type="checkbox"/>
           <img src="../../../assets/order/1.jpg"/>
           <p id="decrisptpay">{{paylist.descibe}}</p>
           <div id="pricepay">
@@ -21,10 +22,14 @@
         </p>
         <p id="focendpay">
           <input type="button" value="联系卖家"/>
-          <input type="button" value="取消订单"/>
-          <input type="button" value="付款"/>
+          <input type="button" value="取消订单" @click="del(payorder)"/>
+          <input type="button" value="付款" @click="del(payorder)"/>
         </p>
       </div>
+    </div>
+    <div id="footer" v-if="seen">
+      <input type="button" value="取消订单" @click="del(payorder)"/>
+      <input type="button" value="合并付款" @click="del(payorder)"/>
     </div>
   </div>
 </template>
@@ -34,6 +39,7 @@ export default{
   name: 'orderpay',
   data () {
     return {
+      seen: 'false',
       payorders: [{
         id: 'payorder1'
       },
@@ -63,6 +69,15 @@ export default{
       }, function () {
         console.log('请求失败')
       })
+    },
+    del: function (payorder) {
+      let oCheck = document.getElementsByClassName('selectH')
+      if (oCheck[0].checked) {
+        this.seen = true
+        if (confirm('确认?')) {
+          this.payorders.splice(payorder, 1)
+        }
+      }
     }
   }
 }
@@ -79,6 +94,7 @@ export default{
     }
     background: #ffffff;
     padding: 10px;
+    padding-bottom: 80px;
     .shoppay{
       margin:10px 0;
       display: flex;
@@ -98,11 +114,6 @@ export default{
         img{
           width: 130px;
           height: 130px;
-        }
-        input{
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
         }
         #decrisptpay{
           position: relative;
@@ -160,6 +171,25 @@ export default{
           border: 1px #ff0000 solid;
           color: #ff0000;
         }
+      }
+    }
+    #footer{
+      position: fixed;
+      height: 80px;
+      background: #ffffff;
+      right:0;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      input{
+        font-size: 20px;
+        width: 130px;
+        height:50px ;
+        border: 1px #ff0000 solid;
+        color: #ff0000;
+        border-radius: 15px;
+        margin: 20px;
       }
     }
   }
