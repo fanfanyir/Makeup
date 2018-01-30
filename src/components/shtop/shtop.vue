@@ -1,5 +1,5 @@
 <template>
-  <div id="shoppingtop">
+  <div id="shtop">
     <span id="sp1">购物车</span>
     <span id="sp2"><a href="#">编辑</a></span>
   </div>
@@ -17,24 +17,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #shoppingtop{
+  #shtop{
     width:100%;
     height:100px;
     background-color:#ff0000;
+    text-align: center;
     span{
       line-height:100px;
       color:#fff;
     }
-    a{
-      color:#fff;
-    }
     #sp1{
       font-size:30px;
-      margin-left:300px;
     }
     #sp2{
       font-size:25px;
-      margin-left:200px;
+      float:right;
+      margin-right:50px;
+      a{
+        color:#fff;
+      }
     }
   }
 </style>

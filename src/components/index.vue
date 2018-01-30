@@ -1,7 +1,7 @@
 <template>
   <div id="index">
     <top></top>
-    <banner></banner>
+    <slide></slide>
     <goods></goods>
     <brand></brand>
     <hot></hot>
@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 import top from './top/top.vue'
-import banner from './banner/banner.vue'
+import slide from './slide/slide.vue'
 import goods from './goods/goods.vue'
 import brand from './brand/brand.vue'
 import hot from './hot/hot.vue'
@@ -20,7 +20,7 @@ import subclass from './subclass/subclass.vue'
 import bottom from './bottom/bottom.vue'
 
 export default {
-  components: { top, banner, goods, brand, hot, subclass, bottom }
+  components: { top, slide, goods, brand, hot, subclass, bottom }
 }
 </script>
 

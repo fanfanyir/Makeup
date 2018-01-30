@@ -1,20 +1,28 @@
 <template>
   <ul id="bottom">
     <li id="index">
-      <img src="../../assets/bottom/index.png">
-      <p>首页</p>
+      <a href="#">
+        <img src="../../assets/bottom/index.png">
+        <span>首页</span>
+      </a>
     </li>
     <li id="list">
-      <img src="../../assets/bottom/list.png">
-      <p>商品列表</p>
+      <a href="#">
+        <img src="../../assets/bottom/list.png">
+        <span>商品</span>
+      </a>
     </li>
     <li id="shopping">
-      <img src="../../assets/bottom/shopping.png">
-      <p>购物车</p>
+      <a href="#">
+        <img src="../../assets/bottom/shopping.png">
+        <span>购物车</span>
+      </a>
     </li>
-    <li id="mys">
-      <img src="../../assets/bottom/mys.png">
-      <p>我的</p>
+    <li id="my">
+      <a href="#">
+        <img src="../../assets/bottom/mys.png">
+        <span>我的</span>
+      </a>
     </li>
   </ul>
 </template>
@@ -22,28 +30,31 @@
 <script type="text/javascript">
 </script>
 
-<style>
-  #bottom{
-    position:fixed;
-    display:flex;
-    justify-content:space-around;
+<style lang="scss" scoped>
+  #bottom {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
-    left:0;
-    bottom:0;
-    width:100%;
-    height:80px;
-    background:#ff0000;
-    text-align:center;
-  }
-  #bottom li{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: #ff0000;
     text-align: center;
-  }
-  #bottom img{
-    width:47px;
-    height:47px;
-    display:block;
-  }
-  #bottom p{
-    color:#fff;
+    li {
+      text-align: center;
+
+      img {
+        width: 50px;
+        height: 50px;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      span {
+        color: #fff;
+      }
+    }
   }
 </style>

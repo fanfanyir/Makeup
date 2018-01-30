@@ -15,57 +15,55 @@ export default{
     return {
       message: '品牌分类',
       items: [
-        {id: '迪奥', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
-        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
-        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
-        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
-        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'},
-        {id: '底妆', src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg'}
+        {id: '迪奥', src: 'http://img5.imgtn.bdimg.com/it/u=2119815782,403042995&fm=27&gp=0.jpg'},
+        {id: '香奈儿', src: 'http://img0.imgtn.bdimg.com/it/u=477648592,679088864&fm=27&gp=0.jpg'},
+        {id: '圣罗兰', src: 'http://img2.imgtn.bdimg.com/it/u=3385881269,3044323849&fm=27&gp=0.jpg'},
+        {id: '兰蔻', src: 'http://img0.imgtn.bdimg.com/it/u=2078243852,2729084786&fm=27&gp=0.jpg'},
+        {id: '纪梵希', src: 'http://img0.imgtn.bdimg.com/it/u=1708780554,2432249886&fm=27&gp=0.jpg'},
+        {id: '阿玛尼', src: 'http://img0.imgtn.bdimg.com/it/u=877742864,563766274&fm=11&gp=0.jpg'}
       ]
     }
   }
 }
 </script>
 
-<style>
-  #brand{
-    margin:15px 10px 0 10px;
-    font-size:30px;
-    background-color:#fff;
-    border-bottom:3px solid #e6e6e6;
-  }
-  #title p{
-    text-align:center;
-    color:#ff0000;
-  }
-  #brandcon{
-    height:350px;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-around;
-  }
-  #brandcon div{
-    width:33%;
-    height:150px;
-    border-radius:50%;
-    text-align:center;
-  }
-  #brandcon a{
-    text-decoration:none;
-    font-size:14px;
-  }
-  a:hover{
-    color:#ff0000;
-  }
-  #brandcon img{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-  }
-  #brandcon span{
-    margin-top:5px;
-    font-size:20px;
-    display:block;
-    text-align:center;
+<style lang="scss" scoped>
+  #brand {
+    margin: 15px 10px 0 10px;
+    font-size: 30px;
+    background-color: #fff;
+    border-bottom: 3px solid #e6e6e6;
+    #title p {
+      padding: 5px;
+      text-align: center;
+      color: #ff0000;
+    }
+    #brandcon {
+      margin-top:20px;
+      height: 350px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      div {
+        width: 33%;
+        height: 150px;
+        text-align: center;
+        a {
+          text-decoration: none;
+          font-size: 14px;
+        }
+        img {
+          width: 120px;
+          height: 120px;
+          border-radius:10px;
+        }
+        span {
+          margin-top: 5px;
+          font-size: 20px;
+          display: block;
+          text-align: center;
+        }
+      }
+    }
   }
 </style>
