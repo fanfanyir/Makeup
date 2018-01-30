@@ -4,7 +4,8 @@
       欢迎注册
     </p>
     <div id="register-pic" v-for ='item in items' v-bind:key="item.id">
-      <img v-bind:src="item.src"/>
+      <img v-bind:src="item.src"  id="imgSdf"/>
+      <input type="file" value="切换头像" v-on:change="changeImg(this)"/>
     </div>
     <!--<changeimg></changeimg>-->
     <form method="post" action="hg" id="register-input" name="register">
@@ -34,7 +35,6 @@
 </template>
 <script>
 import $ from 'jquery'
-import changeimg from './changeimg/changeimg.vue'
 export default {
   name: 'register',
   data () {
@@ -45,6 +45,20 @@ export default {
     }
   },
   methods: {
+    CHANGE : function () {
+      var reader = new FileReader()
+      changeImg: function (file) {
+        alert('fvbdf')
+        var img = document.getElementById('imgSdf')
+        reader.onload = function (evt) {
+          alert('225')
+          img.width = '100'
+          img.height = '100'
+          img.src = evt.target.result
+        }
+        reader.readAsDataURL(file.files[0])
+      }
+    },
     register: function () {
       $.ajax({
         url: '',
@@ -139,8 +153,8 @@ export default {
       }
     }
   },
-  components: {
-    changeimg
+  mounted: function () {
+    this.CHANGE()
   }
 }
 </script>

@@ -17,6 +17,7 @@
   </div>
 </template>
 <script type="text/javascript">
+import md5 from 'js-md5'
 import $ from 'jquery'
 export default {
   name: 'login',
@@ -67,9 +68,8 @@ export default {
       }
     },
     loginP: function () {
-      var password = document.login.password
-      var loginp = $.md5(password)
-      console.log(loginp)
+      var password = document.login.passwords
+      alert(md5(password))
     }
   }
 }

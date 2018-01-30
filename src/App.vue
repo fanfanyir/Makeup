@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <login></login>
-    <!--<register></register>-->
+    <!--<login></login>-->
+    <register></register>
     <!--<person></person>-->
     <!--<my></my>-->
     <!--<manage></manage>-->
