@@ -3,7 +3,7 @@
     <!--头部代码-->
     <header class="clearfix">
         <img src="../../assets/pay/箭头左粗.png" id="arrow_left">
-      <p>
+      <p @click="sssss()">
         {{title}}
       </p>
       <div></div>
@@ -41,43 +41,48 @@
     <!--商品信息-->
     <div class="goods " v-for="goodss in goods" v-bind:key="goodss.src1">
       <div class="goods_up clearfix">
-          <img v-bind:src="goodss.pro_shop_pic" class="goods_picture">
+          <img v-bind:src="goodss.pro_shop.pro_shop_pic" class="goods_picture">
           <div class="goods_upright">
             <p class="infor">
-              {{goodss.pro_shop_desc}}
+              {{goodss.pro_shop.pro_shop_desc}}
             </p>
             <p>
               <span>产品规格：</span>
-              <span class="goods_norms">{{goodss.pro_shop_spec}}</span>
+              <span class="goods_norms">{{goodss.pro_shop.pro_shop_spec}}</span>
             </p>
             <p>
               <span>X</span>
               <span class="goods_number">{{goodss.cart_num}}</span>
+              <!--<span class="goods_number">5</span>-->
             </p>
             <p>
               <span>¥</span>
-              <span class="price">{{goodss.pro_shop_price}}</span>
+              <span class="price">{{goodss.pro_shop.pro_shop_price}}</span>
+              <!--<span class="price">4</span>-->
             </p>
           </div>
       </div>
-      <div class="goods_down clearfix">
-        <div class="footer_left" >
-          <p v-for="item in footer_left_message"  v-bind:key="item.footer_left_message">
-            {{item.message}}
-          </p>
+    </div>
+    <div class="goods_down clearfix">
+      <div class="footer_left" >
+        <p v-for="item in footer_left_message"  v-bind:key="item.footer_left_message">
+          {{item.message}}
+        </p>
         <input type="text" placeholder="选填:填写内容已和商家协商确定" id="leave_word">
-        </div>
-        <div class="footer_right">
-          <p>快递免邮</p>
-        </div>
+      </div>
+      <div class="footer_right">
+        <p>快递免邮</p>
       </div>
     </div>
     <!--分割线-->
     <div class="lines2 line"></div>
     <!--结算-->
     <!--<div id="last"></div>-->
+    <!--<form action="http://flytosky2.free.ngrok.cc/register.htm" method="get">-->
+      <!--<input type="submit"/>-->
+    <!--</form>-->
     <div id="accounts" class="clearfix">
-        <input type="submit" value="确认订单" id="makesure_order"/>
+        <input type="submit" value="确认订单" id="makesure_order" @click="sendM()"/>
       <p>
         <span>合计金额</span>
         <span id="total_money">
@@ -89,6 +94,12 @@
 <script>
 export default {
   name: 'pay',
+  props: {
+    address_add: {
+      required: true,
+      type: Array
+    }
+  },
   data () {
     return {
       title: '确认订单',
@@ -101,8 +112,11 @@ export default {
         }
       ],
       goods: [
-        {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
-        {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '25', 'cart_num': '4', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'}
+        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
+        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '25', 'cart_num': '4', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
+        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
+        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
+        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'}
       ],
       footer_left_message: [
         {message: '配送方式'},
@@ -111,17 +125,68 @@ export default {
       ]
     }
   },
+  mounted () {
+    window.onload = function () {
+    }
+  },
   methods: {
-    address: function () {
+    sssss: function () {
       this.$http({
         method: 'get',
-        url: 'http://192.168.0.200:8080'
+        url: 'http://lxcarts.free.ngrok.cc/selectCart.htm?user_id=1',
+        // data: '',
+        xhrFields: {withCredentials: true}
       }).then(function (res) {
-        alert(res.body)
+        console.log(res.bodyText)
+        this.goods = JSON.parse(res.bodyText)
+        // console.log(this.goods)
+      }, function () {
+        console.log('请求失败')
+      })
+      console.log(333)
+      let Totalmoney = document.getElementById('total_money')
+      let aPrice = document.getElementsByClassName('price')
+      // console.log(aPrice[0].innerHTML)
+      let aNumber = document.getElementsByClassName('goods_number')
+      let str = 0
+      for (let i = 0; i < aPrice.length; i++) {
+        str += parseFloat(aPrice[i].innerHTML) * parseFloat(aNumber[i].innerHTML)
+        console.log(aPrice[i].innerHTML)
+      }
+      Totalmoney.innerHTML = str + '元'
+      console.log(Totalmoney.innerHTML)
+    },
+    address: function () {
+      this.$http({
+        method: 'post',
+        url: 'http://192.168.0.200:8080',
+        data: '',
+        xhrFields: {withCredentials: true}
+      }).then(function (res) {
+        console.log(res.body)
+      }, function () {
+        console.log('请求失败')
       })
       console.log(1)
       // let id = this.$route.params.id
-      this.$router.push({path: 'Choose_Address/'})
+      this.$router.push({path: '/details'})
+    },
+    sendM: function () {
+      // let total = document.getElementById('total_money').innerHTML
+      // let self = this
+      this.$http({
+        method: 'post',
+        url: 'http://makeuptao.free.ngrok.cc/orders.htm',
+        xhrFields: {withCredentials: true},
+        contextType: 'application/json',
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        data: {'price': '286'},
+        dataType: JSON
+      }).then(function (res) {
+        console.log(res)
+      }, function () {
+        console.log('请求失败')
+      })
     }
   }
 }

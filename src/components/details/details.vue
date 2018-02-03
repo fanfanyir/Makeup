@@ -1,10 +1,10 @@
 <template>
     <div id="detailstotal">
-      <details-header></details-header>
+      <DetailsHeader></DetailsHeader>
       <div id="section">
         <div class="clearfix">
           <div id="infor">
-            {{datas[0].infor}}
+            {{datas[0].pro_shop_desc}}
           </div>
           <div id="share">
             <img src="../../assets/LC_icon_share_line_2.png"/>
@@ -13,18 +13,18 @@
         </div>
         <div class="descript">
           <span>¥</span>
-          <span>{{datas[0].price}}</span>
+          <span>{{datas[0].pro_shop_price}}</span>
           <span>-</span>
-          <span>{{datas[0].higprice}}</span>
+          <span>{{datas[0].pro_shop_oldprice}}</span>
         </div>
         <div class="descript1">
           <span>月销</span>
-          <span>{{datas[0].sale}}</span>
+          <span>{{datas[0].pro_shop_sale}}</span>
           <span>笔</span>
         </div>
         <div class="choose">
           <div class="partone clearfix">
-            <p>选择 产品规格</p>
+            <p @click="show()">选择 产品规格</p>
             <img src="../../../src/assets/right.png"/>
           </div>
           <div class="line1"></div>
@@ -46,19 +46,22 @@
           </div>
           <div id="join_shoppingcar">加入购物车</div>
       </footer>
+      <Detailsgoodsnorm v-show="isShow"></Detailsgoodsnorm>
     </div>
 </template>
 
 <script>
 import DetailsHeader from '../details-header/details-header'
+import Detailsgoodsnorm from '../details_goods_norms/details_goods_norms'
 export default {
-  components: {DetailsHeader},
+  components: {DetailsHeader, Detailsgoodsnorm},
   name: 'details',
   data () {
     return {
       datas: [
-        {'infor': '纪梵希口红定制小羊皮／小粉皮唇膏口红西柚色纪梵希口红定制小羊皮／小粉皮唇膏口红', 'price': '249', 'higprice': '289', 'sale': '899'}
-      ]
+        {'pro_shop_desc': '纪梵希口红定制小羊皮／小粉皮唇膏口红西柚色纪梵希口红定制小羊皮／小粉皮唇膏口红', 'pro_shop_price': '249', 'pro_shop_oldprice': '289', 'pro_shop_sale': '899'}
+      ],
+      isShow: false
     }
   },
   methods: {
@@ -81,6 +84,10 @@ export default {
     up: function () {
       let number = document.getElementById('number')
       number.innerHTML = Number(number.innerHTML) + 1
+    },
+    show: function () {
+      this.isShow = true
+      console.log(this.isShow)
     }
   }
 }

@@ -11,7 +11,7 @@
 
 <script>
 import pay from './components/pay/pay.vue'
-import Chooseadress from './components/choose_address/Choose_Address'
+import Chooseadress from './components/choose_address/Choose_Address.vue'
 import addaddress from './components/add_address/Add_Address'
 import detailstotal from './components/details/details'
 export default {

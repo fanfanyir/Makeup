@@ -3,13 +3,14 @@
     outline: none;
   }
   #section{
-    background-color: #e7e7e7;
+    background-color: #e7e7e7 !important;
     .clearfix,.descript,.descript1,.choose{
       background-color: white;
       padding: 0 20px;
     }
     .clearfix{
       padding: 25px 20px 0 20px;
+      margin-top: 3px;
     }
     #infor{
       font-size: 28px;
@@ -63,7 +64,7 @@
       }
     }
     .choose .line1{
-      background-color: #e7e7e7;
+      background-color: #e7e7e7 !important;
       height: 3px;
     }
     .choose .parttwo {
@@ -79,7 +80,7 @@
       input{
         width: 45px;
         height: 40px;
-        background-color: #f7f7f7;
+        background-color: #f7f7f7 !important;
         font-size: 30px;
         text-align: center;
         line-height: 40px;
@@ -90,7 +91,7 @@
     }
     .ceshi{
       height: 500px;
-      background-color: #007aff;
+      background-color: #007aff !important;
     }
   }
   footer{
@@ -110,17 +111,17 @@
         height: 40px;
       }
       p{
-        color: #898989;
+        color: #898989 !important;
       }
     }
     #join_shoppingcar{
       float: right;
       width: 200px;
-      height: 90px;
-      background-color: #ff0000;
+      height: 70px;
+      background-color: #ff0000 !important;
       color: white;
       text-align: center;
-      line-height: 90px;
+      line-height: 70px;
       font-size: 30px;
     }
   }

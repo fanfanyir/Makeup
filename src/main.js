@@ -8,10 +8,11 @@ import 'lib-flexible/flexible'
 import VueResource from 'vue-resource'
 import '../src/assets/common1.css'
 import VueAewsomeSwiper from 'vue-awesome-swiper'
-import pay from './components/pay/pay.vue'
+import pay from './components/pay/pay'
 import Chooseadress from './components/choose_address/Choose_Address'
 import Addaddress from './components/add_address/Add_Address'
 import detailstotal from './components/details/details'
+import goodsnorm from './components/details_goods_norms/details_goods_norms'
 Vue.config.debug = true
 Vue.use(VueAewsomeSwiper)
 Vue.use(VueResource)
@@ -27,7 +28,8 @@ const router = new VueRouter({
     {path: '/pay', component: pay},
     {path: '/Choose_Address', component: Chooseadress},
     {path: '/Add_Address', component: Addaddress},
-    {path: '/details', component: detailstotal}
+    {path: '/details', component: detailstotal},
+    {path: '/details_goods_norms', component: goodsnorm}
   ]
 })
 /* eslint-disable no-new */

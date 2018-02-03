@@ -1,7 +1,7 @@
 <template>
     <div id="choose_address">
       <header>
-        <img src="../../assets/chooseaddress/arrow.png">
+        <img src="../../assets/chooseaddress/arrow.png" @click="retuenjump()">
         <p>
           {{title}}
         </p>
@@ -11,11 +11,11 @@
       </header>
       <footer>
         <div class="address_infor" v-for="(item,index) in address" v-bind:key='item in address' >
-          <p class="name">{{item.name}}</p>
-          <p class="telephone">{{item.telephone}}</p>
-          <p class="address" @click="choose(index)">{{item.address}}</p>
+          <p class="name">{{item.address_name}}</p>
+          <p class="telephone">{{item.address_tel}}</p>
+          <p class="address" @click="choose(index)" :address_add="address[0].address_add">{{item.address_add}}</p>
           <div class="line1"></div>
-          <label><input type="checkbox"  @click="change(index)" :checked="index === 0" :class="'input'+index "/><span>设为默认</span></label>
+          <label><input type="checkbox"  @click="change(index)" :checked="index === 0"/><span :class="'input'+index ">设为默认</span></label>
           <div class="line2"></div>
         </div>
       </footer>
@@ -30,23 +30,25 @@ export default {
       title: '选择收货地址',
       Righttitle: '新增',
       address: [
-        {name: '张梦莹', telephone: '17691045044', address: '陕西省西安市长安区西安邮电大学西区4号楼陕西省西安市长安区西安邮电大学西区4号楼'},
-        {name: '张梦莹', telephone: '17691045044', address: '陕西省西安市长安区西安邮电大学'},
-        {name: '张梦莹', telephone: '17691045044', address: '陕西省西安市长安区智慧城25号楼'}
+        {address_name: '张某某', address_tel: '13468779955', address_add: '陕西省xxxxxx'},
+        {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区西安邮电大学西区4号楼陕西省西安市长安区西安邮电大学西区4号楼'},
+        {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区西安邮电大学'},
+        {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区智慧城25号楼'}
       ]
+    }
+  },
+  mounted () {
+    window.onload = function () {
+      let aSpan = document.getElementsByTagName('span')
+      aSpan[0].innerHTML = '默认地址'
+      aSpan[0].style.color = '#f19149'
     }
   },
   methods: {
     change: function (m) {
       let aInput = document.getElementsByTagName('input')
       let aSpan = document.getElementsByTagName('span')
-      // for (let j = 0; j < aInput.length; j++) {
-      //   aInput[j].index = j
-      // }
-      console.log(aInput[m].className)
-      if (aInput[m].className === 'input0') {
-        aSpan[m].style.color = '#f19149'
-      }
+      // console.log(aSpan[0].style.color)
       if (aInput[0].checked === false) {
         aSpan[0].innerHTML = '默认地址'
         aSpan[0].style.color = '#f19149'
@@ -70,9 +72,11 @@ export default {
       aAddress[i].style.backgroundColor = '#e7e7e7'
     },
     jump: function () {
-      console.log(22)
       // let id = this.$route.params.id
-      this.$router.push({path: 'Add_Address/'})
+      this.$router.push({path: '/Add_Address'})
+    },
+    retuenjump: function () {
+      this.$router.push({path: '/pay'})
     }
   }
 }

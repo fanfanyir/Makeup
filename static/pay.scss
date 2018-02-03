@@ -117,26 +117,27 @@
         font-size: 28px;
       }
     }
-    .goods_down{
-      .footer_left{
-        padding: 0 15px;
-        line-height: 70px;
-        font-size: 25px;
-        float: left;
-        width: 500px;
-        input{
-          margin-left: 105px;
-          width: 600px;
-          border: none;
-          outline: none;
-        }
+  }
+  .goods_down{
+    background-color: white;
+    .footer_left{
+      padding: 0 15px;
+      line-height: 70px;
+      font-size: 25px;
+      float: left;
+      width: 500px;
+      input{
+        margin-left: 105px;
+        width: 600px;
+        border: none;
+        outline: none;
       }
-      .footer_right{
-        float: right;
-        padding: 0 15px;
-        line-height: 70px;
-        font-size: 25px;
-      }
+    }
+    .footer_right{
+      float: right;
+      padding: 0 15px;
+      line-height: 70px;
+      font-size: 25px;
     }
   }
   /*结算*/
