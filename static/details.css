@@ -43,6 +43,8 @@
     #detailstotal #section .choose .partone p {
       float: left;
       width: 95%; }
+      #detailstotal #section .choose .partone p span {
+        margin-left: 400px; }
     #detailstotal #section .choose .partone img {
       width: 30px;
       height: 30px; }
@@ -53,10 +55,10 @@
     padding: 0; }
     #detailstotal #section .choose .parttwo div:nth-of-type(1) {
       float: left;
-      width: 70%; }
+      width: 65%; }
     #detailstotal #section .choose .parttwo div:nth-of-type(2) {
       float: right;
-      width: 25%; }
+      width: 30%; }
     #detailstotal #section .choose .parttwo input {
       width: 45px;
       height: 40px;
@@ -66,9 +68,6 @@
       line-height: 40px; }
     #detailstotal #section .choose .parttwo span {
       margin: 0 10px; }
-  #detailstotal #section .ceshi {
-    height: 500px;
-    background-color: #007aff !important; }
 #detailstotal footer {
   position: fixed;
   left: 0;

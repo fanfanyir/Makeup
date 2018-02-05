@@ -8,7 +8,8 @@
         <p>规格选择</p>
         <div v-for="(norm,index) in norms" v-bind:key="norm in norms" @click="choosenorm(index)">{{norm}}</div>
       </div>
-      <input type="button" value="确认选择">
+      <!--<input type="button" value="确认选择">-->
+      <div id="divsure">确认选择</div>
     </div>
 </template>
 <script>
@@ -17,22 +18,25 @@ export default {
   data () {
     return {
       src1: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1517116938648&di=96a1a65d6a3aeb041d36b78544192fb6&imgtype=0&src=http%3A%2F%2Fmvimg10.meitudata.com%2F55a882c9d1ec18281.jpg',
-      norms: ['#100', '#101', '#102', '#103', '#104'],
+      norms: ['#100'],
       sshow: true
     }
   },
+  props: ['message'],
   methods: {
     choosenorm: function (index) {
       // console.log('div')
       let aDiv = document.getElementsByTagName('div')
       // console.log('333')
-      for (let i = 0; i < aDiv.length; i++) {
+      for (let i = 0; i < aDiv.length - 1; i++) {
         aDiv[i].style.backgroundColor = 'white'
       }
-      aDiv[index + 25].style.backgroundColor = 'hotpink'
+      aDiv[index + 24].style.backgroundColor = 'hotpink'
     },
     close: function () {
-      this.sshow = false
+      this.sshow = !this.sshow
+      console.log(this.sshow)
+      this.$emit('send', this.norms[0])
     }
   }
 }
@@ -40,6 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 #details_goods_norms{
+  width: 100%;
   position: fixed;
   z-index: 14;
   bottom: 0;
@@ -81,7 +86,7 @@ export default {
       font-size: 20px;
     }
   }
-  input{
+  #divsure{
     margin: 0 0 20px 500px;
     border: 0;
     outline: none;
@@ -89,6 +94,7 @@ export default {
     height: 50px;
     color: white;
     line-height: 50px;
+    text-align: center;
     font-size: 30px;
     background-color: #ff0000;
   }

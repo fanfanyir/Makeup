@@ -112,11 +112,8 @@ export default {
         }
       ],
       goods: [
-        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
-        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '25', 'cart_num': '4', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
-        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
-        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'},
-        // {'pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop_desc': '商品描述', 'pro_shop_spec': '商品规格'}
+        // {'pro_shop.pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop.pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop.pro_shop_desc': '商品描述', 'pro_shop.pro_shop_spec': '商品规格'},
+        // {'pro_shop.pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop.pro_shop_price': '25', 'cart_num': '4', 'pro_shop.pro_shop_desc': '商品描述', 'pro_shop.pro_shop_spec': '商品规格'}
       ],
       footer_left_message: [
         {message: '配送方式'},
@@ -126,20 +123,20 @@ export default {
     }
   },
   mounted () {
-    window.onload = function () {
-    }
+    this.sssss()
   },
   methods: {
     sssss: function () {
       this.$http({
         method: 'get',
-        url: 'http://lxcarts.free.ngrok.cc/selectCart.htm?user_id=1',
+        url: 'http://6h66nw.natappfree.cc/selectCart.htm?user_id=1',
         // data: '',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
         console.log(res.bodyText)
         this.goods = JSON.parse(res.bodyText)
-        // console.log(this.goods)
+        console.log(this.goods[0])
+        console.log('李鑫')
       }, function () {
         console.log('请求失败')
       })
@@ -172,21 +169,22 @@ export default {
       this.$router.push({path: '/details'})
     },
     sendM: function () {
-      // let total = document.getElementById('total_money').innerHTML
-      // let self = this
-      this.$http({
-        method: 'post',
-        url: 'http://makeuptao.free.ngrok.cc/orders.htm',
-        xhrFields: {withCredentials: true},
-        contextType: 'application/json',
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
-        data: {'price': '286'},
-        dataType: JSON
-      }).then(function (res) {
-        console.log(res)
-      }, function () {
-        console.log('请求失败')
-      })
+      let total = document.getElementById('total_money')
+      let number = document.getElementsByClassName('goods')
+      let orderMessage = document.getElementById('leave_word')
+      let postData = 999
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function (res) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('success')
+          console.log(res)
+        } else {
+          console.log('error')
+        }
+      }
+      xhr.open('post', ' http://2qchts.natappfree.cc/orders.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('price=' + postData + '&' + 'number=' + number.length + '&' + 'order_money=' + total.innerHTML + '&' + 'order_message=' + orderMessage.value + '&' + 'id0=' + this.goods[0].cart_id + '&' + 'id1=' + this.goods[1].cart_id + '&' + 'num0=' + this.goods[0].cart_num + '&' + 'num1=' + this.goods[1].cart_num)
     }
   }
 }

@@ -2,7 +2,7 @@
     <div id="choose_address">
       <header>
         <img src="../../assets/chooseaddress/arrow.png" @click="retuenjump()">
-        <p>
+        <p @click="user()">
           {{title}}
         </p>
         <p @click="jump()">
@@ -30,21 +30,35 @@ export default {
       title: '选择收货地址',
       Righttitle: '新增',
       address: [
-        {address_name: '张某某', address_tel: '13468779955', address_add: '陕西省xxxxxx'},
-        {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区西安邮电大学西区4号楼陕西省西安市长安区西安邮电大学西区4号楼'},
-        {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区西安邮电大学'},
-        {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区智慧城25号楼'}
+        // {address_name: '张某某', address_tel: '13468779955', address_add: '陕西省xxxxxx'},
+        // {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区西安邮电大学西区4号楼陕西省西安市长安区西安邮电大学西区4号楼'},
+        // {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区西安邮电大学'},
+        // {address_name: '张梦莹', address_tel: '17691045044', address_add: '陕西省西安市长安区智慧城25号楼'}
       ]
     }
   },
   mounted () {
-    window.onload = function () {
+    this.load()
+  },
+  methods: {
+    load: function () {
       let aSpan = document.getElementsByTagName('span')
       aSpan[0].innerHTML = '默认地址'
       aSpan[0].style.color = '#f19149'
-    }
-  },
-  methods: {
+      console.log(22)
+      this.$http({
+        method: 'get',
+        url: 'http://curryni.free.ngrok.cc/dizhi.htm?user_id=2',
+        xhrFields: {withCredentials: true}
+        // contextType: 'application/json',
+        // headers: {'X-Requested-With': 'XMLHttpRequest'},
+        // dataType: JSON
+      }).then(function (res) {
+        this.address = JSON.parse(res.bodyText)
+      }, function () {
+        console.log('请求失败')
+      })
+    },
     change: function (m) {
       let aInput = document.getElementsByTagName('input')
       let aSpan = document.getElementsByTagName('span')
@@ -77,6 +91,20 @@ export default {
     },
     retuenjump: function () {
       this.$router.push({path: '/pay'})
+    },
+    user: function () {
+      // this.$http({
+      //   method: 'get',
+      //   url: 'http://curryni.free.ngrok.cc/dizhi.htm?user_id=2',
+      //   xhrFields: {withCredentials: true}
+      //   // contextType: 'application/json',
+      //   // headers: {'X-Requested-With': 'XMLHttpRequest'},
+      //   // dataType: JSON
+      // }).then(function (res) {
+      //   this.address = JSON.parse(res.bodyText)
+      // }, function () {
+      //   console.log('请求失败')
+      // })
     }
   }
 }
