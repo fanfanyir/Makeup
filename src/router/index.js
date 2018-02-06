@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import index from '@/components/index'
 import goodlist from '@/components/goodslist/goodlist.vue'
+import shopping from '@/components/shopping/shopping.vue'
+import person from '@/components/person.vue'
 import Orderbanner from '@/components/order/order_banner/order_banner.vue'
 import navv from '@/components/order/order_nav/order_nav.vue'
 import allget from '@/components/order/get.vue'
@@ -10,17 +13,37 @@ import allmsg from '@/components/order/msg.vue'
 import allpay from '@/components/order/pay.vue'
 import get from '@/components/order/order_get/order_get.vue'
 import getdetail from '@/components/order/order_get/order_getdetail/ordergetdetail.vue'
-import pay from '@/components/order/order_pay/order_pay.vue'
+import payy from '@/components/order/order_pay/order_pay.vue'
 import paydetail from '@/components/order/order_pay/order_paydetail/orderpaydetail.vue'
 import msg from '@/components/order/order_msg/order_msg.vue'
 import msgdetail from '@/components/order/order_msg/order_msgdetail/ordermsgdetail.vue'
+import pay from '@/components/pay/pay'
+import Chooseadress from '@/components/choose_address/Choose_Address'
+import Addaddress from '@/components/add_address/Add_Address'
+import detailstotal from '@/components/details/details'
+import goodsnorm from '@/components/details_goods_norms/details_goods_norms'
+import login from '@/components/login.vue'
+import register from '@/components/register.vue'
+Vue.use(Router)
+// import index from '@/components/index'
 
 Vue.use(Router)
 export default new Router({
   routes: [
     {
       path: '/',
-      redirect: allall
+      name: 'index',
+      component: index
+    },
+    {
+      path: '/shopping',
+      name: 'shopping',
+      component: shopping
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
     },
     {
       title: '商品目录',
@@ -76,8 +99,7 @@ export default new Router({
       title: '完成',
       path: '/allend',
       name: 'allend',
-      component: allend,
-      children: []
+      component: allend
     },
     {
       title: '付款',
@@ -89,7 +111,7 @@ export default new Router({
           title: '待付款',
           path: '/order/nav/pay',
           name: 'pay',
-          component: pay
+          component: payy
         }
       ]
     },
@@ -111,8 +133,27 @@ export default new Router({
       title: '全部的',
       path: '/allall',
       name: 'allall',
-      component: allall,
-      children: []
+      component: allall
+    },
+    {path: '/pay', component: pay},
+    {path: '/Choose_Address', component: Chooseadress},
+    {path: '/Add_Address', component: Addaddress},
+    {path: '/details', component: detailstotal},
+    {path: '/details_goods_norms', component: goodsnorm},
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/person',
+      name: 'person',
+      component: person
     }
   ]
 })
