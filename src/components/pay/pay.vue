@@ -17,19 +17,19 @@
               {{message1}}
             </span>
             <span id="name">
-              {{str[0].name}}
+              {{goods[0].address.address_add}}
             </span>
         <br>
             <span id="address_infortitle">
               {{message2}}
             </span>
             <span id="address_infor">
-              {{str[0].address_infor}}
+              {{goods[0].address.address_add}}
             </span>
       </div>
       <div id="address_rightpart">
         <span id="telephone">
-          {{str[0].telephone}}
+          {{goods[0].address.address_add}}
         </span>
         <br><br>
         <!--<img src="../../assets/pay/箭头-右.png">-->
@@ -85,8 +85,7 @@
         <input type="submit" value="确认订单" id="makesure_order" @click="sendM()"/>
       <p>
         <span>合计金额</span>
-        <span id="total_money">
-        </span>
+        <span id="total_money"></span>
       </p>
     </div>
   </div>
@@ -112,8 +111,8 @@ export default {
         }
       ],
       goods: [
-        // {'pro_shop.pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop.pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop.pro_shop_desc': '商品描述', 'pro_shop.pro_shop_spec': '商品规格'},
-        // {'pro_shop.pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop.pro_shop_price': '25', 'cart_num': '4', 'pro_shop.pro_shop_desc': '商品描述', 'pro_shop.pro_shop_spec': '商品规格'}
+        {'pro_shop.pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop.pro_shop_price': '23.2', 'cart_num': '2', 'pro_shop.pro_shop_desc': '商品描述', 'pro_shop.pro_shop_spec': '商品规格'},
+        {'pro_shop.pro_shop_pic': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516957137439&di=fb53d3c6c5683c6b04b2fe2be4fb457e&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130508%2F9252150_171934681000_2.jpg', 'pro_shop.pro_shop_price': '25', 'cart_num': '4', 'pro_shop.pro_shop_desc': '商品描述', 'pro_shop.pro_shop_spec': '商品规格'}
       ],
       footer_left_message: [
         {message: '配送方式'},
@@ -129,42 +128,32 @@ export default {
     sssss: function () {
       this.$http({
         method: 'get',
-        url: 'http://6h66nw.natappfree.cc/selectCart.htm?user_id=1',
+        url: 'http://knejvi.natappfree.cc/selectCart.htm?user_id=2',
         // data: '',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
         console.log(res.bodyText)
         this.goods = JSON.parse(res.bodyText)
-        console.log(this.goods[0])
+        console.log(this.goods[0].address)
+        console.log(this.goods[0].cart_id)
         console.log('李鑫')
       }, function () {
         console.log('请求失败')
       })
       console.log(333)
-      let Totalmoney = document.getElementById('total_money')
-      let aPrice = document.getElementsByClassName('price')
-      // console.log(aPrice[0].innerHTML)
-      let aNumber = document.getElementsByClassName('goods_number')
-      let str = 0
-      for (let i = 0; i < aPrice.length; i++) {
-        str += parseFloat(aPrice[i].innerHTML) * parseFloat(aNumber[i].innerHTML)
-        console.log(aPrice[i].innerHTML)
-      }
-      Totalmoney.innerHTML = str + '元'
-      console.log(Totalmoney.innerHTML)
     },
     address: function () {
-      this.$http({
-        method: 'post',
-        url: 'http://192.168.0.200:8080',
-        data: '',
-        xhrFields: {withCredentials: true}
-      }).then(function (res) {
-        console.log(res.body)
-      }, function () {
-        console.log('请求失败')
-      })
-      console.log(1)
+      // this.$http({
+      //   method: 'post',
+      //   url: 'http://192.168.0.200:8080',
+      //   data: '',
+      //   xhrFields: {withCredentials: true}
+      // }).then(function (res) {
+      //   console.log(res.body)
+      // }, function () {
+      //   console.log('请求失败')
+      // })
+      // console.log(1)
       // let id = this.$route.params.id
       this.$router.push({path: '/details'})
     },
@@ -174,9 +163,19 @@ export default {
       let orderMessage = document.getElementById('leave_word')
       let postData = 999
       let xhr = new XMLHttpRequest()
+      let aPrice = document.getElementsByClassName('price')
+      let aNumber = document.getElementsByClassName('goods_number')
+      let str = 0
+      for (let i = 0; i < aPrice.length; i++) {
+        str += parseFloat(aPrice[i].innerHTML) * parseFloat(aNumber[i].innerHTML)
+        console.log(aPrice[i].innerHTML)
+      }
+      total.innerHTML = str + '元'
+      console.log(total.innerHTML)
+      console.log(aPrice[0].innerHTML)
       xhr.onreadystatechange = function (res) {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          console.log('success')
+          console.log('罗瑶success')
           console.log(res)
         } else {
           console.log('error')
@@ -184,7 +183,7 @@ export default {
       }
       xhr.open('post', ' http://2qchts.natappfree.cc/orders.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('price=' + postData + '&' + 'number=' + number.length + '&' + 'order_money=' + total.innerHTML + '&' + 'order_message=' + orderMessage.value + '&' + 'id0=' + this.goods[0].cart_id + '&' + 'id1=' + this.goods[1].cart_id + '&' + 'num0=' + this.goods[0].cart_num + '&' + 'num1=' + this.goods[1].cart_num)
+      xhr.send('price=' + postData + '&' + 'number=' + number.length + '&' + 'order_money=' + total.innerHTML + '&' + 'order_message=' + orderMessage.value + '&' + 'id0=' + this.goods[0].cart_id + '&' + 'id1=' + this.goods[0].cart_id + '&' + 'num0=' + this.goods[0].cart_num + '&' + 'num1=' + this.goods[1].cart_num)
     }
   }
 }

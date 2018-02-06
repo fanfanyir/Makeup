@@ -78,13 +78,12 @@ export default {
     },
     load: function () {
       this.$http({
-        url: 'http://zxhbzu.free.ngrok.cc/detail.htm?user_id=5',
+        url: 'http://jg25vu.natappfree.cc/detail.htm?user_id=5&pro_shop_id=6',
         method: 'get',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
         console.log(res.bodyText)
         this.datas = JSON.parse(JSON.parse(res.bodyText))
-        // this.$broadcast('done', this.datas)
         console.log(JSON.parse(JSON.parse(res.bodyText)))
         console.log('请求成功啦！！')
       }, function () {

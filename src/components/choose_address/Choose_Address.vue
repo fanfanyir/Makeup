@@ -1,7 +1,7 @@
 <template>
     <div id="choose_address">
       <header>
-        <img src="../../assets/chooseaddress/arrow.png" @click="retuenjump()">
+        <img src="../../assets/chooseaddress/arrow.png" @click="returnjump()">
         <p @click="user()">
           {{title}}
         </p>
@@ -42,22 +42,23 @@ export default {
   },
   methods: {
     load: function () {
-      let aSpan = document.getElementsByTagName('span')
-      aSpan[0].innerHTML = '默认地址'
-      aSpan[0].style.color = '#f19149'
-      console.log(22)
-      this.$http({
-        method: 'get',
-        url: 'http://curryni.free.ngrok.cc/dizhi.htm?user_id=2',
-        xhrFields: {withCredentials: true}
-        // contextType: 'application/json',
-        // headers: {'X-Requested-With': 'XMLHttpRequest'},
-        // dataType: JSON
-      }).then(function (res) {
-        this.address = JSON.parse(res.bodyText)
-      }, function () {
-        console.log('请求失败')
-      })
+      // let aSpan = document.getElementsByTagName('span')
+      // aSpan[0].innerHTML = '默认地址'
+      // aSpan[0].style.color = '#f19149'
+      // console.log(22)
+      // this.$http({
+      //   method: 'get',
+      //   url: 'http://c5ie4u.natappfree.cc/dizhi.htm?user_id=2',
+      //   xhrFields: {withCredentials: true}
+      //   // contextType: 'application/json',
+      //   // headers: {'X-Requested-With': 'XMLHttpRequest'},
+      //   // dataType: JSON
+      // }).then(function (res) {
+      //   this.address = JSON.parse(res.bodyText)
+      //   console.log('请求成功倪晨阳')
+      // }, function () {
+      //   console.log('请求失败倪晨阳')
+      // })
     },
     change: function (m) {
       let aInput = document.getElementsByTagName('input')
@@ -89,7 +90,7 @@ export default {
       // let id = this.$route.params.id
       this.$router.push({path: '/Add_Address'})
     },
-    retuenjump: function () {
+    returnjump: function () {
       this.$router.push({path: '/pay'})
     },
     user: function () {
@@ -105,6 +106,24 @@ export default {
       // }, function () {
       //   console.log('请求失败')
       // })
+
+      // let aSpan = document.getElementsByTagName('span')
+      // aSpan[0].innerHTML = '默认地址'
+      // aSpan[0].style.color = '#f19149'
+      console.log(22)
+      this.$http({
+        method: 'get',
+        url: 'http://c5ie4u.natappfree.cc/dizhi.htm?user_id=2',
+        xhrFields: {withCredentials: true}
+        // contextType: 'application/json',
+        // headers: {'X-Requested-With': 'XMLHttpRequest'},
+        // dataType: JSON
+      }).then(function (res) {
+        this.address = JSON.parse(res.bodyText)
+        console.log('请求成功倪晨阳')
+      }, function () {
+        console.log('请求失败倪晨阳')
+      })
     }
   }
 }
