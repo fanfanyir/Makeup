@@ -1,6 +1,6 @@
 <template>
   <div id="waterfall1">
-    <div class="waterfall1_box" v-for="lit in litss" v-bind:key="lit.pro_shop_id">
+    <div class="waterfall1_box" v-for="lit in litss" v-bind:key="lit.pro_shop_id" @click="jumpzmy()">
       <div class="box_img">
         <img :src="lit.pro_shop_pic"/>
         <p>{{lit.pro_shop_desc}}</p>
@@ -36,6 +36,9 @@ export default {
     })
   },
   methods: {
+    jumpzmy: function () {
+      this.$router.push({path: '/details'})
+    },
     handleScroll: function () {
       let that = this
       this.$http({
@@ -47,6 +50,7 @@ export default {
       }).then(function (response) {
         let left = JSON.parse(response.bodyText).data
         this.litss = this.litss.concat(left)
+        this.waterfall('waterfall1', 'waterfall1_box')
         this.$nextTick(() => {
           this.waterfall('waterfall1', 'waterfall1_box')
         })
@@ -57,7 +61,7 @@ export default {
       })
     },
     waterfall: function (parent, pin) {
-      var oParent = document.getElementById(parent)
+      let oParent = document.getElementById(parent)
       let aPin = this.getClassObj(oParent, pin)
       let iPinW = aPin[0].offsetWidth
       let num = Math.floor(document.documentElement.clientWidth / iPinW)
@@ -128,15 +132,18 @@ export default {
   #waterfall1{
     /*margin-top: 150px;*/
     z-index: -1;
+    width: 100%;
     /*position: relative;*/
     .waterfall1_box{
-      width: 320px;
-      padding: 5px;
+      /*width: 320px;*/
+      width: 50%;
+      /*padding: 5px;*/
       height: auto;
       /*position: relative;*/
       float: left;
       .box_img{
-        width: 306px;
+        /*width: 306px;*/
+        width: 100%;
         height: auto;
         padding: 5px;
         background: #FFF;
@@ -144,8 +151,9 @@ export default {
         box-shadow: 0 0 5px #ccc;
         border-radius: 5px;
         img{
-          width: 296px;
+          /*width: 296px;*/
           height: auto;
+          width: 100%;
         }
         div{
           width: 296px;

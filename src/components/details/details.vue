@@ -7,7 +7,7 @@
             {{datas[0].pro_shop_desc}}
           </div>
           <div id="share">
-            <img src="../../assets/LC_icon_share_line_2.png"/>
+            <img src="../../assets/LC_icon.png"/>
             <p>分享有赏</p>
           </div>
         </div>
