@@ -10,18 +10,34 @@
 </template>
 
 <script type="text/javascript">
+import $ from 'jquery'
 export default{
   data () {
     return {
       message: '眼妆',
       items: [
-        {src: 'http://img0.imgtn.bdimg.com/it/u=1363759338,3109658944&fm=27&gp=0.jpg', id: '迪奥'},
-        {src: 'http://img4.imgtn.bdimg.com/it/u=854196371,4097056263&fm=27&gp=0.jpg', id: '底妆1'},
-        {src: 'http://img4.imgtn.bdimg.com/it/u=2965317859,1746404083&fm=27&gp=0.jpg', id: '底妆2'},
+        {src: 'http://ozxb0em6i.bkt.clouddn.com/106448_205.jpg', id: '迪奥'},
+        {src: 'http://ozxb0em6i.bkt.clouddn.com/106454_205.jpg', id: '底妆1'},
+        {src: 'http://ozxb0em6i.bkt.clouddn.com/106573_205.jpg', id: '底妆2'},
         {src: 'http://img0.imgtn.bdimg.com/it/u=3685931821,1122295923&fm=27&gp=0.jpg', id: '底妆3'},
         {src: 'http://img5.imgtn.bdimg.com/it/u=2117095798,285123523&fm=27&gp=0.jpg', id: '底妆4'},
         {src: 'http://img3.imgtn.bdimg.com/it/u=332430542,2387847793&fm=27&gp=0.jpg', id: '底妆5'}
       ]
+    }
+  },
+  methods: {
+    ajax: function () {
+      $.ajax({
+        method: 'GET',
+        url: '',
+        dataType: 'json',
+        success: function (data) {
+          for (let i = 0; i < data.length; i++) {
+            $('#subcon img').eq(i).attr('src', data[i].kind_photo)
+            $('#subcon span').eq(i).html(data[i].kind_.min)
+          }
+        }
+      })
     }
   }
 }

@@ -1,30 +1,44 @@
 <template>
   <div id="goods">
     <div id="title"><p>{{ message }}</p></div>
-    <div id="goodscon">
-      <div v-for="item in items" v-bind:key="item.id">
-        <a href="#"><img v-bind:src="item.src"><span >{{ item.id }}</span></a>
-      </div>
+    <div id="goodscon" class="goodscon">
+      <!--<div v-for="item in items" v-bind:key="item.id">-->
+      <!--<a href="#"><img v-bind:src="item.src"><span >{{ item.id }}</span></a>-->
+      <!--</div>-->
     </div>
   </div>
 </template>
 
 <script>
+import $ from 'jquery'
 export default{
   data () {
     return {
-      message: '商品分类',
-      items: [
-        {id: '底妆', src: 'http://img0.imgtn.bdimg.com/it/u=3230019345,1180801021&fm=27&gp=0.jpg'},
-        {id: '唇妆', src: 'http://img5.imgtn.bdimg.com/it/u=4171676116,824482619&fm=200&gp=0.jpg'},
-        {id: '眼妆', src: 'http://img4.imgtn.bdimg.com/it/u=3414440775,4089284891&fm=27&gp=0.jpg'},
-        {id: '护肤', src: 'http://img3.imgtn.bdimg.com/it/u=4026681481,3560270022&fm=27&gp=0.jpg'},
-        {id: '香水', src: 'http://img3.imgtn.bdimg.com/it/u=642237152,1288091797&fm=27&gp=0.jpg'},
-        {id: '美容工具', src: 'http://img4.imgtn.bdimg.com/it/u=2594624002,3617889790&fm=27&gp=0.jpg'},
-        {id: '美甲', src: 'http://img5.imgtn.bdimg.com/it/u=2229256891,3636616472&fm=27&gp=0.jpg'},
-        {id: '男士专场', src: 'http://img2.imgtn.bdimg.com/it/u=2271745413,3328747779&fm=27&gp=0.jpg'}
-      ]
+      message: '商品分类'
     }
+  },
+  methods: {
+    get: function () {
+      this.$http({
+        method: 'GET',
+        url: 'http://bzuhan.free.ngrok.cc/selectAllBigClass.htm',
+        dataType: 'json',
+        async: false,
+        xhrFields: {withCredentials: true}
+      }).then(function (res) {
+        console.log(res.data)
+        var str = res.data
+        for (let i = 0; i <= str.length; i++) {
+          $('#goodscon img').eq(i).attr('src', str[i].max_photo)
+          $('#goodscon span').eq(i).html(str[i].kind_max)
+        }
+      }, function () {
+        console.log('请求失败')
+      })
+    }
+  },
+  mounted: function () {
+    this.get()
   }
 }
 </script>
@@ -43,6 +57,7 @@ export default{
     }
     #goodscon {
       height: 335px;
+      padding-top:10px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;

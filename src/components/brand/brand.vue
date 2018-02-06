@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default{
   data () {
     return {
@@ -23,6 +24,19 @@ export default{
         {id: '阿玛尼', src: 'http://img0.imgtn.bdimg.com/it/u=877742864,563766274&fm=11&gp=0.jpg'}
       ]
     }
+  },
+  methood: function () {
+    $.ajax({
+      methods: 'GET',
+      url: '',
+      dataType: 'json',
+      success: function (data) {
+        for (let i = 0; i <= data.length; i++) {
+          $('#brandcon img').eq(i).attr('src', data[i].brand_picture)
+          $('#brandcon span').eq(i).html(data[i].brand_name)
+        }
+      }
+    })
   }
 }
 </script>
