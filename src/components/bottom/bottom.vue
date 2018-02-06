@@ -3,31 +3,47 @@
     <li id="index">
       <a href="#">
         <img src="../../assets/bottom/index.png">
-        <span>首页</span>
+        <span @click="home()">首页</span>
       </a>
     </li>
     <li id="list">
       <a href="#">
         <img src="../../assets/bottom/list.png">
-        <span>商品</span>
+        <span @click="goodslist()">商品</span>
       </a>
     </li>
     <li id="shopping">
       <a href="#">
         <img src="../../assets/bottom/shopping.png">
-        <span>购物车</span>
+        <span @click="shop()">购物车</span>
       </a>
     </li>
     <li id="my">
       <a href="#">
         <img src="../../assets/bottom/mys.png">
-        <span>我的</span>
+        <span @click="jumpMy()">我的</span>
       </a>
     </li>
   </ul>
 </template>
 
 <script type="text/javascript">
+export default{
+  methods: {
+    home: function () {
+      this.$router.push({path: '/index'})
+    },
+    goodslist: function () {
+      this.$router.push({path: '/goodlist'})
+    },
+    shop: function () {
+      this.$router.push({push: '/shopping'})
+    },
+    jumpMy: function () {
+      this.$router.push({path: '/person'})
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
