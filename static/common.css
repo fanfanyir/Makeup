@@ -9,7 +9,7 @@
 }
 body{
 	font-size:12px;
-	font-family:Arial,Verdana,Tahoma,"微软雅黑","黑体";
+	/*font-family:Arial,Verdana,Tahoma,"微软雅黑","黑体";*/
 	line-height:120%;
 	background:#fff;
 	margin:0;
@@ -62,4 +62,3 @@ a:active{
 .clearfix{
 	*zoom:1;
 }
-

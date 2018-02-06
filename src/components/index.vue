@@ -20,11 +20,12 @@ import subclass from './subclass/subclass.vue'
 import bottom from './bottom/bottom.vue'
 
 export default {
+  name: 'index',
   components: { top, slide, goods, brand, hot, subclass, bottom }
 }
 </script>
 
-<style>
+<style scoped>
   body{
     margin:0;
     padding:0;

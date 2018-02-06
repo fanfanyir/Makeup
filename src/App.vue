@@ -12,6 +12,11 @@
     <!--<feet></feet>-->
     <!--<usercollect></usercollect>-->
     <!--实现跳转<router-view/>-->
+    <!--<chooseadress></chooseadress>-->
+    <!--<addaddress></addaddress>-->
+    <!--<detailstotal></detailstotal>-->
+    <!--<detailsheader></detailsheader>-->
+    <!--<pay></pay>-->
     <router-view/>
     <!--<div id="zyf_goodslist">-->
     <!--<goodlist></goodlist>-->
@@ -46,6 +51,10 @@ import orderpay from './components/order/pay.vue'
 import orderpaydetail from './components/order/order_pay/order_paydetail/orderpaydetail.vue'
 import ordergetdetail from './components/order/order_get/order_getdetail/ordergetdetail.vue'
 import ordermsgdetail from './components/order/order_msg/order_msgdetail/ordermsgdetail.vue'
+import pay from './components/pay/pay.vue'
+import Chooseadress from './components/choose_address/Choose_Address.vue'
+import addaddress from './components/add_address/Add_Address'
+import detailstotal from './components/details/details'
 export default {
   name: 'app',
   data () {
@@ -70,7 +79,11 @@ export default {
     orderpaydetail,
     ordergetdetail,
     ordermsgdetail,
-    usercollect
+    usercollect,
+    detailstotal,
+    pay,
+    Chooseadress,
+    addaddress
   }
 }
 </script>

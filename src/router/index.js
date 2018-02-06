@@ -12,10 +12,18 @@ import allmsg from '@/components/order/msg.vue'
 import allpay from '@/components/order/pay.vue'
 import get from '@/components/order/order_get/order_get.vue'
 import getdetail from '@/components/order/order_get/order_getdetail/ordergetdetail.vue'
-import pay from '@/components/order/order_pay/order_pay.vue'
+import payy from '@/components/order/order_pay/order_pay.vue'
 import paydetail from '@/components/order/order_pay/order_paydetail/orderpaydetail.vue'
 import msg from '@/components/order/order_msg/order_msg.vue'
 import msgdetail from '@/components/order/order_msg/order_msgdetail/ordermsgdetail.vue'
+import pay from '@/components/pay/pay'
+import Chooseadress from '@/components/choose_address/Choose_Address'
+import Addaddress from '@/components/add_address/Add_Address'
+import detailstotal from '@/components/details/details'
+import goodsnorm from '@/components/details_goods_norms/details_goods_norms'
+Vue.use(Router)
+// import index from '@/components/index'
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -83,8 +91,7 @@ export default new Router({
       title: '完成',
       path: '/allend',
       name: 'allend',
-      component: allend,
-      children: []
+      component: allend
     },
     {
       title: '付款',
@@ -96,7 +103,7 @@ export default new Router({
           title: '待付款',
           path: '/order/nav/pay',
           name: 'pay',
-          component: pay
+          component: payy
         }
       ]
     },
@@ -118,8 +125,12 @@ export default new Router({
       title: '全部的',
       path: '/allall',
       name: 'allall',
-      component: allall,
-      children: []
-    }
+      component: allall
+    },
+    {path: '/pay', component: pay},
+    {path: '/Choose_Address', component: Chooseadress},
+    {path: '/Add_Address', component: Addaddress},
+    {path: '/details', component: detailstotal},
+    {path: '/details_goods_norms', component: goodsnorm}
   ]
 })
