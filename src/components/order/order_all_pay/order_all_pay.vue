@@ -1,22 +1,22 @@
 <template>
   <div id="orderallpay">
-    <div class="orderallpaybox"  v-for='payorder in payorders' v-bind:key="payorder.id">
+    <div class="orderallpaybox"  v-for='payorder in payorders' v-bind:key="payorder.order_id">
       <p class="shoppay"><span>美妆品牌店 ＞</span><span>等待买家付款</span></p>
-      <div class="boxpay" v-for='paylist in paylists' v-bind:key="paylist.id">
-        <div class="imgboxpay clearfix">
-          <img src="../../../assets/order/1.jpg"/>
-          <p id="decrisptpay">{{paylist.descibe}}</p>
+      <div class="boxpay" v-for='paylist in paylists' v-bind:key="paylist.pro_shop_order_id">
+        <div class="imgboxpay clearfix" @click="waitpay()">
+          <img :src="paylist.pro_shop_pic"/>
+          <p id="decrisptpay">{{paylist.pro_shop_desc}}</p>
           <div id="pricepay">
-            <span>￥{{paylist.last}}</span>
-            <span>￥{{paylist.firstone}}</span>
-            <span>x{{paylist.num}}</span>
+            <span>￥{{paylist.pro_shop_price}}</span>
+            <span>￥{{paylist.pro_shop_oldprice}}</span>
+            <span>x{{paylist.pro_shop_order_number}}</span>
           </div>
         </div>
       </div>
       <div id="okendpay">
         <p id="resultendpay">
-          <span>共2件商品</span>
-          <span>合计：￥1999.00(含运费 ￥{{0.00}})</span>
+          <span>共{{num}}件商品</span>
+          <span>合计：￥{{sendend}}(含运费 ￥{{0.00}})</span>
         </p>
         <p id="focendpay">
           <input type="button" value="联系卖家"/>
@@ -33,22 +33,29 @@ export default{
   name: 'orderallpay',
   data () {
     return {
+      num: '2',
+      sendend: '19999.00',
       payorders: [{
-        id: 'payorder1'
-      }],
-      paylists: [{
-        id: 'pay1',
-        descibe: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        last: '999.00',
-        firstone: '1999.00',
-        num: '2'
+        order_id: 'payorder1'
       },
       {
-        id: 'pay2',
-        descibe: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        last: '999.00',
-        firstone: '1999.00',
-        num: '2'
+        order_id: 'payorder2'
+      }],
+      paylists: [{
+        pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+        pro_shop_order_id: 'pay1',
+        pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+        pro_shop_price: '999.00',
+        pro_shop_oldprice: '1999.00',
+        pro_shop_order_number: '2'
+      },
+      {
+        pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+        pro_shop_order_id: 'pay2',
+        pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+        pro_shop_price: '999.00',
+        pro_shop_oldprice: '1999.00',
+        pro_shop_order_number: '2'
       }]
     }
   },
@@ -58,6 +65,11 @@ export default{
       }).then(function (data) {
       }, function () {
         console.log('请求失败')
+      })
+    },
+    waitpay: function () {
+      this.$router.push({
+        path: '/paydetail'
       })
     }
   }
@@ -86,6 +98,8 @@ export default{
     .boxpay{
       width: 100%;
       .imgboxpay{
+        background: #f6f6f9;
+        margin-bottom: 10px;
         width: 100%;
         height: 160px;
         display: flex;

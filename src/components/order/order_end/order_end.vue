@@ -1,22 +1,22 @@
 <template>
   <div id="orderend">
-    <div class="orderendbox"  v-for='endorder in endorders' v-bind:key="endorder.id" v-if="seen">
+    <div class="orderendbox"  v-for='endorder in endorders' v-bind:key="endorder.order_id" v-if="seen">
         <p class="shopend"><span>美妆品牌店 ＞</span><span>交易关闭</span></p>
-        <div class="boxend" v-for='endlist in endorder.endlists' v-bind:key="endlist.id">
+        <div class="boxend" v-for='endlist in endorder.endlists' v-bind:key="endlist.pro_shop_order_id">
           <div class="imgboxend clearfix">
-            <img src="../../../assets/order/1.jpg"/>
-            <p id="decrisptend">{{endlist.descibe}}</p>
+            <img :src="endlist.pro_shop_pic"/>
+            <p id="decrisptend">{{endlist.pro_shop_desc}}</p>
             <div id="priceend">
-              <span>￥{{endlist.last}}</span>
-              <span>￥{{endlist.firstone}}</span>
-              <span>x{{endlist.num}}</span>
+              <span>￥{{endlist.pro_shop_price}}</span>
+              <span>￥{{endlist.pro_shop_oldprice}}</span>
+              <span>x{{endlist.pro_shop_order_number}}</span>
             </div>
           </div>
         </div>
         <div id="okendend">
           <p id="resultend">
-            <span>共2件商品</span>
-            <span>合计：￥1999.00(含运费 ￥{{0.00}})</span>
+            <span>共{{num}}件商品</span>
+            <span>合计：￥{{sendend}}(含运费 ￥{{0.00}})</span>
           </p>
           <p id="focendend">
             <input type="button" value="删除订单" @click="del(endorder)"/>
@@ -32,38 +32,44 @@ export default{
   data () {
     return {
       seen: 'true',
+      num: '2',
+      sendend: '19999.00',
       endorders: [{
-        id: '1',
+        order_id: '1',
         endlists: [{
-          id: 'pay1',
-          descibe: '第一件迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-          last: '999.00',
-          firstone: '19249.00',
-          num: '2'
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_order_id: 'pay1',
+          pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_price: '999.00',
+          pro_shop_oldprice: '1999.00',
+          pro_shop_order_number: '2'
         },
         {
-          id: 'pay2',
-          descibe: '第二件ev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-          last: '955.00',
-          firstone: '19324.00',
-          num: '2'
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_order_id: 'pay2',
+          pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_price: '999.00',
+          pro_shop_oldprice: '1999.00',
+          pro_shop_order_number: '2'
         }]
       },
       {
-        id: '2',
+        order_id: '2',
         endlists: [{
-          id: 'pay3',
-          descibe: '第三件迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-          last: '999.00',
-          firstone: '12499.00',
-          num: '2'
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_order_id: 'pay3',
+          pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_price: '999.00',
+          pro_shop_oldprice: '1999.00',
+          pro_shop_order_number: '2'
         },
         {
-          id: 'pay4',
-          descibe: '第四件forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-          last: '955.00',
-          firstone: '544.00',
-          num: '2'
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_order_id: 'pay4',
+          pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_price: '999.00',
+          pro_shop_oldprice: '1999.00',
+          pro_shop_order_number: '2'
         }]
       }]
     }
@@ -107,6 +113,8 @@ export default{
     .boxend{
       width: 100%;
       .imgboxend{
+        background: #f6f6f9;
+        margin-bottom: 10px;
         width: 100%;
         height: 160px;
         display: flex;

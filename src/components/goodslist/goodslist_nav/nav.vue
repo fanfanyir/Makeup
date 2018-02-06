@@ -1,5 +1,5 @@
 <template>
-  <div id="navv">
+  <div id="ordernav">
     <ul id="nav1">
       <li class="tab" @click="toggleTab('brand',0)"><a>品牌</a></li>
       <li class="tab" @click="toggleTab('sort',1)"><a>排序方式▼</a></li>
@@ -16,7 +16,7 @@ import brand from './brand/brand'
 import classify from './classify/classify'
 import sort from './sort/sort'
 export default{
-  name: 'navv',
+  name: 'ordernav',
   data () {
     return {
       currentTab: '',
@@ -53,7 +53,7 @@ export default{
 //      $(this).toggle(2000)
 </script>
 <style lang="scss" scoped>
-  #navv{
+  #ordernav{
     width: 100%;
     top: 80px;
     position: fixed;

@@ -23,6 +23,20 @@ export default{
   methods: {
     changeBgc: function (index) {
       this.ind = index
+      var aLi = document.getElementsByTagName('li')
+      var attr = aLi[index].innerHTML
+      this.$http({
+        method: 'GET',
+        url: 'http://zxhbzu.free.ngrok.cc/brand.htm',
+        dataType: 'json',
+        data: {'brand': attr},
+        async: false,
+        xhrFields: {withCredentials: true}
+      }).then(function (response) {
+        this.items = JSON.parse(JSON.parse(response.data))
+      }, function () {
+        console.log('请求失败')
+      })
     }
   }
 }

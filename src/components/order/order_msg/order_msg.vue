@@ -1,27 +1,27 @@
 <template>
   <div id="ordermsg">
-    <div class="ordermsgbox"  v-for='msgorder in msgorders' v-bind:key="msgorder.id">
+    <div class="ordermsgbox"  v-for='(msgorder, index) in msgorders' v-bind:key="msgorder.order_id">
       <p class="shopmsg"><span>美妆品牌店 ＞</span><span>交易成功</span></p>
-      <div class="boxmsg" v-for='msglist in msglists' v-bind:key="msglist.id">
-        <div class="imgboxmsg clearfix">
-          <img src="../../../assets/order/1.jpg"/>
-          <p id="decrisptmsg">迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆</p>
+      <div class="boxmsg" v-for='msglist in msgorder.pro_shops' v-bind:key="msglist.pro_shop_orders.pro_shop_order_id">
+        <div class="imgboxmsg clearfix" @click="waitmsg()">
+          <img :src="msglist.pro_shop_pic"/>
+          <p id="decrisptmsg">{{msglist.pro_shop_desc}}</p>
           <div id="pricemsg">
-            <span>￥{{msglist.last}}</span>
-            <span>￥{{msglist.firstone}}</span>
-            <span>x{{msglist.num}}</span>
+            <span>￥{{msglist.pro_shop_orders.pro_shop_order_price}}</span>
+            <span>￥{{msglist.pro_shop_orders.pro_shop_order_oldprice}}</span>
+            <span>x{{msglist.pro_shop_orders.pro_shop_order_number}}</span>
           </div>
         </div>
       </div>
       <div id="okendmsg">
         <p id="resultendmsg">
-          <span>共2件商品</span>
-          <span>合计：￥1999.00(含运费 ￥{{0.00}})</span>
+          <span>共{{num}}件商品</span>
+          <span>合计：￥{{msgorder.order_money}}(含运费 ￥{{0.00}})</span>
         </p>
         <p id="focendmsg">
-          <input type="button" value="删除订单"/>
+          <input type="button" value="删除订单" @click="del(index)"/>
           <input type="button" value="查看物流"/>
-          <input type="button" value="评价" @click="msg(msglist)"/>
+          <input type="button" value="评价" @click="msg(index)"/>
         </p>
     </div>
     </div>
@@ -33,38 +33,82 @@ export default{
   name: 'ordermsg',
   data () {
     return {
+      num: '2',
+      sendend: '19999.00',
       msgorders: [{
-        id: 'payorder1'
+        order_id: 'payorder1',
+        pro_shops: [{
+          pro_shop_desc: 'one     奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_orders: {
+            pro_shop_order_id: 'pay1',
+            pro_shop_order_price: '999.00',
+            pro_shop_order_oldprice: '1999.00',
+            pro_shop_order_number: '2'
+          }
+        },
+        {
+          pro_shop_desc: 'two     奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_orders: {
+            pro_shop_order_id: 'pay2',
+            pro_shop_order_price: '999.00',
+            pro_shop_order_oldprice: '1999.00',
+            pro_shop_order_number: '2'
+          }
+        }]
       },
       {
-        id: 'payorder2'
-      }],
-      msglists: [{
-        id: 'pay1',
-        descibe: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        last: '999.00',
-        firstone: '1999.00',
-        num: '2'
-      },
-      {
-        id: 'pay2',
-        descibe: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        last: '999.00',
-        firstone: '1999.00',
-        num: '2'
+        order_id: 'payorder2',
+        pro_shops: [{
+          pro_shop_desc: 'three     奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_orders: {
+            pro_shop_order_id: 'pay1',
+            pro_shop_order_price: '999.00',
+            pro_shop_order_oldprice: '1999.00',
+            pro_shop_order_number: '2'
+          }
+        },
+        {
+          pro_shop_desc: 'four     奥17新款forever 粉底气 垫bb底妆',
+          pro_shop_pic: 'http://s14.sinaimg.cn/middle/5bc41e82hba41609eab5d&690',
+          pro_shop_orders: {
+            pro_shop_order_id: 'pay2',
+            pro_shop_order_price: '999.00',
+            pro_shop_order_oldprice: '1999.00',
+            pro_shop_order_number: '2'
+          }
+        }]
       }]
     }
   },
   methods: {
     price: function () {
-      this.$http.get('', {
-      }).then(function (data) {
+      this.$http({
+        method: 'GET',
+        url: 'http://jlw.free.ngrok.cc/someOrder.htm?',
+        dataType: 'json',
+        async: false,
+        xhrFields: {withCredentials: true}
+      }).then(function (response) {
+        alert(345)
+        this.msgorders = JSON.parse(JSON.parse(response.data))
+        console.log(this.msgorders)
       }, function () {
         console.log('请求失败')
       })
     },
-    del: function (msglist) {
+    del: function (index) {
+      if (confirm('确认?')) {
+        this.msgorders.splice(index, 1)
+      }
+    },
+    msg: function (index) {
       prompt('请您评价')
+    },
+    waitmsg: function () {
+      this.$router.push({path: '/msgdetail'})
     }
   }
 }
@@ -92,6 +136,8 @@ export default{
     .boxmsg{
       width: 100%;
       .imgboxmsg{
+        background: #f6f6f9;
+        margin-bottom: 10px;
         width: 100%;
         height: 160px;
         display: flex;

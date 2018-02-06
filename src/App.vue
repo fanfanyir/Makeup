@@ -1,39 +1,42 @@
 <template>
   <div id="app">
     <!--<div id="zyf_goodslist">-->
-      <!--<banner></banner>-->
-      <!--<navv></navv>-->
-      <!--<div id="marginn">-->
-        <!--<waterfall1></waterfall1>-->
-      <!--</div>-->
+    <!--<goodlist></goodlist>-->
     <!--</div>-->
-    <div id="zyf_order">
-      <orderbanner></orderbanner>
-      <ordernav></ordernav>
-    </div>
+    <!--<div id="zyf_order">-->
+    <!--<orderbanner></orderbanner>-->
+    <!--</div>-->
     <!--<div id="zyf_detial">-->
-      <!--<orderdetail></orderdetail>-->
+    <!--<orderpaydetail></orderpaydetail>-->
+    <!--<ordergetdetail></ordergetdetail>-->
+    <!--<ordermsgdetail></ordermsgdetail>-->
     <!--</div>-->
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import banner from './components/goodslist/goodslist_banner/banner.vue'
-import navv from './components/goodslist/goodslist_nav/nav.vue'
-import waterfall1 from './components/goodslist/waterfall/waterfallb.vue'
+import goodlist from './components/goodslist/goodlist.vue'
 import orderbanner from './components/order/order_banner/order_banner.vue'
-import orderdetail from './components/order/order_detail/orderdetail.vue'
-import ordernav from './components/order/order_top/order_nav.vue'
+import orderend from './components/order/end.vue'
+import orderget from './components/order/get.vue'
+import ordermsg from './components/order/msg.vue'
+import orderpay from './components/order/pay.vue'
+import orderpaydetail from './components/order/order_pay/order_paydetail/orderpaydetail.vue'
+import ordergetdetail from './components/order/order_get/order_getdetail/ordergetdetail.vue'
+import ordermsgdetail from './components/order/order_msg/order_msgdetail/ordermsgdetail.vue'
 export default {
   name: 'App',
   components: {
-    banner,
-    navv,
-    waterfall1,
+    goodlist,
     orderbanner,
-    ordernav,
-    orderdetail
+    orderend,
+    orderget,
+    ordermsg,
+    orderpay,
+    orderpaydetail,
+    ordergetdetail,
+    ordermsgdetail
   }
 }
 </script>
@@ -44,9 +47,5 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     justify-content: center;
     /*color: #2c3e50;*/
-  }
-  #marginn{
-    position: relative;
-    margin-top: 150px;
   }
 </style>
