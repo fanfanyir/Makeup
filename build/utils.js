@@ -18,10 +18,16 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
+      importLoaders:2
     }
   }
-
+  const px2remLoader = {
+    loader: 'px2rem-loader',
+    options: {
+      remUnit: 75
+    }
+  }
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
@@ -50,7 +56,6 @@ exports.cssLoaders = function (options) {
       }
     }
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
-
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -83,7 +88,6 @@ exports.cssLoaders = function (options) {
     styl: generateLoaders('stylus')
   }
 }
-
 // Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function (options) {
   const output = []

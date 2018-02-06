@@ -10,7 +10,6 @@ const postcss = require('postcss')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
@@ -48,6 +47,11 @@ module.exports = {
       vue: {
         postcss: [require('postcss-px2rem')({ remUnit: 75, propWhiteList: [] })]
       },
+    }),
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.ProvidePlugin({
+      jQuery: "jquery",
+      $: "jquery"
     })
   ],
   module: {
@@ -104,5 +108,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
+  },
 }
