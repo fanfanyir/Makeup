@@ -19,7 +19,7 @@ const createLintingRule = () => ({
     formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
-})
+});
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -62,6 +62,19 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+      },
+      {
+        test: /\.sass$/,
+        loaders: ['style', 'css', 'sass']
+      },
+      {
+        test: /\.(css|less|scss)(\?.*)?$/,
+        loader: 'style-loader!css-loader!sass-loader!less-loader!postcss-loader'
+      },
+
       {
         test: /\.js$/,
         loader: 'babel-loader',

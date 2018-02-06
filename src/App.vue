@@ -13,6 +13,17 @@
     <!--<usercollect></usercollect>-->
     <!--实现跳转<router-view/>-->
     <router-view/>
+    <!--<div id="zyf_goodslist">-->
+    <!--<goodlist></goodlist>-->
+    <!--</div>-->
+    <!--<div id="zyf_order">-->
+    <!--<orderbanner></orderbanner>-->
+    <!--</div>-->
+    <!--<div id="zyf_detial">-->
+    <!--<orderpaydetail></orderpaydetail>-->
+    <!--<ordergetdetail></ordergetdetail>-->
+    <!--<ordermsgdetail></ordermsgdetail>-->
+    <!--</div>-->
   </div>
 </template>
 <script>
@@ -26,11 +37,19 @@ import changepw from './components/change-pw'
 import changenum from './components/change-num'
 import feet from './components/feet'
 import usercollect from './components/usercollect'
+import goodlist from './components/goodslist/goodlist.vue'
+import orderbanner from './components/order/order_banner/order_banner.vue'
+import orderend from './components/order/end.vue'
+import orderget from './components/order/get.vue'
+import ordermsg from './components/order/msg.vue'
+import orderpay from './components/order/pay.vue'
+import orderpaydetail from './components/order/order_pay/order_paydetail/orderpaydetail.vue'
+import ordergetdetail from './components/order/order_get/order_getdetail/ordergetdetail.vue'
+import ordermsgdetail from './components/order/order_msg/order_msgdetail/ordermsgdetail.vue'
 export default {
   name: 'app',
   data () {
-    return {
-    }
+    return {}
   },
   components: {
     index,
@@ -42,6 +61,15 @@ export default {
     changepw,
     changenum,
     feet,
+    goodlist,
+    orderbanner,
+    orderend,
+    orderget,
+    ordermsg,
+    orderpay,
+    orderpaydetail,
+    ordergetdetail,
+    ordermsgdetail,
     usercollect
   }
 }
@@ -53,5 +81,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   width:100%;
   height:100%;
+  justify-content: center;
+    /*color: #2c3e50;*/
 }
 </style>

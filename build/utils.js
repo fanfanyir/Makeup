@@ -34,7 +34,6 @@ exports.cssLoaders = function (options) {
       sourceMap: options.sourceMap
     }
   }
-
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const px2remLoader = {
