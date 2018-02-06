@@ -1,23 +1,26 @@
 <template>
   <div id="app">
     <!--<login></login>-->
-    <register></register>
+    <!--<register></register>-->
     <!--<person></person>-->
-    <!--<my></my>-->
     <!--<manage></manage>-->
     <!--<changepw></changepw>-->
     <!--<changenum></changenum>-->
+    <feet></feet>
+    <!--<usercollect></usercollect>-->
     <!--实现跳转<router-view/>-->
+    <router-view/>
   </div>
 </template>
 <script>
 import login from './components/login'
 import register from './components/register'
 import person from './components/person'
-import my from './components/my'
 import manage from './components/manage'
 import changepw from './components/change-pw'
 import changenum from './components/change-num'
+import feet from './components/feet'
+import usercollect from './components/usercollect'
 export default {
   name: 'app',
   data () {
@@ -29,10 +32,11 @@ export default {
     register,
     login,
     person,
-    my,
     manage,
     changepw,
-    changenum
+    changenum,
+    feet,
+    usercollect
   }
 }
 </script>

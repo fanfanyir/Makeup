@@ -3,13 +3,13 @@
     <p id="register-header">
       欢迎注册
     </p>
-    <div id="register-pic" v-for ='item in items' v-bind:key="item.id">
-      <img v-bind:src="item.src"  id="imgSdf"/>
-      <input type="file" value="切换头像" v-on:change="changeImg(this)"/>
-    </div>
     <!--<changeimg></changeimg>-->
-    <form method="post" action="hg" id="register-input" name="register">
-      <input type="text" placeholder="账户名" name="u1" v-on:blur="user1()"/>
+    <form method="post" action="http://c5ie4u.natappfree.cc/register.htm" @submit.prevent="check()" id="register-input" name="register" enctype="multipart/form-data">
+      <div id="register-pic" v-for ='item in items' v-bind:key="item.id">
+        <img v-bind:src="item.src"  id="imgSdf"/>
+        <input type="file" value="切换头像" name="file" v-on:change="changeImg(this)"/>
+      </div>
+      <input type="text" placeholder="账户名" name="u1" v-on:blur="user1()" id="u1"/>
       <p></p>
       <input type="text" placeholder="请输入身份证号" name="u2" v-on:blur="user2()"/>
       <p></p>
@@ -27,14 +27,13 @@
       <p></p>
       <input type="password" placeholder="确认密码" name="u7" v-on:blur="user7()"/>
       <p></p>
-    </form>
-    <form id="register-footer">
-      <input type="submit" value="立即注册" @click="register()" />
+      <input type="submit" value="立即注册"  id="register-footer"/>
     </form>
   </div>
 </template>
 <script>
 import $ from 'jquery'
+var reader = new FileReader()
 export default {
   name: 'register',
   data () {
@@ -45,32 +44,23 @@ export default {
     }
   },
   methods: {
-    CHANGE : function () {
-      var reader = new FileReader()
-      changeImg: function (file) {
-        alert('fvbdf')
-        var img = document.getElementById('imgSdf')
-        reader.onload = function (evt) {
-          alert('225')
-          img.width = '100'
-          img.height = '100'
-          img.src = evt.target.result
-        }
-        reader.readAsDataURL(file.files[0])
+    check: function () {
+      alert('fhfh')
+      if (this.$options.methods.user1() && this.$options.methods.user2 && this.$options.user3 && this.$options.user4 && this.$options.user5 && this.$options.user6 && this.$options.user7) {
+        return true
+      } else {
+        return false
       }
     },
-    register: function () {
-      $.ajax({
-        url: '',
-        dataType: 'json',
-        success: function (data) {
-          if (data) {
-            alert('注册成功')
-          } else {
-            alert('此账户名已经存在')
-          }
-        }
-      })
+    changeImg: function (file) {
+      var that = this
+      reader.onload = function (ev) {
+        alert('225')
+        that.item.width = '100'
+        that.item.height = '100'
+        that.item.src = ev.target.result
+      }
+      reader.readAsDataURL(file)
     },
     user1: function () {
       var oReg1 = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
@@ -82,12 +72,17 @@ export default {
       } else {
         aP[1].innerHTML = ''
         $.ajax({
-          url: '',
-          dataType: '',
-          data: {u1: $('input').eq(0).val()},
+          url: 'http://c5ie4u.natappfree.cc/check.htm?username=' + $('#u1').val(),
+          type: 'get',
+          dataType: 'json',
           success: function (str) {
-            if (str) {
-              $('p').eq(1).innerHTML = '账户名已被注册过'
+            alert(str)
+            if (str === true) {
+              $('p').eq(1).html('帐户名已注册过')
+              return false
+            } else {
+              $('p').eq(1).html('')
+              return true
             }
           }
         })
@@ -105,6 +100,7 @@ export default {
         return false
       } else {
         aP[2].innerHTML = ''
+        return true
       }
     },
     user4: function () {
@@ -116,6 +112,7 @@ export default {
         return false
       } else {
         aP[4].innerHTML = ''
+        return true
       }
     },
     user5: function () {
@@ -127,6 +124,7 @@ export default {
         return false
       } else {
         aP[5].innerHTML = ''
+        return true
       }
     },
     user6: function () {
@@ -138,6 +136,7 @@ export default {
         return false
       } else {
         aP[6].innerHTML = ''
+        return true
       }
     },
     user7: function () {
@@ -150,11 +149,9 @@ export default {
         return false
       } else {
         aP[7].innerHTML = ''
+        return true
       }
     }
-  },
-  mounted: function () {
-    this.CHANGE()
   }
 }
 </script>
@@ -217,7 +214,7 @@ export default {
     justify-content: center;
     align-items:flex-end;
   }
-  #register-footer input{
+  #register-footer{
     margin:0 auto;
     width:80%;
     height:70px;
@@ -225,6 +222,7 @@ export default {
     border-radius:55px;
     font-size:36px;
     color:white;
+    outline:none;
   }
   #register-select option{
     color:#000;

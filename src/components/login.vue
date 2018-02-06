@@ -3,11 +3,12 @@
     <div v-for="item in items" v-bind:key="item.id" id="login-pic">
       <img v-bind:src="item.src"/>
     </div>
-    <form id="login-input" name="login" action="" >
-      <input type="text" placeholder="请输入账户名"  id="username"  name="username" v-on:blur="login1()" />
+    <form id="login-input" name="login" action="http://curryni.free.ngrok.cc/denglu.htm" >
+      <input type="text" placeholder="请输入账户名"  id="username"  name="user_name" v-on:blur="login1()" />
       <p></p>
-      <input type="password" placeholder="请输入密码" id="password" name="password"  v-on:blur="login2()"/>
+      <input type="password" placeholder="请输入密码" id="password" name="pass_word"  v-on:blur="login2()"/>
       <p></p>
+      <input type="text" class="dis0" name="url0" value=""/>
       <p id="forget">
         <a href="register.vue" id="forget-register">立即注册 ?</a>
         <a href="#"  id="forget-register2">忘记密码</a>
@@ -17,7 +18,6 @@
   </div>
 </template>
 <script type="text/javascript">
-import md5 from 'js-md5'
 import $ from 'jquery'
 export default {
   name: 'login',
@@ -30,6 +30,9 @@ export default {
     }
   },
   methods: {
+    init: function () {
+      alert(document.referrer)
+    },
     login: function () {
       $.ajax({
         url: 'User?username=' + $('#username').val() + '&password=' + $('#password').val(),
@@ -46,7 +49,7 @@ export default {
     },
     login1: function () {
       var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
-      var username = document.login.username
+      var username = document.login.user_name
       var aP = document.getElementsByTagName('p')
       if (!reg.test(username.value)) {
         aP[0].innerHTML = '请输入由字母数字中文组成的6-15位账户名'
@@ -58,7 +61,7 @@ export default {
     },
     login2: function () {
       var reg1 = /^[a-zA-Z0-9]{6,15}$/
-      var password = document.login.password
+      var password = document.login.pass_word
       var aP = document.getElementsByTagName('p')
       if (!reg1.test(password.value) && password.value) {
         aP[1].innerHTML = '密码错误'
@@ -66,11 +69,10 @@ export default {
       } else {
         aP[1].innerHTML = ''
       }
-    },
-    loginP: function () {
-      var password = document.login.passwords
-      alert(md5(password))
     }
+  },
+  mounted: function () {
+    this.init()
   }
 }
 </script>
@@ -78,6 +80,9 @@ export default {
 <style scoped>
   *{margin:0;
   padding:0;}
+  .dis0{
+    display: none;
+  }
  #login {
    width:100%;
    height:100%;
