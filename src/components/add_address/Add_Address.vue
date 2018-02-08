@@ -60,12 +60,25 @@ export default {
       if (!(re.test(aInput[1].value)) && aInput[1].value.length - 0 && aInput[0].value.length - 0 && aInput[0].value.length > 1) {
         alert('请填写正确的联系电话')
       }
-      this.$http({
-        method: 'get',
-        url: 'http://192.168.0.200:8080'
-      }).then(function (res) {
-        alert(res.body)
-      })
+      if (aInput[0].value.length > 2 && re.test(aInput[1].value) && aInput[2].value.length && aInput[3].value.length) {
+        // this.$http({
+        //   method: 'get',
+        //   url: 'http://192.168.0.200:8080'
+        // }).then(function (res) {
+        //   alert(res.body)
+        // })
+        let xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function (res) {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(res)
+            console.log('success给倪晨阳的')
+          } else {
+            console.log('error给倪晨阳的')
+          }
+        }
+        xhr.open('post', 'http://192.168.0.200:8080', true)
+        xhr.send(null)
+      }
     },
     jump: function () {
       this.$router.push({path: '/Choose_Address'})

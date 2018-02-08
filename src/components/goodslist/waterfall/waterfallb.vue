@@ -40,25 +40,25 @@ export default {
       this.$router.push({path: '/details'})
     },
     handleScroll: function () {
-      let that = this
-      this.$http({
-        method: 'GET',
-        url: 'https://easy-mock.com/mock/5a6a99c0396ee930b9c4b92f',
-        dataType: 'json',
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        let left = JSON.parse(response.bodyText).data
-        this.litss = this.litss.concat(left)
-        this.waterfall('waterfall1', 'waterfall1_box')
-        this.$nextTick(() => {
-          this.waterfall('waterfall1', 'waterfall1_box')
-        })
-        that.ajaxState = true
-      },
-      function () {
-        console.log('请求失败')
-      })
+      // let that = this
+      // this.$http({
+      //   method: 'GET',
+      //   url: 'https://easy-mock.com/mock/5a6a99c0396ee930b9c4b92f',
+      //   dataType: 'json',
+      //   async: false,
+      //   xhrFields: {withCredentials: true}
+      // }).then(function (response) {
+      //   let left = JSON.parse(response.bodyText).data
+      //   this.litss = this.litss.concat(left)
+      //   this.waterfall('waterfall1', 'waterfall1_box')
+      //   this.$nextTick(() => {
+      //     this.waterfall('waterfall1', 'waterfall1_box')
+      //   })
+      //   that.ajaxState = true
+      // },
+      // function () {
+      //   console.log('请求失败')
+      // })
     },
     waterfall: function (parent, pin) {
       let oParent = document.getElementById(parent)

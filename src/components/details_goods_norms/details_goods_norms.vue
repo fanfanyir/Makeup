@@ -87,13 +87,13 @@ export default {
     }
   }
   #divsure{
-    margin: 0 0 20px 500px;
+    /*margin: 0 0 20px 500px;*/
     border: 0;
     outline: none;
-    width: 150px;
-    height: 50px;
+    /*width: 150px;*/
+    height: 80px;
     color: white;
-    line-height: 50px;
+    line-height: 80px;
     text-align: center;
     font-size: 30px;
     background-color: #ff0000;

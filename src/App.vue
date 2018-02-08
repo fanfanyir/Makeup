@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @choosed="choosed()">
     <!--<index></index>-->
     <!--<shopping></shopping>-->
     <!--<test></test>-->
@@ -59,6 +59,12 @@ export default {
   name: 'app',
   data () {
     return {}
+  },
+  methods: {
+    choosed: function (data) {
+      console.log(data)
+      console.log(33)
+    }
   },
   components: {
     index,
