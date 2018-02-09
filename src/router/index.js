@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import index from '@/components/index'
 import goodlist from '@/components/goodslist/goodlist.vue'
 import shopping from '@/components/shopping/shopping.vue'
-import person from '@/components/person.vue'
+import person from '@/components/person/person.vue'
 import Orderbanner from '@/components/order/order_banner/order_banner.vue'
 import navv from '@/components/order/order_nav/order_nav.vue'
 import allget from '@/components/order/get.vue'
@@ -22,8 +22,13 @@ import Chooseadress from '@/components/choose_address/Choose_Address'
 import Addaddress from '@/components/add_address/Add_Address'
 import detailstotal from '@/components/details/details'
 import goodsnorm from '@/components/details_goods_norms/details_goods_norms'
-import login from '@/components/login.vue'
-import register from '@/components/register.vue'
+import login from '@/components/login/login.vue'
+import register from '@/components/register/register.vue'
+import feet from '@/components/feet/feet.vue'
+import manage from '@/components/manage/manage.vue'
+import usercollect from '@/components/usercollect/usercollect.vue'
+import changenum from '@/components/changenum/change-num.vue'
+import changepw from '@/components/changepw/change-pw.vue'
 Vue.use(Router)
 // import index from '@/components/index'
 
@@ -150,10 +155,11 @@ export default new Router({
       name: 'register',
       component: register
     },
-    {
-      path: '/person',
-      name: 'person',
-      component: person
-    }
+    {path: '/person', name: 'person', component: person},
+    {path: '/feet', name: 'feet', component: feet},
+    {path: '/manage', name: 'manage', component: manage},
+    {path: '/usercollect', name: 'usercollect', component: usercollect},
+    {path: '/changenum', name: 'changenum', component: changenum},
+    {path: '/changepw', name: 'changepw', component: changepw}
   ]
 })

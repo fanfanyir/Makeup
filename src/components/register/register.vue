@@ -4,7 +4,7 @@
       欢迎注册
     </p>
     <!--<changeimg></changeimg>-->
-    <form method="post" action="http://c5ie4u.natappfree.cc/register.htm" @submit.prevent="check()" id="register-input" name="register" enctype="multipart/form-data">
+    <form method="post" action="http://uv6vi9.natappfree.cc/register.htm" @submit="check1()" id="register-input" name="register" enctype="multipart/form-data">
       <div id="register-pic" v-for ='item in items' v-bind:key="item.id">
         <img v-bind:src="item.src"  id="imgSdf"/>
         <input type="file" value="切换头像" name="file" v-on:change="changeImg(this)"/>
@@ -27,13 +27,12 @@
       <p></p>
       <input type="password" placeholder="确认密码" name="u7" v-on:blur="user7()"/>
       <p></p>
-      <input type="submit" value="立即注册"  id="register-footer"/>
+      <input type="submit" value="立即注册" id="register-footer"/>
     </form>
   </div>
 </template>
 <script>
 import $ from 'jquery'
-var reader = new FileReader()
 export default {
   name: 'register',
   data () {
@@ -44,23 +43,15 @@ export default {
     }
   },
   methods: {
-    check: function () {
-      alert('fhfh')
-      if (this.$options.methods.user1() && this.$options.methods.user2 && this.$options.user3 && this.$options.user4 && this.$options.user5 && this.$options.user6 && this.$options.user7) {
+    check1: function () {
+      alert('jin')
+      if (this.$options.methods.user1 && this.$options.methods.user2 && this.$options.methods.user4 && this.$options.methods.user5 && this.$options.methods.user6 && this.$options.methods.user7) {
+        alert('提交成功')
         return true
       } else {
+        alert('提交失败')
         return false
       }
-    },
-    changeImg: function (file) {
-      var that = this
-      reader.onload = function (ev) {
-        alert('225')
-        that.item.width = '100'
-        that.item.height = '100'
-        that.item.src = ev.target.result
-      }
-      reader.readAsDataURL(file)
     },
     user1: function () {
       var oReg1 = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
@@ -72,7 +63,7 @@ export default {
       } else {
         aP[1].innerHTML = ''
         $.ajax({
-          url: 'http://c5ie4u.natappfree.cc/check.htm?username=' + $('#u1').val(),
+          url: 'http://uv6vi9.natappfree.cc/check.htm?username=' + $('#u1').val(),
           type: 'get',
           dataType: 'json',
           success: function (str) {
@@ -151,7 +142,16 @@ export default {
         aP[7].innerHTML = ''
         return true
       }
+    },
+    init: function () {
+      var url1 = this.$route.query.judge
+      if (url1) {
+        alert('注册失败')
+      }
     }
+  },
+  mounted: function () {
+    this.init()
   }
 }
 </script>

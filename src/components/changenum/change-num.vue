@@ -1,16 +1,12 @@
 <template>
   <div id="changenum">
-    <p id="changenum-data">手机号更改</p>
+    <p id="changenum-data"><img id="changenum-data1" src="../../assets/order/左箭头2.png" @click="changenumData()">手机号更改</p>
     <form id="changenum-list">
       <div>
-        <p class="changenum-left">已绑定手机号</p>
-        <p id="changenum-right"> {{num1}}</p>
-      </div>
-      <div>
         <p class="changenum-left">新手机号</p>
-        <input type="text" >
+        <input id="phone" type="text" class="changenum-input" v-on:blur="changenum1()"/>
       </div>
-        <input type="submit" value="提 交" class="changenum-sub" @click="changenum()"/>
+      <button  class="changenum-sub" @click="changenum()">提 交</button>
     </form>
   </div>
 </template>
@@ -24,15 +20,27 @@ export default {
     }
   },
   methods: {
+    changenumData: function () {
+      this.$router.go(-1)
+    },
+    changenum1: function () {
+      var oReg1 = /^[1][3,4,5,7,8][0-9]{9}$/
+      if (!oReg1.test($('#phone').val())) {
+        alert('请输入正确手机号')
+        return false
+      } else {
+        return true
+      }
+    },
     changenum: function () {
-      var that = this
       $.ajax({
-        url: '',
+        url: '?phone=' + $('#phone').val(),
         type: 'post',
         dataType: 'json',
-        success: function (Rdata) {
-          var str = $.parseJSON(Rdata)
-          that.data.num1 = str
+        success: function (res) {
+          if (res) {
+            alert('提交成功')
+          }
         }
       })
     }
@@ -47,14 +55,19 @@ export default {
     width:100%;
     height:100%;
   }
+  #changenum-data1{
+    width:50px;
+    height:50px;
+    margin-right:35%;
+  }
   #changenum-data{
     width:100%;
     height:80px;
     background-color: #ff0000;
-    text-align: center;
     color:white;
     font-size:30px;
     line-height:80px;
+    padding-left:10px;
   }
   #changenum-list{
     width:100%;
@@ -79,6 +92,7 @@ export default {
   .changenum-left{
     width:30%;
     height:80px;
+    font-size:20px;
   }
   #changenum-right{
     width:60%;
@@ -89,13 +103,19 @@ export default {
     height:60px;
     outline:none;
   }
+  .changenum-input{
+    border:none;
+  }
   .changenum-sub{
-    margin-top:20px;
+    margin-top:50px;
     border:none;
     width:100%;
     background-color:#ff0000;
     font-size:30px;
     color:white;
+    height:50px;
+    line-height:50px;
     border-radius:20px;
+    text-align: center;
   }
 </style>

@@ -3,17 +3,17 @@
     <div v-for="item in items" v-bind:key="item.id" id="login-pic">
       <img v-bind:src="item.src"/>
     </div>
-    <form id="login-input" name="login" action="http://curryni.free.ngrok.cc/denglu.htm" >
+    <form id="login-input" name="login" >
       <input type="text" placeholder="请输入账户名"  id="username"  name="user_name" v-on:blur="login1()" />
       <p></p>
       <input type="password" placeholder="请输入密码" id="password" name="pass_word"  v-on:blur="login2()"/>
       <p></p>
       <input type="text" class="dis0" name="url0" value=""/>
       <p id="forget">
-        <a href="register.vue" id="forget-register">立即注册 ?</a>
+        <a href="#" id="forget-register" @click="jumpRegister()">立即注册 ?</a>
         <a href="#"  id="forget-register2">忘记密码</a>
       </p>
-      <input type="submit" value="登 录" id="login-btn" @click="loginP()"/>
+      <input type="button" value="登 录" id="login-btn" @click="loginP()"/>
     </form>
   </div>
 </template>
@@ -33,19 +33,31 @@ export default {
     init: function () {
       alert(document.referrer)
     },
-    login: function () {
-      $.ajax({
-        url: 'User?username=' + $('#username').val() + '&password=' + $('#password').val(),
-        type: 'post',
-        dataType: 'json',
-        success: function (str) {
-          if (str) {
-            alert('登陆成功')
-          } else {
-            $('p').eq(0).innerHTML = '此用户名不存在，请先注册'
-          }
-        }
+    jumpRegister: function () {
+      this.$router.push({
+        path: '/register'
       })
+    },
+    loginP: function () {
+      if (this.$options.methods.login1 && this.$options.methods.login2) {
+        $.ajax({
+          url: 'http://3j3xbd.natappfree.cc/denglu.htm?username=' + $('#username').val() + '&password=' + $('#password').val(),
+          type: 'get',
+          dataType: 'json',
+          success: function (str) {
+            if (str.state) {
+              alert('登陆成功')
+              alert(str.user_id)
+              this.$router.go(-1)
+            } else {
+              alert('登录失败')
+              $('p').eq(0).innerHTML = '此用户名不存在，请先注册'
+            }
+          }
+        })
+      } else {
+        alert('登陆失败')
+      }
     },
     login1: function () {
       var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
@@ -56,7 +68,7 @@ export default {
         return false
       } else {
         aP[0].innerHTML = ''
-        this.login()
+        return true
       }
     },
     login2: function () {
@@ -68,6 +80,7 @@ export default {
         return false
       } else {
         aP[1].innerHTML = ''
+        return true
       }
     }
   },
@@ -120,10 +133,8 @@ export default {
     color:red;
   }
  #login-input #username{
-   color:#ff0000;
  }
   #login-input #password{
-    color:#ff0000;
   }
   #login-input #forget{
     width:100%;
