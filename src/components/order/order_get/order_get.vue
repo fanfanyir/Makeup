@@ -44,7 +44,7 @@ export default{
     price: function () {
       this.$http({
         method: 'GET',
-        url: 'http://jlw.free.ngrok.cc/someOrder.htm?user_id=5&user_sex=2',
+        url: 'http://gcx84u.natappfree.cc/someOrder.htm?user_id=5&user_sex=2',
         dataType: 'json',
         async: false,
         xhrFields: {withCredentials: true}

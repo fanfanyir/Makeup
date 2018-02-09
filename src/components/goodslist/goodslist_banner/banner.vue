@@ -1,6 +1,6 @@
 <template>
 <div id="banner">
-    <img id="left" src="../../../assets/goodslist/左箭头-(1).png">
+    <img id="left" src="../../../assets/goodslist/左箭头-(1).png" @click="waitpay()">
     <div id="top_search">
       <input id="search_btn" type="text" v-model="msg"/>
       <img id="camera" src="../../../assets/goodslist/照相机.png"/>
@@ -14,6 +14,11 @@ export default{
   name: 'banner',
   data () {
     return {msg: '化妆品'}
+  },
+  methods: {
+    waitpay: function () {
+      this.$router.push('/')
+    }
   }
 }
 </script>

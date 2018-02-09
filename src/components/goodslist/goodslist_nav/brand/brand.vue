@@ -1,12 +1,13 @@
 <template>
     <ul id="brand">
-      <li v-for="(item, index) in items" :class="{'active':ind === index}" v-bind:key="item.brand_id"  @click="changeBgc(index)">
+      <li v-for="(item, index) in items" :class="{'active':ind === index}" v-bind:key="item.brand_id"  @click="changeBgc(index, item.brand_id)">
         {{item.brand_name}}
       </li>
     </ul>
 </template>
 
 <script>
+import bus from '../../../../assets/Bus'
 export default{
   name: 'brand',
   data () {
@@ -16,32 +17,39 @@ export default{
     }
   },
   methods: {
-    changeBgc: function (index) {
+    changeBgc: function (index, brandid) {
       this.ind = index
-      var aLi = document.getElementsByTagName('li')
-      var attr = aLi[index].innerHTML
-      this.$http({
-        method: 'GET',
-        url: 'http://zxhbzu.free.ngrok.cc/brand.htm',
-        dataType: 'json',
-        data: {'brand': attr},
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        this.items = JSON.parse(JSON.parse(response.data))
-      }, function () {
-        console.log('请求失败')
-      })
+      console.log('品牌组件id来了')
+      console.log(brandid)
+      bus.$emit('brand', brandid)
+      // this.$emit('listenToChildEvent', brandid)
+      //      var aLi = document.getElementsByTagName('li')
+      //      var attr = aLi[index].innerHTML
+      //      this.$http({
+      //        method: 'GET',
+      //        url: 'http://zxhbzu.free.ngrok.cc/brand.htm',
+      //        dataType: 'json',
+      //        data: {'brand': attr},
+      //        async: false,
+      //        xhrFields: {withCredentials: true}
+      //      }).then(function (response) {
+      //        this.items = JSON.parse(JSON.parse(response.data))
+      //      }, function () {
+      //        console.log('请求失败')
+      //      })
     },
     price: function () {
       this.$http({
         method: 'GET',
-        url: 'http://zxhbzu.free.ngrok.cc/brand.htm?name=zhang&price=liu',
+        // url: 'http://zxhbzu.free.ngrok.cc/brand.htm?name=zhang&price=liu',
+        url: 'https://easy-mock.com/mock/5a6b0d092007214d6db2c394/pinpai',
         dataType: 'json',
         async: false,
         xhrFields: {withCredentials: true}
       }).then(function (response) {
-        this.items = JSON.parse(JSON.parse(response.data))
+        console.log(response.data.data)
+        this.items = response.data.data
+        // this.items = JSON.parse(JSON.parse(response.data))
       }, function () {
         console.log('请求失败')
       })

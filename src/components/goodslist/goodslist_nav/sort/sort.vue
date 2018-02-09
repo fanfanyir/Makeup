@@ -1,12 +1,13 @@
 <template>
   <!--<div id="brand">-->
   <ul id="sort">
-    <li v-for='(item,index) in items' :class="{'active':ind === index}" @click="changeBgc(index)" v-bind:key="item.sortlist">{{item.sortlist}}</li>
+    <li v-for='(item,index) in items' :class="{'active':ind === index}" @click="changeBgc(index, item.sortlist)" v-bind:key="item.sortlist">{{item.sortlist}}</li>
   </ul>
   <!--</div>-->
 </template>
 
 <script>
+import bus from '../../../../assets/Bus'
 export default{
   name: 'sort',
   data () {
@@ -21,8 +22,9 @@ export default{
     }
   },
   methods: {
-    changeBgc: function (index) {
+    changeBgc: function (index, sortt) {
       this.ind = index
+      bus.$emit('sort', sortt)
       var aLi = document.getElementsByTagName('li')
       var attr = aLi[index].innerHTML
       this.$http({

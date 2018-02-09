@@ -1,37 +1,58 @@
 <template>
   <div id="classify1">
-    <div id="classify1_1" v-for="item in itemsright1" v-bind:key="item.kind_id">
+    <div id="classify1_1" v-for="item in itemsright1" v-bind:key="item.kind_id" @click="changeBgc(item.kind_id)">
       <a href="#"><img :src="item.min_photo"/><p>{{item.kind_min}}</p></a>
     </div>
   </div>
 </template>
 
 <script>
+import bus from '../../../../../assets/Bus'
 export default {
   name: 'classify1',
   data () {
     return {
-      itemsright1: []
+      itemsright1: [],
+      kindmaxx: ''
     }
   },
   methods: {
+    changeBgc: function (kindid) {
+      console.log('分类小类组件id要来了')
+      bus.$emit('classify', kindid)
+    },
     price: function () {
-      this.$http({
-        method: 'GET',
-        url: 'http://zxhbzu.free.ngrok.cc/kind.htm?kind_max=底妆',
-        dataType: 'json',
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        this.itemsright1 = JSON.parse(JSON.parse(response.data))
-      }, function () {
-        console.log('请求失败')
-      })
+    //      this.$http({
+    //        method: 'GET',
+    //        url: 'http://zxhbzu.free.ngrok.cc/kind.htm?kind_max=底妆',
+    //        dataType: 'json',
+    //        async: false,
+    //        xhrFields: {withCredentials: true}
+    //      }).then(function (response) {
+    //        this.itemsright1 = JSON.parse(JSON.parse(response.data))
+    //      }, function () {
+    //        console.log('请求失败')
+    //      })
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function (response) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('小类1success')
+          this.itemsright1 = JSON.parse(JSON.parse(response.data))
+        } else {
+          console.log('error')
+        }
+      }
+      xhr.open('post', 'http://zxhbzu.free.ngrok.cc/kind.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('kind_max=' + this.kindmaxx)
     }
   },
-  computed: {
-  },
   mounted: function () {
+    var self = this
+    bus.$on('kindmax', (kindmax) => {
+      console.log('大类id到小类组件通讯成功啦')
+      self.kindmaxx = kindmax
+    })
     this.price()
   }
 }

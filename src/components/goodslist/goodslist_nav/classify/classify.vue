@@ -3,69 +3,66 @@
     <ul>
       <!--<li id="classify1" class="tab" @click="toggleTab('classify1', 0)"><a>面部护肤</a><span>＞</span></li>-->
       <!--<li id="classify2" class="tab" @click="toggleTab('classify2', 1)"><a>彩妆</a><span>＞</span></li>-->
-      <li v-for='(item, index) in itemleft' :class="{'active':ind === index}" :id="item.tabname" @click="toggleTab(item.tabname,index)" v-bind:key="item.tabname" class="tab">
+      <li v-for='(item, index) in itemleft' :class="{'active':ind === index}"  @click="toggleTab(item.kind_max,index)" v-bind:key="item.kind_max" class="tab">
         <a>{{item.kind_max}}</a><span>＞</span>
       </li>
     </ul>
-    <classify1 :is="classTab"></classify1>
+    <classify1></classify1>
+    <!--<classify1 :is="classTab"></classify1>-->
   </div>
 </template>
 
 <script>
+import bus from '../../../../assets/Bus'
 import classify1 from './classify1/classify1.vue'
-import classify2 from './classify2/classify2.vue'
-import classify3 from './classify3/classify3.vue'
+// import classify2 from './classify2/classify2.vue'
+// import classify3 from './classify3/classify3.vue'
 export default{
   name: 'classify',
   data () {
     return {
       ind: '',
-      classTab: 'classify1',
       itemleft: [
         {
-          tabname: 'classify1',
           kind_max: '底妆'
         },
         {
-          tabname: 'classify2',
           kind_max: '眼妆'
         },
         {
-          tabname: 'classify3',
           kind_max: '香水'
         },
         {
-          tabname: 'classify4',
           kind_max: '护肤'
         },
         {
-          tabname: 'classify5',
           kind_max: '唇妆'
         },
         {
-          tabname: 'classify6',
           kind_max: '美甲'
         },
         {
-          tabname: 'classify7',
           kind_max: '美容工具'
         },
         {
-          tabname: 'classify8',
           kind_max: '其他'
         }
       ]
     }
   },
   components: {
-    classify1,
-    classify2,
-    classify3
+    classify1
+    // classify2,
+    // classify3
   },
   methods: {
-    toggleTab: function (tab, index) {
-      this.classTab = tab
+    //    toggleTab: function (tab, index) {
+    //      this.classTab = tab
+    //      this.ind = index
+    //    }
+    toggleTab: function (kindmax, index) {
       this.ind = index
+      bus.$emit('kindmax', kindmax)
     }
   }
 }

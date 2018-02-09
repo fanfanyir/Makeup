@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import bus from '../../../assets/Bus'
 export default {
   name: 'orderpay',
   data () {
@@ -70,7 +71,7 @@ export default {
     },
     adddel: function () {
       let oCheck = document.getElementsByClassName('selectH')
-      var aOrderpaybox = document.getElementsByClassName('orderpaybox')
+      let aOrderpaybox = document.getElementsByClassName('orderpaybox')
       if (confirm('确认取消?')) {
         for (let i = 0; i < oCheck.length; i++) {
           if (oCheck[i].checked === true) {
@@ -81,7 +82,7 @@ export default {
     },
     addpay: function () {
       let oCheck = document.getElementsByClassName('selectH')
-      var aOrderpaybox = document.getElementsByClassName('orderpaybox')
+      let aOrderpaybox = document.getElementsByClassName('orderpaybox')
       if (confirm('确认付款?')) {
         for (let i = 0; i < oCheck.length; i++) {
           if (oCheck[i].checked === true) {
@@ -97,25 +98,37 @@ export default {
       })
     },
     detial: function (index) {
+      console.log(index)
       this.$http({
-        method: 'POST',
-        url: 'http://jlw.free.ngrok.cc/someOrder.htm',
+        method: 'get',
+        url: 'http://32jk2s.natappfree.cc/orderDetails.htm?order_id=1',
         dataType: 'json',
-        data: {'order_id': index},
+        // data: {'order_id': index},
         async: false,
         xhrFields: {withCredentials: true}
       }).then(function (response) {
-        alert(345)
-        this.payorders = JSON.parse(JSON.parse(response.data))
-        console.log(this.payorders)
+        bus.$emit('loadSuccess', response)
       }, function () {
         console.log('请求失败')
       })
     },
+    //      var xhr = new XMLHttpRequest()
+    //      xhr.onreadystatechange = function (data) {
+    //        if (xhr.readyState === 4) {
+    //          if (xhr.status >= 200 & xhr.status < 300 || xhr.status === 304) {
+    //            alert('组件通讯开始啦')
+    //            bus.$emit('userDefinedEvent', 'this messsge is from order_pay')
+    //          } else {
+    //          }
+    //        }
+    //      }
+    //      xhr.open('post', 'http://gcx84u.natappfree.cc/orderDetails.htm', 'true')
+    //      xhr.send(null)
+    //    },
     price: function () {
       this.$http({
         method: 'GET',
-        url: 'http://jlw.free.ngrok.cc/someOrder.htm?user_id=5&user_sex=1',
+        url: 'http://32jk2s.natappfree.cc/someOrder.htm?user_id=5&user_sex=1',
         dataType: 'json',
         async: false,
         xhrFields: {withCredentials: true}

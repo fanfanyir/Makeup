@@ -49,8 +49,11 @@ import orderget from './components/order/get.vue'
 import ordermsg from './components/order/msg.vue'
 import orderpay from './components/order/pay.vue'
 import orderpaydetail from './components/order/order_pay/order_paydetail/orderpaydetail.vue'
+import payy from './components/order/order_pay/order_pay.vue'
 import ordergetdetail from './components/order/order_get/order_getdetail/ordergetdetail.vue'
+import get from './components/order/order_get/order_get.vue'
 import ordermsgdetail from './components/order/order_msg/order_msgdetail/ordermsgdetail.vue'
+import msg from './components/order/order_msg/order_msg.vue'
 import pay from './components/pay/pay.vue'
 import Chooseadress from './components/choose_address/Choose_Address.vue'
 import addaddress from './components/add_address/Add_Address'
@@ -83,7 +86,10 @@ export default {
     detailstotal,
     pay,
     Chooseadress,
-    addaddress
+    addaddress,
+    payy,
+    get,
+    msg
   }
 }
 </script>

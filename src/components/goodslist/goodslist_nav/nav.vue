@@ -7,7 +7,9 @@
       <li><img id="view" src="../../../assets/goodslist/Viewlist.png"/></li>
       <li class="right_shai"><span id="lineshai">筛选</span><img id="seclect" src="../../../assets/goodslist/筛选.png"/></li>
     </ul>
-    <brand :is="currentTab" keep-alive v-if="seen" class="boxt"></brand>
+    <brand :is="currentTab" keep-alive v-if="seen" class="boxt"
+           v-bind:message="parentMsg"></brand>
+    <!--v-on:listenToChildEvent="showMessageFromChild"-->
   </div>
 </template>
 
@@ -21,7 +23,8 @@ export default{
     return {
       currentTab: '',
       seen: '',
-      btn: 'true'
+      btn: 'true',
+      parentMsg: 'hello,child'
     }
   },
   components: {
@@ -48,6 +51,9 @@ export default{
         this.btn = !this.btn
       }
     }
+    //    showMessageFromChild: function (data) {
+    //      console.log(data)
+    //    }
   }
 }
 //      $(this).toggle(2000)

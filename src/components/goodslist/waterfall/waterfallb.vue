@@ -10,6 +10,7 @@
   </div>
 </template>
 <script>
+import bus from '../../../assets/Bus'
 import $ from 'jquery'
 export default {
   name: 'waterfall1',
@@ -17,18 +18,47 @@ export default {
     return {
       litss: [],
       starNum: 0,
-      ajaxState: true
+      ajaxState: true,
+      brandd: '',
+      sortt: '',
+      classifyy: '',
+      allsort: ''
     }
   },
   mounted: function () {
-    this.handleScroll()
     let that = this
+    bus.$on('brand', (brandid) => {
+      console.log(brandid)
+      console.log(typeof brandid)
+      console.log('品牌组件通讯成功啦')
+      that.brandd = brandid
+    })
+    bus.$on('classify', (classifyy) => {
+      console.log(classifyy)
+      console.log(typeof classifyy)
+      console.log('分类组件通讯成功啦')
+      that.classifyy = classifyy
+    })
+    bus.$on('sort', (sortt) => {
+      console.log(sortt)
+      console.log(typeof sortt)
+      console.log('排序通讯成功啦')
+      that.sortt = sortt
+    })
+    this.aresure()
     window.addEventListener('scroll', function () {
       if (that.checkScrollSite() && that.ajaxState) {
         that.ajaxState = false
-        that.handleScroll()
+        that.aresure()
       }
     })
+  },
+  beforeUpdate: function () {
+    this.$nextTick(() => {
+      this.waterfall('waterfall1', 'waterfall1_box')
+    })
+  },
+  updated: function () {
   },
   watched: function () {
     this.$nextTick(() => {
@@ -36,6 +66,26 @@ export default {
     })
   },
   methods: {
+    aresure () {
+      if (this.brandd) {
+        this.allsort = this.brandd
+        console.log('点击品牌')
+      } else if (this.sortt) {
+        this.allsort = this.sortt
+        console.log('点击排序')
+      } else if (this.classifyy) {
+        this.allsort = this.classifyy
+        console.log('点击分类')
+      }
+      if (this.allsort) {
+        console.log('点击导航了')
+        this.navsort(this.allsort)
+        this.brandd = this.sortt = this.classifyy = ''
+      } else {
+        console.log('没有点击')
+        this.handleScroll()
+      }
+    },
     jumpzmy: function () {
       this.$router.push({path: '/details'})
     },
@@ -49,8 +99,8 @@ export default {
         xhrFields: {withCredentials: true}
       }).then(function (response) {
         let left = JSON.parse(response.bodyText).data
+        this.litss = []
         this.litss = this.litss.concat(left)
-        this.waterfall('waterfall1', 'waterfall1_box')
         this.$nextTick(() => {
           this.waterfall('waterfall1', 'waterfall1_box')
         })
@@ -59,6 +109,27 @@ export default {
       function () {
         console.log('请求失败')
       })
+    },
+    navsort: function (navnav) {
+      let that = this
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function (response) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('总排序123成功')
+          let left = JSON.parse(response.bodyText).data
+          this.litss = []
+          this.litss = this.litss.concat(left)
+          this.$nextTick(() => {
+            this.waterfall('waterfall1', 'waterfall1_box')
+          })
+          that.ajaxState = true
+        } else {
+          console.log('总排序123error')
+        }
+      }
+      xhr.open('post', 'http://zxhbzu.free.ngrok.cc/kind.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('kind_max=' + this.navnav)
     },
     waterfall: function (parent, pin) {
       let oParent = document.getElementById(parent)
