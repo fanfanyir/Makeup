@@ -3,7 +3,7 @@
     <ul>
       <!--<li id="classify1" class="tab" @click="toggleTab('classify1', 0)"><a>面部护肤</a><span>＞</span></li>-->
       <!--<li id="classify2" class="tab" @click="toggleTab('classify2', 1)"><a>彩妆</a><span>＞</span></li>-->
-      <li v-for='(item, index) in itemleft' :class="{'active':ind === index}"  @click="toggleTab(item.kind_max,index)" v-bind:key="item.kind_max" class="tab">
+      <li v-for='(item, index) in itemleft' :class="{'active':ind === index}"  @click.prevent="toggleTab(item.kind_max,index)" v-bind:key="item.kind_max" class="tab">
         <a>{{item.kind_max}}</a><span>＞</span>
       </li>
     </ul>

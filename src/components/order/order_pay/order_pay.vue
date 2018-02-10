@@ -98,19 +98,30 @@ export default {
       })
     },
     detial: function (index) {
-      console.log(index)
-      this.$http({
-        method: 'get',
-        url: 'http://32jk2s.natappfree.cc/orderDetails.htm?order_id=1',
-        dataType: 'json',
-        // data: {'order_id': index},
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        bus.$emit('loadSuccess', response)
-      }, function () {
-        console.log('请求失败')
-      })
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function (response) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          bus.$emit('orderpay', response)
+        } else {
+          console.log('error')
+        }
+      }
+      xhr.open('post', 'http://7gdrgz.natappfree.cc/orderDetails.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('order_id=' + index)
+    //      console.log(index)
+    //      this.$http({
+    //        method: 'get',
+    //        url: 'http://gd3k7g.natappfree.cc/orderDetails.htm?order_id=9',
+    //        dataType: 'json',
+    //        // data: {'order_id': index},
+    //        async: false,
+    //        xhrFields: {withCredentials: true}
+    //      }).then(function (response) {
+    //        bus.$emit('loadSuccess', response)
+    //      }, function () {
+    //        console.log('请求失败')
+    //      })
     },
     //      var xhr = new XMLHttpRequest()
     //      xhr.onreadystatechange = function (data) {
@@ -126,19 +137,32 @@ export default {
     //      xhr.send(null)
     //    },
     price: function () {
-      this.$http({
-        method: 'GET',
-        url: 'http://32jk2s.natappfree.cc/someOrder.htm?user_id=5&user_sex=1',
-        dataType: 'json',
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        alert(345)
-        this.payorders = JSON.parse(JSON.parse(response.data))
-        console.log(this.payorders)
-      }, function () {
-        console.log('请求失败')
-      })
+      let xhr = new XMLHttpRequest()
+      xhr.open('post', 'http://7gdrgz.natappfree.cc/someOrder.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 1)
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(typeof JSON.parse(JSON.parse(xhr.responseText)))
+          this.payorders = JSON.parse(JSON.parse(xhr.responseText))
+          console.log(this.payorders)
+        } else {
+          console.log('error')
+        }
+      }
+    //      this.$http({
+    //        method: 'GET',
+    //        url: 'http://gd3k7g.natappfree.cc/someOrder.htm?user_id=1&user_sex=1',
+    //        dataType: 'json',
+    //        async: false,
+    //        xhrFields: {withCredentials: true}
+    //      }).then(function (response) {
+    //        alert(345)
+    //        this.payorders = JSON.parse(JSON.parse(response.data))
+    //        console.log(this.payorders)
+    //      }, function () {
+    //        console.log('请求失败')
+    //      })
     }
   },
   mounted: function () {

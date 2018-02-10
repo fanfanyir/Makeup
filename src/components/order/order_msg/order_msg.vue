@@ -1,6 +1,6 @@
 <template>
   <div id="ordermsg">
-    <div class="ordermsgbox"  v-for='(msgorder, index) in msgorders' v-bind:key="msgorder.order_id">
+    <div class="ordermsgbox"  v-for='(msgorder, index) in msgorders' v-bind:key="msgorder.order_id" @click="detial(msgorder.order_id)">
       <p class="shopmsg"><span>美妆品牌店 ＞</span><span>交易成功</span></p>
       <div class="boxmsg" v-for='msglist in msgorder.pro_shops' v-bind:key="msglist.pro_shop_orders.pro_shop_order_id">
         <div class="imgboxmsg clearfix" @click="waitmsg()">
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import bus from '../../../assets/Bus'
 export default{
   name: 'ordermsg',
   data () {
@@ -85,19 +86,58 @@ export default{
   },
   methods: {
     price: function () {
-      this.$http({
-        method: 'GET',
-        url: 'http://jlw.free.ngrok.cc/someOrder.htm?',
-        dataType: 'json',
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        alert(345)
-        this.msgorders = JSON.parse(JSON.parse(response.data))
-        console.log(this.msgorders)
-      }, function () {
-        console.log('请求失败')
-      })
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function (response) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          alert(response)
+          this.msgorders = JSON.parse(JSON.parse(response.data))
+          console.log(this.msgorders)
+        } else {
+          console.log('error')
+        }
+      }
+      xhr.open('post', 'http://jlw.free.ngrok.cc/someOrder.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 1)
+    //      this.$http({
+    //        method: 'GET',
+    //        url: 'http://jlw.free.ngrok.cc/someOrder.htm?',
+    //        dataType: 'json',
+    //        async: false,
+    //        xhrFields: {withCredentials: true}
+    //      }).then(function (response) {
+    //        alert(345)
+    //        this.msgorders = JSON.parse(JSON.parse(response.data))
+    //        console.log(this.msgorders)
+    //      }, function () {
+    //        console.log('请求失败')
+    //      })
+    },
+    detial: function (index) {
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function (response) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          bus.$emit('ordermsg', response)
+        } else {
+          console.log('error')
+        }
+      }
+      xhr.open('post', 'http://gd3k7g.natappfree.cc/orderDetails.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('order_id=' + index)
+    //      console.log(index)
+    //      this.$http({
+    //        method: 'get',
+    //        url: 'http://gd3k7g.natappfree.cc/orderDetails.htm?order_id=9',
+    //        dataType: 'json',
+    //        // data: {'order_id': index},
+    //        async: false,
+    //        xhrFields: {withCredentials: true}
+    //      }).then(function (response) {
+    //        bus.$emit('ordermsg', response)
+    //      }, function () {
+    //        console.log('请求失败')
+    //      })
     },
     del: function (index) {
       if (confirm('确认?')) {

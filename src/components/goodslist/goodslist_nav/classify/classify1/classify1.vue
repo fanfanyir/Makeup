@@ -22,38 +22,33 @@ export default {
       bus.$emit('classify', kindid)
     },
     price: function () {
-    //      this.$http({
-    //        method: 'GET',
-    //        url: 'http://zxhbzu.free.ngrok.cc/kind.htm?kind_max=底妆',
-    //        dataType: 'json',
-    //        async: false,
-    //        xhrFields: {withCredentials: true}
-    //      }).then(function (response) {
-    //        this.itemsright1 = JSON.parse(JSON.parse(response.data))
-    //      }, function () {
-    //        console.log('请求失败')
-    //      })
       let xhr = new XMLHttpRequest()
-      xhr.onreadystatechange = function (response) {
+      xhr.open('post', 'http://j5fnvj.natappfree.cc/kind.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('kind_max=' + this.kindmaxx)
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           console.log('小类1success')
-          this.itemsright1 = JSON.parse(JSON.parse(response.data))
+          console.log(JSON.parse(xhr.responseText))
+          this.itemsright1 = JSON.parse(JSON.parse(xhr.responseText))
+          console.log(JSON.parse(xhr.responseText))
         } else {
           console.log('error')
         }
       }
-      xhr.open('post', 'http://zxhbzu.free.ngrok.cc/kind.htm', true)
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('kind_max=' + this.kindmaxx)
     }
   },
   mounted: function () {
-    var self = this
+    this.price()
+    let self = this
     bus.$on('kindmax', (kindmax) => {
       console.log('大类id到小类组件通讯成功啦')
       self.kindmaxx = kindmax
+      this.price()
     })
-    this.price()
+  },
+  destroyed: function () {
+    bus.$off('classify')
   }
 }
 </script>

@@ -86,7 +86,7 @@ export default{
   mounted: function () {
     //    this.ad()
     var self = this
-    bus.$on('loadSuccess', (text) => {
+    bus.$on('orderpay', (text) => {
       console.log(text.data)
       console.log(typeof JSON.parse(JSON.parse(text.data)))
       console.log('组件通讯成功啦')

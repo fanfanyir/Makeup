@@ -19,46 +19,72 @@ export default {
       litss: [],
       starNum: 0,
       ajaxState: true,
-      brandd: '',
-      sortt: '',
-      classifyy: '',
-      allsort: ''
+      brandd: null,
+      sortt: null,
+      classifyy: null,
+      allsort: null,
+      att: 0
     }
   },
   mounted: function () {
     let that = this
-    bus.$on('brand', (brandid) => {
-      console.log(brandid)
-      console.log(typeof brandid)
+    // 商品过来的id
+    bus.$on('brand', (brandname) => {
       console.log('品牌组件通讯成功啦')
-      that.brandd = brandid
+      that.brandd = brandname
     })
+    // 分类过来的名称
     bus.$on('classify', (classifyy) => {
-      console.log(classifyy)
-      console.log(typeof classifyy)
       console.log('分类组件通讯成功啦')
       that.classifyy = classifyy
     })
+    // 排序过来的名称
     bus.$on('sort', (sortt) => {
-      console.log(sortt)
-      console.log(typeof sortt)
       console.log('排序通讯成功啦')
       that.sortt = sortt
     })
-    this.aresure()
-    window.addEventListener('scroll', function () {
-      if (that.checkScrollSite() && that.ajaxState) {
-        that.ajaxState = false
-        that.aresure()
-      }
-    })
+    this.handleScroll()
+    if (!this.att) {
+      window.addEventListener('scroll', function () {
+        if (that.checkScrollSite() && that.ajaxState) {
+          that.ajaxState = false
+          console.log(that.allsort)
+          that.handleScroll()
+          //        if (this.att) {
+          //          console.log('点击导航了50')
+          //          that.navsort(this.att)
+          //          console.log('调用新的请求52')
+          //          // this.brandd = this.sortt = this.classifyy = ''
+          //        } else {
+          //          console.log('没有点击55')
+          //          that.handleScroll()
+          //          console.log('没有diao')
+          //        }
+        }
+      })
+    }
   },
   beforeUpdate: function () {
-    this.$nextTick(() => {
-      this.waterfall('waterfall1', 'waterfall1_box')
-    })
-  },
-  updated: function () {
+    let that = this
+    this.att = this.aresure()
+    if (this.att) {
+      console.log('点击导航了')
+      that.navsort()
+      this.brandd = this.sortt = this.classifyy = null
+    }
+    this.checkScrollSite()
+    // this.$nextTick(() => {
+    //    let that = this
+    //    if (this.aresure()) {
+    //      console.log('点击导航了')
+    //      that.navsort(this.allsort)
+    //      console.log('调用新的请求')
+    //      // this.brandd = this.sortt = this.classifyy = ''
+    //    } else {
+    //      console.log('没有点击')
+    //      that.handleScroll()
+    //    }
+    // })
   },
   watched: function () {
     this.$nextTick(() => {
@@ -67,39 +93,42 @@ export default {
   },
   methods: {
     aresure () {
-      if (this.brandd) {
-        this.allsort = this.brandd
-        console.log('点击品牌')
-      } else if (this.sortt) {
-        this.allsort = this.sortt
-        console.log('点击排序')
-      } else if (this.classifyy) {
-        this.allsort = this.classifyy
-        console.log('点击分类')
+      let that = this
+      if (that.brandd) {
+        // that.allsort = 'brandone'
+        return that.brandd
+      } else if (that.sortt) {
+        // that.allsort = 'sortone'
+        return that.sortt
+      } else if (that.classifyy) {
+        // that.allsort = 'classifyone'
+        return that.classifyy
       }
-      if (this.allsort) {
-        console.log('点击导航了')
-        this.navsort(this.allsort)
-        this.brandd = this.sortt = this.classifyy = ''
-      } else {
-        console.log('没有点击')
-        this.handleScroll()
-      }
+      //      if (that.allsort) {
+      //        return true
+      //      } else {
+      //        return false
+      //      }
     },
     jumpzmy: function () {
       this.$router.push({path: '/details'})
     },
+    // 直接请求
     handleScroll: function () {
+      console.log('点击请求')
       let that = this
       this.$http({
         method: 'GET',
-        url: 'https://easy-mock.com/mock/5a6a99c0396ee930b9c4b92f',
+        // url: 'https://easy-mock.com/mock/5a6a99c0396ee930b9c4b92f',
+        url: 'http://j5fnvj.natappfree.cc/load.htm',
         dataType: 'json',
         async: false,
         xhrFields: {withCredentials: true}
       }).then(function (response) {
-        let left = JSON.parse(response.bodyText).data
-        this.litss = []
+        console.log('请求成功')
+        console.log(response)
+        let left = JSON.parse(JSON.parse(response.data))
+        console.log(typeof left)
         this.litss = this.litss.concat(left)
         this.$nextTick(() => {
           this.waterfall('waterfall1', 'waterfall1_box')
@@ -110,27 +139,33 @@ export default {
         console.log('请求失败')
       })
     },
-    navsort: function (navnav) {
+    // 给后台传id时请求
+    navsort: function () {
+      console.log('调用' + this.allsort)
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.onreadystatechange = function (response) {
+      xhr.open('post', 'http://j5fnvj.natappfree.cc/proList.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('brand=' + this.brandd + '&' + 'classify=' + this.classifyy + '&' + 'sort=' + this.sortt)
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          console.log('总排序123成功')
-          let left = JSON.parse(response.bodyText).data
-          this.litss = []
-          this.litss = this.litss.concat(left)
+          that.litss.splice(0)
+          console.log(typeof JSON.parse(xhr.responseText))
+          console.log(this.litss)
+          // this.litss = JSON.parse(xhr.responseText)
+          that.litss.splice(0, xhr.responseText.length, xhr.responseText)
+          console.log(this.litss)
+          console.log('chuanidididid')
           this.$nextTick(() => {
             this.waterfall('waterfall1', 'waterfall1_box')
           })
           that.ajaxState = true
         } else {
-          console.log('总排序123error')
+          console.log('排序error')
         }
       }
-      xhr.open('post', 'http://zxhbzu.free.ngrok.cc/kind.htm', true)
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('kind_max=' + this.navnav)
     },
+    // 布局
     waterfall: function (parent, pin) {
       let oParent = document.getElementById(parent)
       let aPin = this.getClassObj(oParent, pin)
@@ -152,6 +187,7 @@ export default {
         }
       }
     },
+    // 获取所有的块
     getClassObj: function (parent, className) {
       let aObj = parent.getElementsByTagName('div')
       let result = []
@@ -162,6 +198,7 @@ export default {
       }
       return result
     },
+    // 获取top最小的位置
     getMinKey: function (arr, minH) {
       for (var key in arr) {
         if (arr[key] === minH) {
@@ -169,6 +206,7 @@ export default {
         }
       }
     },
+    // 透明度变化
     setMoveStyle: function (obj, top, left, index) {
       if (index <= this.starNum) {
         return
@@ -183,6 +221,7 @@ export default {
       }, 1000)
       this.starNum = index
     },
+    // 滚轮滚动到一定位置
     checkScrollSite: function () {
       let oParent = document.getElementById('waterfall1')
       let aPin = this.getClassObj(oParent, 'waterfall1_box')

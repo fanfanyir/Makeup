@@ -1,7 +1,7 @@
 <template>
   <!--<div id="brand">-->
   <ul id="sort">
-    <li v-for='(item,index) in items' :class="{'active':ind === index}" @click="changeBgc(index, item.sortlist)" v-bind:key="item.sortlist">{{item.sortlist}}</li>
+    <li v-for='(item,index) in items' :class="{'active':ind === index}" @click.prevent="changeBgc(index, item.sortlist)" v-bind:key="item.sortlist">{{item.sortlist}}</li>
   </ul>
   <!--</div>-->
 </template>
@@ -40,6 +40,9 @@ export default{
         console.log('请求失败')
       })
     }
+  },
+  destroyed: function () {
+    bus.$off('sort')
   }
 }
 </script>
