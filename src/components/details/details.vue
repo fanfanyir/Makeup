@@ -47,7 +47,7 @@
           </div>
           <div id="join_shoppingcar" @click="join_shoppingcar()">加入购物车</div>
       </footer>
-      <Detailsgoodsnorm v-show="isShow" v-bind:message="parentMsg" v-on:send="shshow"></Detailsgoodsnorm>
+      <Detailsgoodsnorm v-show="isShow" v-bind:message="parentMsg" v-on:send="shshow" :src1="img"></Detailsgoodsnorm>
     </div>
 </template>
 
@@ -84,22 +84,12 @@ export default {
           console.log('error')
         }
       }
-      xhr.open('post', 'http://s72aer.natappfree.cc/insertCollect.htm', true)
+      xhr.open('post', 'http://8w6pvv.natappfree.cc/insertCollect.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('ccc=' + oP.innerHTML.length + '&' + 'user_id=' + 1 + '&' + 'pro_shop_id=' + 1)
       console.log(oP.innerHTML.length)
     },
     join_shoppingcar: function () {
-      // this.$http({
-      //   url: 'http://naipzi.natappfree.cc/success.htm?user_id=10&pro_shop_id=10&cart_num=3',
-      //   method: 'get',
-      //   xhrFields: {withCredentials: true}
-      // }).then(function (res) {
-      //   console.log('success join in李鑫')
-      //   console.log(res)
-      // }, function () {
-      //   console.log('error join in李鑫')
-      // })
       let numbers = document.getElementById('number')
       console.log(numbers.innerHTML)
       let xhr = new XMLHttpRequest()
@@ -110,9 +100,9 @@ export default {
           console.log('error join in李鑫')
         }
       }
-      xhr.open('post', 'http://naipzi.natappfree.cc/success.htm', true)
+      xhr.open('post', 'http://n8sey7.natappfree.cc/success.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('user_id=' + 14 + '&' + 'pro_shop_id=' + 14 + '&' + 'cart_num=' + numbers.innerHTML)
+      xhr.send('user_id=' + 30 + '&' + 'pro_shop_id=' + 30 + '&' + 'cart_num=' + numbers.innerHTML)
     },
     shshow: function (res) {
       console.log(res)
@@ -120,7 +110,7 @@ export default {
     },
     load: function () {
       this.$http({
-        url: 'http://s72aer.natappfree.cc/detail.htm?user_id=1&pro_shop_id=1',
+        url: 'http://8w6pvv.natappfree.cc/detail.htm?user_id=1&pro_shop_id=1',
         method: 'get',
         xhrFields: {withCredentials: true}
       }).then(function (res) {

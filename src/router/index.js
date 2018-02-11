@@ -24,6 +24,7 @@ import detailstotal from '@/components/details/details'
 import goodsnorm from '@/components/details_goods_norms/details_goods_norms'
 import login from '@/components/login.vue'
 import register from '@/components/register.vue'
+import paypic from '@/components/paypic/paypic'
 Vue.use(Router)
 // import index from '@/components/index'
 
@@ -140,6 +141,8 @@ export default new Router({
     {path: '/Add_Address', component: Addaddress},
     {path: '/details', component: detailstotal},
     {path: '/details_goods_norms', component: goodsnorm},
+    {path: '/paypic', component: paypic},
+
     {
       path: '/login',
       name: 'login',

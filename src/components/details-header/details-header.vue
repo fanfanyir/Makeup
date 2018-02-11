@@ -57,6 +57,10 @@ export default {
     width: 100%;
     height: 750px;
     background-color: red;
+    img{
+      width: 100%;
+      height: 750px;
+    }
   }
   .swiper-pagination{
     width: 100%;

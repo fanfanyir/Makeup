@@ -61,23 +61,20 @@ export default {
         alert('请填写正确的联系电话')
       }
       if (aInput[0].value.length > 2 && re.test(aInput[1].value) && aInput[2].value.length && aInput[3].value.length) {
-        // this.$http({
-        //   method: 'get',
-        //   url: 'http://192.168.0.200:8080'
-        // }).then(function (res) {
-        //   alert(res.body)
-        // })
+        console.log(55)
+        let add = aInput[2].value + aInput[3].value
         let xhr = new XMLHttpRequest()
-        xhr.onreadystatechange = function (res) {
+        xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(res)
             console.log('success给倪晨阳的')
           } else {
             console.log('error给倪晨阳的')
           }
         }
-        xhr.open('post', 'http://192.168.0.200:8080', true)
-        xhr.send(null)
+        xhr.open('post', 'http://8w6pvv.natappfree.cc/jiadizhi.htm', true)
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+        // xhr.send('user_id=' + 2)
+        xhr.send('address_name=' + aInput[0].value + '&' + 'address_tel=' + aInput[1].value + '&' + 'address_add=' + add + '&' + 'user_id=' + 7)
       }
     },
     jump: function () {

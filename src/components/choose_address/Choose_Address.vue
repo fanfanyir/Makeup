@@ -62,7 +62,7 @@ export default {
       // console.log(22)
       // this.$http({
       //   method: 'get',
-      //   url: 'http://c5ie4u.natappfree.cc/dizhi.htm?user_id=2',
+      //   url: 'http://swem5n.natappfree.cc/dizhi.htm?user_id=2',
       //   xhrFields: {withCredentials: true}
       //   // contextType: 'application/json',
       //   // headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -95,7 +95,7 @@ export default {
       console.log(m)
       this.$http({
         method: 'get',
-        url: 'http://9tjfv6.natappfree.cc/gaimorendizhi.htm?user_id=2&address_id=2',
+        url: 'http://swem5n.natappfree.cc/gaimorendizhi.htm?user_id=2&address_id=2',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
         console.log(res, m)
@@ -106,15 +106,17 @@ export default {
     },
     choose: function (i) {
       let aAddress = document.getElementsByClassName('address')
+      let name = document.getElementsByClassName('name')
+      let tel = document.getElementsByClassName('telephone')
+      let address = document.getElementsByClassName('address')
       for (let j = 0; j < aAddress.length; j++) {
         aAddress[j].style.backgroundColor = 'white'
       }
       aAddress[i].style.backgroundColor = '#e7e7e7'
-      console.log('click')
-      Bus.$emit('inceptMessage', i)
+      Bus.$emit('inceptMessage', name[i].innerHTML, tel[i].innerHTML, address[i].innerHTML)
+      // console.log('click')
     },
     jump: function () {
-      // let id = this.$route.params.id
       this.$router.push({path: '/Add_Address'})
     },
     returnjump: function () {

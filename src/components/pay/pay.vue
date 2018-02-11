@@ -1,42 +1,40 @@
 <template>
-  <div id="makesure">
-    <h1>{{strrrr}}</h1>
-    <!--&lt;!&ndash;头部代码&ndash;&gt;-->
-    <!--<header class="clearfix">-->
-        <!--<img src="../../assets/pay/箭头左粗.png" id="arrow_left">-->
-      <!--<p @click="sssss()">-->
-        <!--{{title}}-->
-      <!--</p>-->
-      <!--&lt;!&ndash;<div></div>&ndash;&gt;-->
-    <!--</header>-->
-    <!--&lt;!&ndash;地址代码&ndash;&gt;-->
-      <!--<div id="address" @click="address()" >-->
-      <!--<div id="address_leftpart">-->
-        <!--<img src="../../assets/pay/地址-2.png" id="address_picture"/>-->
-            <!--<span>-->
-              <!--{{message1}}-->
-            <!--</span>-->
-            <!--<span id="name">-->
+  <div id="makesure" >
+    <!--头部代码-->
+    <header class="clearfix">
+        <img src="../../assets/pay/箭头左粗.png" id="arrow_left" >
+      <p @click="sssss()">
+        {{title}}
+      </p>
+      <!--<div></div>-->
+    </header>
+    <!--地址代码-->
+      <div id="address" @click="address()" >
+      <div id="address_leftpart">
+        <img src="../../assets/pay/地址-2.png" id="address_picture"/>
+            <span>
+              {{message1}}
+            </span>
+            <span id="name">
               <!--{{goods[0].address.address_add}}-->
-              <!--&lt;!&ndash;{str.name}&ndash;&gt;-->
-            <!--</span>-->
-        <!--<br>-->
-            <!--<span id="address_infortitle">-->
-              <!--{{message2}}-->
-            <!--</span>-->
-            <!--<span id="address_infor">-->
+             {{str2}}
+            </span>
+        <br>
+            <span id="address_infortitle">
+              {{message2}}
+            </span>
+            <span id="address_infor">
               <!--{{goods[0].address.address_add}}-->
-              <!--&lt;!&ndash;{str.name}&ndash;&gt;-->
-            <!--</span>-->
-      <!--</div>-->
-      <!--<div id="address_rightpart">-->
-        <!--<span id="telephone">-->
+            </span>
+      </div>
+      <div id="address_rightpart">
+        <span id="telephone">
           <!--{{goods[0].address.address_add}}-->
-           <!--&lt;!&ndash;{str.name}&ndash;&gt;-->
-        <!--</span>-->
-        <!--<br><br>-->
-      <!--</div>-->
-    <!--</div>-->
+           {{str2}}
+        </span>
+        <br><br>
+      </div>
+    </div>
     <!--&lt;!&ndash;商品信息&ndash;&gt;-->
     <!--<div class="goods " v-for="goodss in goods" v-bind:key="goodss.src1">-->
       <!--<div class="goods_up clearfix">-->
@@ -76,27 +74,25 @@
     <!--&lt;!&ndash;分割线&ndash;&gt;-->
     <!--<div class="lines2 line"></div>-->
     <!--&lt;!&ndash;结算&ndash;&gt;-->
-    <!--<div id="accounts" class="clearfix">-->
+    <div id="accounts" class="clearfix">
         <input type="submit" value="确认订单" id="makesure_order" @click="sendM()"/>
-    <!--<br>-->
+    <br>
         <!--<span>{{ceshi}}</span>-->
       <!--<p>-->
         <!--<span>合计金额</span>-->
         <!--<span id="total_money"></span>-->
       <!--</p>-->
-    <!--</div>-->
+    </div>
+    <!--&lt;!&ndash;<paypic v-show="picshow" :price="pri"></paypic>&ndash;&gt;-->
+    <paypic :price="pri" v-show="picshow"></paypic>
   </div>
 </template>
 <script>
 import Bus from '../../assets/Bus'
+import Paypic from '../paypic/paypic'
 export default {
+  components: {Paypic},
   name: 'pay',
-  props: {
-    address_add: {
-      required: true,
-      type: Array
-    }
-  },
   data () {
     return {
       title: '确认订单',
@@ -104,6 +100,11 @@ export default {
       message2: '收货地址:',
       message3: '产品规格:',
       message4: '购买数量',
+      picshow: false,
+      str1: '',
+      str2: '',
+      str3: '',
+      pri: 889,
       strrrr: '',
       str: [
         {'name': '王建飞', 'address_infor': '陕西省西安市长安区西安邮电大学陕西省西安市长安区西安邮电大学王建飞', 'telephone': '17691040983'
@@ -120,29 +121,36 @@ export default {
       ]
     }
   },
-  created () {
-    Bus.$on('inceptMessage', (i) => {
-      this.strrrr = i
-      console.log(this.strrrr + '通了')
+  mounted () {
+    Bus.$on('inceptMessage', function (str1, str2, str3) {
+      this.str1 = str1
+      this.str2 = str2
+      this.str3 = str3
+      console.log(this.str1, this.str2, this.str3)
     })
     // this.sssss()
   },
+  deactivated () {
+    this.$destroy()
+  },
   methods: {
     sssss: function () {
+      console.log(this.str1)
       this.$http({
         method: 'get',
-        url: 'http://9nwa3s.natappfree.cc/selectCart.htm?user_id=2',
+        url: 'http://n8sey7.natappfree.cc/selectCarts.htm?user_id=1',
+        // url: 'http://192.168.0.200:8080',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
-        console.log(res.bodyText)
-        this.goods = JSON.parse(res.bodyText)
-        console.log(this.goods[0].address)
-        console.log(this.goods[0].cart_id)
-        console.log('李鑫')
+        console.log(res)
+        console.log(JSON.parse(res.bodyText))
+        this.goods = JSON.parse(JSON.parse(res.bodyText))
+        console.log(typeof this.goods)
+        console.log(this.goods)
+        console.log('李鑫请求成功')
       }, function () {
-        console.log('请求失败')
+        console.log('李鑫请求失败1')
       })
-      console.log(333)
     },
     address: function () {
       // this.$http({
@@ -159,6 +167,9 @@ export default {
       this.$router.push({path: '/Choose_Address'})
     },
     sendM: function () {
+      let pp = this.pri
+      Bus.$emit('sendPri', pp)
+      this.picshow = !this.picshow
       // let total = document.getElementById('total_money')
       // let number = document.getElementsByClassName('goods')
       // let orderMessage = document.getElementById('leave_word')
@@ -203,10 +214,11 @@ export default {
         'num1': 2,
         'num2': 3
       }
-      xhr.open('post', 'http://z4pnju.natappfree.cc/order.htm', true)
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('number=' + 3 + '&' + 'order_money=' + 666 + '&' + 'order_message=' + 5 + '&' + 'id=' + JSON.stringify(sendid) + '&' + 'num=' + JSON.stringify(sendnum) + '&' + 'address_id=' + 3 + '&' + 'user_id=' + 1)
+      xhr.open('post', 'http://swem5n.natappfree.cc/order.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-for m-urlencoded')
+      xhr.send('number=' + 3 + '&' + 'order_money=' + 999 + '&' + 'order_message=' + 5 + '&' + 'id=' + JSON.stringify(sendid) + '&' + 'num=' + JSON.stringify(sendnum) + '&' + 'address_id=' + 3 + '&' + 'user_id=' + 1)
       // xhr.send('number=' + 3 + '&' + 'order_money=' + 666 + '&' + 'order_message=' + 5 + '&' + 'id=' + JSON.stringify(sendid) + '&' + 'num=' + JSON.stringify(sendnum) + '&' + 'address_id=' + 3 + '&' + 'user_id=' + 1)
+      // this.$router.push({path: '/paypic'})
     }
   }
 }
