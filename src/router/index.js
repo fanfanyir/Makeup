@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/components/index'
-import goodlist from '@/components/goodslist/goodlist.vue'
+import index from '@/components/index.vue'
 import shopping from '@/components/shopping/shopping.vue'
+import goodlist from '@/components/goodslist/goodlist.vue'
 import person from '@/components/person.vue'
 import Orderbanner from '@/components/order/order_banner/order_banner.vue'
 import allget from '@/components/order/get.vue'
@@ -25,16 +25,16 @@ import login from '@/components/login.vue'
 import register from '@/components/register.vue'
 Vue.use(Router)
 // import index from '@/components/index'
-
-Vue.use(Router)
 export default new Router({
   routes: [
     {
+      title: '首页',
       path: '/',
       name: 'index',
       component: index
     },
     {
+      tite: '购物车',
       path: '/shopping',
       name: 'shopping',
       component: shopping
