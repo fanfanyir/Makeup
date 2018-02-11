@@ -27,7 +27,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import bus from '../../../assets/Bus'
 export default{

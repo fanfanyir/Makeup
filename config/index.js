@@ -13,6 +13,7 @@ module.exports = {
     proxyTable: {},
     // Various Dev Server settings
     // host: '192.168.0.101', // can be overwritten by process.env.HOST
+    // host: '192.168.0.149', // can be overwritten by process.env.HOST
     // host: '172.20.10.8',// can be overwritten by process.env.HOST
     // host: '192.168.43.219',// can be overwritten by process.env.HOST
     host: '192.168.0.183',// can be overwritten by process.env.HOST
