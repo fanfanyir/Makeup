@@ -23,14 +23,14 @@ export default{
       this.$router.push({path: '/goodlist'})
     },
     ajax: function () {
-      var that = this
+      let that = this
       $.ajax({
         method: 'GET',
         url: 'http://8w6pvv.natappfree.cc/index_kind_max3.htm',
         dataType: 'json',
         success: function (data) {
           console.log(data)
-          var str = $.parseJSON(data)
+          let str = $.parseJSON(data)
           that.items = str
           console.log(that.pro_shop_pic.split(';')[Math.floor(Math.random() * 3)])
         }
