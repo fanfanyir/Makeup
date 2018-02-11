@@ -1,6 +1,6 @@
 <template>
     <ul id="brand">
-      <li v-for="(item, index) in items" :class="{'active':ind === index}" v-bind:key="item.brand_id"  @click.prevent="changeBgc(index, item.brand_name)">
+      <li v-for="(item, index) in items" :class="{'active':ind === index}" v-bind:key="item.brand_id"  @click="changeBgc(index, item.brand_name)">
         {{item.brand_name}}
       </li>
     </ul>
@@ -19,37 +19,22 @@ export default{
   methods: {
     changeBgc: function (index, brandname) {
       this.ind = index
-      console.log('品牌组件id来了')
       console.log(brandname)
       bus.$emit('brand', brandname)
-      // this.$emit('listenToChildEvent', brandid)
-      //      var aLi = document.getElementsByTagName('li')
-      //      var attr = aLi[index].innerHTML
-      //      this.$http({
-      //        method: 'GET',
-      //        url: 'http://zxhbzu.free.ngrok.cc/brand.htm',
-      //        dataType: 'json',
-      //        data: {'brand': attr},
-      //        async: false,
-      //        xhrFields: {withCredentials: true}
-      //      }).then(function (response) {
-      //        this.items = JSON.parse(JSON.parse(response.data))
-      //      }, function () {
-      //        console.log('请求失败')
-      //      })
     },
     price: function () {
       this.$http({
         method: 'GET',
-        url: 'http://j5fnvj.natappfree.cc/brand.htm',
+        url: 'http://8w6pvv.natappfree.cc/brand.htm',
         //        url: 'https://easy-mock.com/mock/5a6b0d092007214d6db2c394/pinpai',
         dataType: 'json',
         async: false,
         xhrFields: {withCredentials: true}
       }).then(function (response) {
-        console.log(response.data.data)
+        console.log(response.data)
+        // console.log(typeof response.data)
         // this.items = response.data.data
-        this.items = JSON.parse(JSON.parse(response.data))
+        this.items = response.data
       }, function () {
         console.log('请求失败')
       })
@@ -57,10 +42,10 @@ export default{
   },
   mounted: function () {
     this.price()
-  },
-  destroyed: function () {
-    bus.$off('brand')
   }
+  //  destroyed: function () {
+  //    bus.$off('brand')
+  //  }
 }
 </script>
 <style lang="scss" scoped>

@@ -56,10 +56,6 @@ export default{
     // classify3
   },
   methods: {
-    //    toggleTab: function (tab, index) {
-    //      this.classTab = tab
-    //      this.ind = index
-    //    }
     toggleTab: function (kindmax, index) {
       this.ind = index
       bus.$emit('kindmax', kindmax)

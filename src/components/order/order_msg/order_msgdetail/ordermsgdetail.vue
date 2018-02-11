@@ -22,7 +22,7 @@
     <div class="orderdetailbox">
       <p class="shops"><span>美妆品牌店 ＞</span></p>
       <div class="boxdetail" v-for='paylist in paylists' v-bind:key="paylist.pro_shop_order_id">
-        <div class="imgboxdetail clearfix">
+        <div class="imgboxdetail clearfix" @click="jump()">
           <img :src="paylist.pro_shop_pic"/>
           <p id="decrisptdetail">{{paylist.pro_shop_desc}}</p>
           <div id="pricedetail">
@@ -57,6 +57,7 @@
 </template>
 
 <script>
+// import bus from '../../../../assets/Bus'
 export default{
   name: 'ordermsgdetail',
   data () {
@@ -89,17 +90,25 @@ export default{
     }
   },
   methods: {
-    ad: function () {
-      let oAend = document.getElementById('enddetail')
-      oAend.innerHTML = '￥' + (parseFloat(oAend.innerHTML) + 8.05)
+    jump: function () {
+      this.$router.push({path: '/details'})
     },
     waitpay: function () {
       this.$router.go(-1)
+    },
+    del2: function (payorder) {
+      prompt('请您评价')
     }
-  },
-  mounted: function () {
-    this.ad()
   }
+  //  mounted: function () {
+  //    let that = this
+  //    bus.$on('ordermsg', (text) => {
+  //      // console.log(text)
+  //      console.log(typeof JSON.parse(text))
+  //      // console.log('组件通讯成功啦')
+  //      that.paylists = JSON.parse(text)
+  //    })
+  //  }
 }
 </script>
 <style lang="scss" scoped>

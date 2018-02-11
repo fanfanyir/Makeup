@@ -15,14 +15,12 @@
 </template>
 
 <script>
-import ordernav from '../order_nav/order_nav'
 export default{
   name: 'orderbanner',
   data () {
     return {msg: '我的订单'}
   },
   components: {
-    ordernav
   }
 }
 </script>

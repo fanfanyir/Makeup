@@ -1,11 +1,11 @@
 <template>
   <div id="orderpay">
-    <div class="orderpaybox"  v-for='(payorder, index) in payorders' v-bind:key="payorder.order_id" @click="detial(payorder.order_id)">
+    <div class="orderpaybox"  v-for='(payorder, index) in payorders' v-bind:key="payorder.order_id">
       <p class="shoppay">
         <span><input class="selectH" type="checkbox" @click="see()"/> 美妆品牌店 ＞</span><span>等待买家付款</span>
       </p>
       <div class="boxpay" v-for='paylist in payorder.pro_shops' v-bind:key="paylist.pro_shop_orders.pro_shop_order_id">
-        <div class="imgboxpay clearfix" @click="waitpay()">
+        <div class="imgboxpay clearfix" @click="waitpay(payorder.order_id)">
           <img :src="paylist.pro_shop_pic"/>
           <p id="decrisptpay">{{paylist.pro_shop_desc}}</p>
           <div id="pricepay">
@@ -22,8 +22,8 @@
         </p>
         <p id="focendpay">
           <input type="button" value="联系卖家"/>
-          <input type="button" value="取消订单" @click="del(index)"/>
-          <input type="button" value="付款" @click="pay(index)"/>
+          <input type="button" value="取消订单" @click="del(index,payorder.order_id)"/>
+          <input type="button" value="付款" @click="pay(index,payorder.order_id)"/>
         </p>
       </div>
     </div>
@@ -44,7 +44,8 @@ export default {
       seen: false,
       num: '2',
       att: [],
-      payorders: []
+      payorders: [],
+      pay_order_id: ''
     }
   },
   methods: {
@@ -59,23 +60,62 @@ export default {
         }
       }
     },
-    del: function (index) {
-      if (confirm('确认?')) {
+    del: function (index, orderid) {
+      if (confirm('确认取消?')) {
+        let str = {}
+        str[0] = orderid
         this.payorders.splice(index, 1)
+        let xhr = new XMLHttpRequest()
+        xhr.open('post', 'http://qeicvd.natappfree.cc/cancleOrder.htm', true)
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+        xhr.send('cancle_order_id=' + JSON.stringify(str))
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            alert('一个订单已取消')
+          } else {
+            console.log('error')
+          }
+        }
       }
     },
-    pay: function (index) {
-      if (confirm('确认?')) {
+    pay: function (index, orderid) {
+      if (confirm('确认付款?')) {
+        let str = {}
+        str[0] = orderid
         this.payorders.splice(index, 1)
+        let xhr = new XMLHttpRequest()
+        xhr.open('post', 'http://qeicvd.natappfree.cc/sureOrder.htm', true)
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+        xhr.send('sure_order_id=' + JSON.stringify(str))
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            alert('一个订单已确认付款')
+          } else {
+            console.log('error')
+          }
+        }
       }
     },
     adddel: function () {
       let oCheck = document.getElementsByClassName('selectH')
       let aOrderpaybox = document.getElementsByClassName('orderpaybox')
       if (confirm('确认取消?')) {
+        let str = {}
         for (let i = 0; i < oCheck.length; i++) {
           if (oCheck[i].checked === true) {
             aOrderpaybox[i].style.display = 'none'
+            str[i] = this.payorders[i].order_id
+          }
+        }
+        let xhr = new XMLHttpRequest()
+        xhr.open('post', 'http://qeicvd.natappfree.cc/cancleOrder.htm', true)
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+        xhr.send('cancle_order_id=' + JSON.stringify(str))
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            alert('多个订单已取消')
+          } else {
+            console.log('error')
           }
         }
       }
@@ -91,24 +131,26 @@ export default {
         }
       }
     },
-    waitpay: function () {
-      alert(222)
+    // 跳转到详情页
+    waitpay: function (index) {
       this.$router.push({
         path: '/paydetail'
       })
-    },
-    detial: function (index) {
       let xhr = new XMLHttpRequest()
-      xhr.onreadystatechange = function (response) {
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          bus.$emit('orderpay', response)
+          // console.log(JSON.parse(xhr.responseText))
+          bus.$emit('orderpay', JSON.parse(xhr.responseText))
         } else {
           console.log('error')
         }
       }
-      xhr.open('post', 'http://7gdrgz.natappfree.cc/orderDetails.htm', true)
+      xhr.open('post', 'http://qeicvd.natappfree.cc/orderDetails.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('order_id=' + index)
+    },
+    // 详情页信息
+    detial: function (index) {
     //      console.log(index)
     //      this.$http({
     //        method: 'get',
@@ -136,16 +178,17 @@ export default {
     //      xhr.open('post', 'http://gcx84u.natappfree.cc/orderDetails.htm', 'true')
     //      xhr.send(null)
     //    },
+    // 待付款页面信息获取
     price: function () {
+      let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://7gdrgz.natappfree.cc/someOrder.htm', true)
+      xhr.open('post', 'http://qeicvd.natappfree.cc/someOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 1)
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          console.log(typeof JSON.parse(JSON.parse(xhr.responseText)))
-          this.payorders = JSON.parse(JSON.parse(xhr.responseText))
-          console.log(this.payorders)
+          // console.log(typeof JSON.parse(JSON.parse(xhr.responseText)))
+          that.payorders = JSON.parse(JSON.parse(xhr.responseText))
         } else {
           console.log('error')
         }

@@ -23,7 +23,7 @@
     <div class="orderdetailbox">
       <p class="shops"><span>美妆品牌店 ＞</span></p>
       <div class="boxdetail" v-for='porshop in paylists[0].pro_shops' v-bind:key="porshop.pro_shop_id">
-        <div class="imgboxdetail clearfix">
+        <div class="imgboxdetail clearfix" @click="jumpzmy()">
           <img :src="porshop.pro_shop_pic"/>
           <p id="decrisptdetail">{{porshop.pro_shop_orders.pro_shop_desc}}</p>
           <div id="pricedetail">
@@ -51,7 +51,7 @@
       <p id="builddetail">创建时间： {{paylists[0].order_time}}</p>
     </div>
     <div id="footer">
-      <input type="button" value="朋友代付" @click="del1(payorder)"/>
+      <input type="button" value="朋友代付"/>
       <input type="button" value="取消订单" @click="del1(payorder)"/>
       <input type="button" value="付款" @click="del2(payorder)"/>
     </div>
@@ -79,18 +79,31 @@ export default{
     //      let oAend = document.getElementById('enddetail')
     //      oAend.innerHTML = '￥' + (parseFloat(oAend.innerHTML) + 8.05)
     //    },
+    del1: function (index) {
+      if (confirm('确认取消?')) {
+        this.payorders.splice(index, 1)
+      }
+    },
+    del2: function (index) {
+      if (confirm('确认付款?')) {
+        this.payorders.splice(index, 1)
+      }
+    },
+    jumpzmy: function () {
+      this.$router.push({path: '/details'})
+    },
     waitpay: function () {
       this.$router.go(-1)
     }
   },
   mounted: function () {
     //    this.ad()
-    var self = this
+    let that = this
     bus.$on('orderpay', (text) => {
-      console.log(text.data)
-      console.log(typeof JSON.parse(JSON.parse(text.data)))
-      console.log('组件通讯成功啦')
-      self.paylists = JSON.parse(JSON.parse(text.data))
+      // console.log(text)
+      console.log(typeof JSON.parse(text))
+      // console.log('组件通讯成功啦')
+      that.paylists = JSON.parse(text)
     })
   }
 }

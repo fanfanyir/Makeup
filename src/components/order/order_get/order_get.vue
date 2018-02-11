@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import bus from '../../../assets/Bus'
 export default{
   name: 'orderget',
   data () {
@@ -42,27 +43,65 @@ export default{
   },
   methods: {
     price: function () {
-      this.$http({
-        method: 'GET',
-        url: 'http://gcx84u.natappfree.cc/someOrder.htm?user_id=5&user_sex=2',
-        dataType: 'json',
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        alert(345)
-        this.getorders = JSON.parse(JSON.parse(response.data))
-        console.log(this.getorders)
-      }, function () {
-        console.log('请求失败')
-      })
+      let that = this
+      let xhr = new XMLHttpRequest()
+      xhr.open('post', 'http://7gdrgz.natappfree.cc/someOrder.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 2)
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // console.log(typeof JSON.parse(JSON.parse(xhr.responseText)))
+          that.getorders = JSON.parse(JSON.parse(xhr.responseText))
+        } else {
+          console.log('error')
+        }
+      }
+    //      this.$http({
+    //        method: 'GET',
+    //        url: 'http://gcx84u.natappfree.cc/someOrder.htm?user_id=5&user_sex=2',
+    //        dataType: 'json',
+    //        async: false,
+    //        xhrFields: {withCredentials: true}
+    //      }).then(function (response) {
+    //        alert(345)
+    //        this.getorders = JSON.parse(JSON.parse(response.data))
+    //        console.log(this.getorders)
+    //      }, function () {
+    //        console.log('请求失败')
+    //      })
     },
     sure: function (index) {
       if (confirm('确认收货?')) {
         this.getorders.splice(index, 1)
+        let xhr = new XMLHttpRequest()
+        xhr.open('post', 'http://qeicvd.natappfree.cc/sureOrder.htm', true)
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+        xhr.send('sure_Order_id=' + index)
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('已收货')
+          } else {
+            console.log('error')
+          }
+        }
       }
     },
     waitget: function () {
       this.$router.push({path: '/getdetail'})
+    },
+    detial: function (index) {
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // console.log(JSON.parse(xhr.responseText))
+          bus.$emit('orderget', JSON.parse(xhr.responseText))
+        } else {
+          console.log('error')
+        }
+      }
+      xhr.open('post', 'http://7gdrgz.natappfree.cc/orderDetails.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('order_id=' + index)
     }
   }
 }

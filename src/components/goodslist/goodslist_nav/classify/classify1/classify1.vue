@@ -18,20 +18,21 @@ export default {
   },
   methods: {
     changeBgc: function (kindid) {
-      console.log('分类小类组件id要来了')
       bus.$emit('classify', kindid)
+      console.log('分类小类组件id要来了' + kindid)
     },
     price: function () {
+      let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://j5fnvj.natappfree.cc/kind.htm', true)
+      xhr.open('post', 'http://8w6pvv.natappfree.cc/kind.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('kind_max=' + this.kindmaxx)
+      xhr.send('kind_max=' + that.kindmaxx)
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          console.log('小类1success')
-          console.log(JSON.parse(xhr.responseText))
-          this.itemsright1 = JSON.parse(JSON.parse(xhr.responseText))
-          console.log(JSON.parse(xhr.responseText))
+          console.log(xhr.responseText)
+          // console.log(typeof JSON.parse(JSON.parse(xhr.responseText)))
+          that.itemsright1 = JSON.parse(JSON.parse(xhr.responseText))
+          console.log(that.itemsright1)
         } else {
           console.log('error')
         }
@@ -46,9 +47,6 @@ export default {
       self.kindmaxx = kindmax
       this.price()
     })
-  },
-  destroyed: function () {
-    bus.$off('classify')
   }
 }
 </script>

@@ -5,7 +5,6 @@ import goodlist from '@/components/goodslist/goodlist.vue'
 import shopping from '@/components/shopping/shopping.vue'
 import person from '@/components/person.vue'
 import Orderbanner from '@/components/order/order_banner/order_banner.vue'
-import navv from '@/components/order/order_nav/order_nav.vue'
 import allget from '@/components/order/get.vue'
 import allend from '@/components/order/end.vue'
 import allall from '@/components/order/order_all/order_all.vue'
@@ -56,12 +55,6 @@ export default new Router({
       path: '/order',
       name: 'order',
       component: Orderbanner
-    },
-    {
-      title: '列表',
-      path: '/order/nav',
-      name: 'nav',
-      component: navv
     },
     {
       title: '待付款订单详情',

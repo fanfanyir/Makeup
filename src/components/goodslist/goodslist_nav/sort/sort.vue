@@ -1,7 +1,7 @@
 <template>
   <!--<div id="brand">-->
   <ul id="sort">
-    <li v-for='(item,index) in items' :class="{'active':ind === index}" @click.prevent="changeBgc(index, item.sortlist)" v-bind:key="item.sortlist">{{item.sortlist}}</li>
+    <li v-for='(item,index) in items' :class="{'active':ind === index}" @click="changeBgc(index, item.sortlist)" v-bind:key="item.sortlist">{{item.sortlist}}</li>
   </ul>
   <!--</div>-->
 </template>
@@ -25,24 +25,21 @@ export default{
     changeBgc: function (index, sortt) {
       this.ind = index
       bus.$emit('sort', sortt)
-      var aLi = document.getElementsByTagName('li')
-      var attr = aLi[index].innerHTML
-      this.$http({
-        method: 'GET',
-        url: 'http://zxhbzu.free.ngrok.cc/brand.htm',
-        dataType: 'json',
-        data: {'brand': attr},
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (response) {
-        this.items = JSON.parse(JSON.parse(response.data))
-      }, function () {
-        console.log('请求失败')
-      })
+    //      var aLi = document.getElementsByTagName('li')
+    //      var attr = aLi[index].innerHTML
+    //      this.$http({
+    //        method: 'GET',
+    //        url: 'http://zxhbzu.free.ngrok.cc/brand.htm',
+    //        dataType: 'json',
+    //        data: {'brand': attr},
+    //        async: false,
+    //        xhrFields: {withCredentials: true}
+    //      }).then(function (response) {
+    //        this.items = JSON.parse(JSON.parse(response.data))
+    //      }, function () {
+    //        console.log('请求失败')
+    //      })
     }
-  },
-  destroyed: function () {
-    bus.$off('sort')
   }
 }
 </script>

@@ -14,22 +14,22 @@
       <img src="../../../../assets/order/微信图片_20180118203836.png" id="address_picture"/>
       <div class="right">
         <p>
-          <span>收货人：{{str[0].address_name}}</span>
-          <span>{{str[0].address_tel}}</span>
+          <span>收货人：{{paylists[0].address.address_name}}</span>
+          <span>{{paylists[0].address.address_tel}}</span>
         </p>
-        <p>收货地址：{{str[0].address_add}}</p>
+        <p>收货地址：{{paylists[0].address.address_add}}</p>
       </div>
     </div>
     <div class="orderdetailbox">
       <p class="shops"><span>美妆品牌店 ＞</span></p>
-      <div class="boxdetail" v-for='paylist in paylists' v-bind:key="paylist.pro_shop_order_id">
-        <div class="imgboxdetail clearfix">
+      <div class="boxdetail" v-for='paylist in paylists[0].pro_shops' v-bind:key="paylist.pro_shop_id">
+        <div class="imgboxdetail clearfix" @click="jumpzmy()">
           <img :src="paylist.pro_shop_pic"/>
-          <p id="decrisptdetail">{{paylist.pro_shop_desc}}</p>
+          <p id="decrisptdetail">{{paylist.pro_shop_orders.pro_shop_desc}}</p>
           <div id="pricedetail">
-            <span>￥{{paylist.pro_shop_price}}</span>
-            <span>￥{{paylist.pro_shop_oldprice}}</span>
-            <span>x{{paylist.pro_shop_order_number}}</span>
+            <span>￥{{paylist.pro_shop_orders.pro_shop_order_price}}</span>
+            <span>￥{{paylist.pro_shop_orders.pro_shop_order_oldprice}}</span>
+            <span>x{{paylist.pro_shop_orders.pro_shop_order_number}}</span>
           </div>
         </div>
       </div>
@@ -40,15 +40,15 @@
     </p>
     <p class="enddetial">
       <span>实付款（含运费）</span>
-      <span id="enddetail">{{order_money}}</span>
+      <span id="enddetail">{{paylists[0].order_money}}</span>
     </p>
     <div id="mess">
       <span>买家留言：</span>
-      <div id="intext">{{order_message}}</div>
+      <div id="intext">{{paylists[0].order_message}}</div>
     </div>
     <div id="tryend">
-      <p id="codedetail">订单编号： {{order_id}}</p>
-      <p id="builddetail">创建时间： {{build}}</p>
+      <p id="codedetail">订单编号： {{paylists[0].order_id}}</p>
+      <p id="builddetail">创建时间： {{paylists[0].order_time}}</p>
     </div>
     <div id="footer">
       <input type="button" value="延长收货" @click="del1(payorder)"/>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import bus from '../../../../assets/Bus'
 export default{
   name: 'ordergetdetail',
   data () {
@@ -65,43 +66,54 @@ export default{
       day: '9',
       hour: '23',
       msg: '订单详情',
-      order_id: '116736578494628937',
-      build: '2018-01-18 20:32:03',
-      order_money: '1999.00',
-      order_message: '我有故事你有酒吗',
-      str: [
-        {'address_name': '王建飞', 'address_add': '陕西省 西安市 长安区 西安邮电大学 西安邮电大学', 'address_tel': '18325783902'
-        }
-      ],
-      paylists: [{
-        pro_shop_pic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKz0gOBpnFmpUVU09QhKCBBBV87RRBSx1Huqm2Iuk1nKir3qQz',
-        pro_shop_order_id: 'pay1',
-        pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        pro_shop_price: '999.00',
-        pro_shop_oldprice: '1999.00',
-        pro_shop_order_number: '2'
-      },
-      {
-        pro_shop_pic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKz0gOBpnFmpUVU09QhKCBBBV87RRBSx1Huqm2Iuk1nKir3qQz',
-        pro_shop_order_id: 'pay2',
-        pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        pro_shop_price: '999.00',
-        pro_shop_oldprice: '1999.00',
-        pro_shop_order_number: '2'
-      }]
+      paylists: []
+    // order_id: '116736578494628937'
+    //      build: '2018-01-18 20:32:03',
+    //      order_money: '1999.00',
+    //      order_message: '我有故事你有酒吗',
+    //      str: [
+    //        {'address_name': '王建飞', 'address_add': '陕西省 西安市 长安区 西安邮电大学 西安邮电大学', 'address_tel': '18325783902'
+    //        }
+    //      ],
+    //      paylists: [{
+    //        pro_shop_pic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKz0gOBpnFmpUVU09QhKCBBBV87RRBSx1Huqm2Iuk1nKir3qQz',
+    //        pro_shop_order_id: 'pay1',
+    //        pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+    //        pro_shop_price: '999.00',
+    //        pro_shop_oldprice: '1999.00',
+    //        pro_shop_order_number: '2'
+    //      },
+    //      {
+    //        pro_shop_pic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKz0gOBpnFmpUVU09QhKCBBBV87RRBSx1Huqm2Iuk1nKir3qQz',
+    //        pro_shop_order_id: 'pay2',
+    //        pro_shop_desc: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
+    //        pro_shop_price: '999.00',
+    //        pro_shop_oldprice: '1999.00',
+    //        pro_shop_order_number: '2'
+    //      }]
     }
   },
   methods: {
-    ad: function () {
-      let oAend = document.getElementById('enddetail')
-      oAend.innerHTML = '￥' + (parseFloat(oAend.innerHTML) + 8.05)
+  //    ad: function () {
+  //      let oAend = document.getElementById('enddetail')
+  //      oAend.innerHTML = '￥' + (parseFloat(oAend.innerHTML) + 8.05)
+  //    },
+    jumpzmy: function () {
+      this.$router.push({path: '/details'})
     },
-    waitpay: function () {
+    waitget: function () {
       this.$router.go(-1)
     }
   },
   mounted: function () {
-    this.ad()
+    // this.ad()
+    let that = this
+    bus.$on('orderpay', (text) => {
+      // console.log(text)
+      console.log(typeof JSON.parse(text))
+      // console.log('组件通讯成功啦')
+      that.paylists = JSON.parse(text)
+    })
   }
 }
 </script>

@@ -22,7 +22,6 @@ export default {
       brandd: null,
       sortt: null,
       classifyy: null,
-      allsort: null,
       att: 0
     }
   },
@@ -30,48 +29,45 @@ export default {
     let that = this
     // 商品过来的id
     bus.$on('brand', (brandname) => {
-      console.log('品牌组件通讯成功啦')
+      console.log('从brand点击传到了瀑布流' + brandname)
       that.brandd = brandname
+      if (that.brandd) {
+        that.att = that.brandd
+        that.navsort()
+        this.brandd = this.sortt = this.classifyy = null
+      }
     })
     // 分类过来的名称
-    bus.$on('classify', (classifyy) => {
-      console.log('分类组件通讯成功啦')
-      that.classifyy = classifyy
+    bus.$on('classify', (kindid) => {
+      console.log('从classify小类点击传到了瀑布流' + kindid)
+      that.classifyy = kindid
+      if (that.classifyy) {
+        that.att = that.classifyy
+        that.navsort()
+        this.brandd = this.sortt = this.classifyy = null
+      }
     })
     // 排序过来的名称
     bus.$on('sort', (sortt) => {
-      console.log('排序通讯成功啦')
+      console.log('从sort点击传到了瀑布流' + sortt)
       that.sortt = sortt
+      if (that.sortt) {
+        that.att = that.sortt
+        that.navsort()
+        this.brandd = this.sortt = this.classifyy = null
+      }
     })
-    this.handleScroll()
     if (!this.att) {
+      this.handleScroll()
       window.addEventListener('scroll', function () {
-        if (that.checkScrollSite() && that.ajaxState) {
+        if (that.checkScrollSite() && that.ajaxState && !that.att) {
           that.ajaxState = false
-          console.log(that.allsort)
           that.handleScroll()
-          //        if (this.att) {
-          //          console.log('点击导航了50')
-          //          that.navsort(this.att)
-          //          console.log('调用新的请求52')
-          //          // this.brandd = this.sortt = this.classifyy = ''
-          //        } else {
-          //          console.log('没有点击55')
-          //          that.handleScroll()
-          //          console.log('没有diao')
-          //        }
         }
       })
     }
   },
   beforeUpdate: function () {
-    let that = this
-    this.att = this.aresure()
-    if (this.att) {
-      console.log('点击导航了')
-      that.navsort()
-      this.brandd = this.sortt = this.classifyy = null
-    }
     this.checkScrollSite()
     // this.$nextTick(() => {
     //    let that = this
@@ -92,24 +88,7 @@ export default {
     })
   },
   methods: {
-    aresure () {
-      let that = this
-      if (that.brandd) {
-        // that.allsort = 'brandone'
-        return that.brandd
-      } else if (that.sortt) {
-        // that.allsort = 'sortone'
-        return that.sortt
-      } else if (that.classifyy) {
-        // that.allsort = 'classifyone'
-        return that.classifyy
-      }
-      //      if (that.allsort) {
-      //        return true
-      //      } else {
-      //        return false
-      //      }
-    },
+    // 跳转页面
     jumpzmy: function () {
       this.$router.push({path: '/details'})
     },
@@ -120,7 +99,7 @@ export default {
       this.$http({
         method: 'GET',
         // url: 'https://easy-mock.com/mock/5a6a99c0396ee930b9c4b92f',
-        url: 'http://j5fnvj.natappfree.cc/load.htm',
+        url: 'http://8w6pvv.natappfree.cc/load.htm',
         dataType: 'json',
         async: false,
         xhrFields: {withCredentials: true}
@@ -141,27 +120,27 @@ export default {
     },
     // 给后台传id时请求
     navsort: function () {
-      console.log('调用' + this.allsort)
+      console.log('调用' + this.att)
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://j5fnvj.natappfree.cc/proList.htm', true)
+      xhr.open('post', 'http://8w6pvv.natappfree.cc/proList.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('brand=' + this.brandd + '&' + 'classify=' + this.classifyy + '&' + 'sort=' + this.sortt)
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          that.litss.splice(0)
+          // that.litss.splice(0)
+          console.log(xhr.responseText)
           console.log(typeof JSON.parse(xhr.responseText))
-          console.log(this.litss)
-          // this.litss = JSON.parse(xhr.responseText)
-          that.litss.splice(0, xhr.responseText.length, xhr.responseText)
-          console.log(this.litss)
-          console.log('chuanidididid')
+          that.litss = JSON.parse(xhr.responseText)
+          // that.litss.splice(0, xhr.responseText.length, JSON.parse(xhr.responseText))
+          // console.log(that.litss)
+          // console.log('chuanidididid')
           this.$nextTick(() => {
             this.waterfall('waterfall1', 'waterfall1_box')
           })
           that.ajaxState = true
         } else {
-          console.log('排序error')
+          console.log('error')
         }
       }
     },

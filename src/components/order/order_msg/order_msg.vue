@@ -86,11 +86,11 @@ export default{
   },
   methods: {
     price: function () {
+      let that = this
       let xhr = new XMLHttpRequest()
-      xhr.onreadystatechange = function (response) {
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          alert(response)
-          this.msgorders = JSON.parse(JSON.parse(response.data))
+          that.msgorders = JSON.parse(JSON.parse(xhr.responseText))
           console.log(this.msgorders)
         } else {
           console.log('error')
@@ -98,7 +98,7 @@ export default{
       }
       xhr.open('post', 'http://jlw.free.ngrok.cc/someOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 1)
+      xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 3)
     //      this.$http({
     //        method: 'GET',
     //        url: 'http://jlw.free.ngrok.cc/someOrder.htm?',
@@ -115,9 +115,9 @@ export default{
     },
     detial: function (index) {
       let xhr = new XMLHttpRequest()
-      xhr.onreadystatechange = function (response) {
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          bus.$emit('ordermsg', response)
+          bus.$emit('ordermsg', JSON.parse(xhr.responseText))
         } else {
           console.log('error')
         }
