@@ -23,13 +23,23 @@ import detailstotal from '@/components/details/details'
 import goodsnorm from '@/components/details_goods_norms/details_goods_norms'
 import login from '@/components/login.vue'
 import register from '@/components/register.vue'
+import paypic from '@/components/paypic/paypic'
 Vue.use(Router)
-// import index from '@/components/index'
 export default new Router({
   routes: [
     {
       title: '首页',
       path: '/',
+      name: 'index',
+      redirect: index
+    },
+    {
+      title: '支付',
+      path: '/pay',
+      name: 'pay',
+      component: pay
+    },
+    {
       name: 'index',
       component: index
     },
@@ -103,7 +113,7 @@ export default new Router({
         {
           title: '待付款',
           path: '/order/nav/pay',
-          name: 'pay',
+          name: 'payy',
           component: payy
         }
       ]
@@ -128,16 +138,11 @@ export default new Router({
       name: 'allall',
       component: allall
     },
-    {path: '/pay', component: pay},
     {path: '/Choose_Address', component: Chooseadress},
     {path: '/Add_Address', component: Addaddress},
     {path: '/details', component: detailstotal},
     {path: '/details_goods_norms', component: goodsnorm},
-    {
-      path: '/login',
-      name: 'login',
-      component: login
-    },
+    {path: '/paypic', component: paypic},
     {
       path: '/register',
       name: 'register',

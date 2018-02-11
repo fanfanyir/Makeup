@@ -1,5 +1,6 @@
 <template>
     <div id="detailstotal">
+      <img src="../../assets/jumpleft.png" id="jumpup" @click="jumpup"/>
       <DetailsHeader :image="img"></DetailsHeader>
       <div id="section">
         <div class="clearfix">
@@ -44,9 +45,9 @@
             <img src="../../../src/assets/收藏.png" id="collectionimg"/>
             <p @click="collection()" id="collection">收藏</p>
           </div>
-          <div id="join_shoppingcar">加入购物车</div>
+          <div id="join_shoppingcar" @click="join_shoppingcar()">加入购物车</div>
       </footer>
-      <Detailsgoodsnorm v-show="isShow" v-bind:message="parentMsg" v-on:send="shshow"></Detailsgoodsnorm>
+      <Detailsgoodsnorm v-show="isShow" v-bind:message="parentMsg" v-on:send="shshow" :src1="img"></Detailsgoodsnorm>
     </div>
 </template>
 
@@ -64,7 +65,7 @@ export default {
       isShow: false,
       parentMsg: 'hello',
       des: '',
-      img: ['https://t12.baidu.com/it/u=2375941760,3154246640&fm=173&s=A644944ED632058CA085A7B90300C016&w=295&h=295&img.GIF', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1517116938648&di=96a1a65d6a3aeb041d36b78544192fb6&imgtype=0&src=http%3A%2F%2Fmvimg10.meitudata.com%2F55a882c9d1ec18281.jpg', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2871851980,2831193141&fm=27&gp=0.jpg'
+      img: ['http://ozxb0em6i.bkt.clouddn.com/106454_205.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1517116938648&di=96a1a65d6a3aeb041d36b78544192fb6&imgtype=0&src=http%3A%2F%2Fmvimg10.meitudata.com%2F55a882c9d1ec18281.jpg', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2871851980,2831193141&fm=27&gp=0.jpg', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2871851980,2831193141&fm=27&gp=0.jpg'
       ]
     }
   },
@@ -72,28 +73,63 @@ export default {
     this.load()
   },
   methods: {
+    jumpup: function () {
+      this.$router.push({path: '/goodlist'})
+      let oP = document.getElementById('collection')
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('success')
+        } else {
+          console.log('error')
+        }
+      }
+      xhr.open('post', 'http://8w6pvv.natappfree.cc/insertCollect.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('ccc=' + oP.innerHTML.length + '&' + 'user_id=' + 1 + '&' + 'pro_shop_id=' + 1)
+      console.log(oP.innerHTML.length)
+    },
+    join_shoppingcar: function () {
+      let numbers = document.getElementById('number')
+      console.log(numbers.innerHTML)
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('success join in李鑫')
+        } else {
+          console.log('error join in李鑫')
+        }
+      }
+      xhr.open('post', 'http://n8sey7.natappfree.cc/success.htm', true)
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send('user_id=' + 30 + '&' + 'pro_shop_id=' + 30 + '&' + 'cart_num=' + numbers.innerHTML)
+    },
     shshow: function (res) {
       console.log(res)
       this.des = res
     },
     load: function () {
       this.$http({
-        url: 'http://jg25vu.natappfree.cc/detail.htm?user_id=5&pro_shop_id=6',
+        url: 'http://8w6pvv.natappfree.cc/detail.htm?user_id=1&pro_shop_id=1',
         method: 'get',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
+        console.log(res)
         console.log(res.bodyText)
-        this.datas = JSON.parse(JSON.parse(res.bodyText))
-        console.log(JSON.parse(JSON.parse(res.bodyText)))
-        console.log('请求成功啦！！')
+        this.datas = JSON.parse(res.bodyText)
+        console.log(JSON.parse(res.bodyText))
+        console.log(typeof this.datas[0].pro_shop_pic.split(';'))
+        this.img = this.datas[0].pro_shop_pic.split(';')
+        console.log(this.img.length)
+        console.log('张雪华请求成功啦！！')
       }, function () {
-        console.log('请求失败啦！！')
+        console.log('张雪华请求失败啦！！')
       })
     },
     collection: function () {
       let oP = document.getElementById('collection')
       if (oP.innerHTML.length === 2) {
-        oP.style.color = 'red !important'
+        oP.style.color = 'red '
         oP.innerHTML = '已收藏'
       } else {
         oP.style.color = '#898989'
