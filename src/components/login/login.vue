@@ -31,7 +31,6 @@ export default {
   },
   methods: {
     init: function () {
-      alert(document.referrer)
     },
     jumpRegister: function () {
       this.$router.push({
@@ -40,15 +39,18 @@ export default {
     },
     loginP: function () {
       if (this.$options.methods.login1 && this.$options.methods.login2) {
+        var that = this
         $.ajax({
-          url: 'http://3j3xbd.natappfree.cc/denglu.htm?username=' + $('#username').val() + '&password=' + $('#password').val(),
+          url: 'http://8w6pvv.natappfree.cc/denglu.htm?username=' + $('#username').val() + '&password=' + $('#password').val(),
           type: 'get',
           dataType: 'json',
           success: function (str) {
             if (str.state) {
               alert('登陆成功')
-              alert(str.user_id)
-              this.$router.go(-1)
+              that.$router.push({
+                path: '/person',
+                query: {user_id: str.user_id}
+              })
             } else {
               alert('登录失败')
               $('p').eq(0).innerHTML = '此用户名不存在，请先注册'

@@ -5,17 +5,17 @@
       <li>
         <p>妆淘头像</p>
         <div >
-          <img v-bind:src="user.user_photo"/>
+          <img v-bind:key='user.user_photo'/>
         </div>
       </li>
         <li>
           <p>用户名</p>
-          <p>{{user.user_photo}}</p>
+          <p>{{user.userinfo_nickname}}</p>
         </li>
         <li>
           <p>性别</p>
           <p>{{user.user_sex}}</p>
-        </li>
+      </li>
         <li>
           <p>生日</p>
           <p>{{user.userinfo_bir}}</p>
@@ -33,7 +33,7 @@
       <a href="#">我的收藏</a>
       <a href="#" @click="jumpFeet()">我的足迹</a>
       <a href="#" @click="jumpOrd()">我的订单</a>
-      <a href="#" @click="jumpMana()">账户管理</a>
+      <a href="#" @click="jumpManan1()">账户管理</a>
     </div>
   </div>
 </template>
@@ -43,13 +43,17 @@ export default {
   name: 'person',
   data () {
     return {
-      user: []
+      user: [
+      ]
     }
   },
   methods: {
-    jumpMana: function () {
-      this.$router.push({
-        path: '/manage'
+    jumpManan1: function () {
+      var that = this
+      console.log(that.$route.query)
+      that.$router.push({
+        path: 'manage',
+        params: {user_id: that.$route.query.user_id}
       })
     },
     jumpFeet: function () {
@@ -58,8 +62,9 @@ export default {
       })
     },
     jumpOrd: function () {
+      var url1 = this.$route.query.user_id
       this.$router.push({
-        path: '/allall'
+        path: '/allall?user_id=' + url1
       })
     },
     personData: function () {
@@ -67,15 +72,19 @@ export default {
     },
     init: function () {
       var url1 = this.$route.query.user_id
-      alert(url1)
+      var that = this
       $.ajax({
-        url: 'http://e4i2j8.natappfree.cc/gerenziliao.htm' + '?user_id=' + url1,
+        url: 'http://8w6pvv.natappfree.cc/gerenziliao.htm' + '?user_id=' + url1,
         type: 'get',
         dataType: 'json',
         success: function (res) {
-          console.log(typeof res)
           console.log(res)
-          console.log(this.user)
+          console.log(this)
+          that.user = res
+          if (res.user_sex === 1) {
+            that.user.user_sex = '男'
+          }
+          console.log(that.user)
         }
       })
     }

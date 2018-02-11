@@ -6,7 +6,7 @@
         <p class="changenum-left">新手机号</p>
         <input id="phone" type="text" class="changenum-input" v-on:blur="changenum1()"/>
       </div>
-      <button  class="changenum-sub" @click="changenum()">提 交</button>
+      <button  class="changenum-sub" @click="changenum2()">提 交</button>
     </form>
   </div>
 </template>
@@ -32,14 +32,17 @@ export default {
         return true
       }
     },
-    changenum: function () {
+    changenum2: function () {
+      var url1 = this.$route.query.user_id
       $.ajax({
-        url: '?phone=' + $('#phone').val(),
-        type: 'post',
+        url: 'http://swem5n.natappfree.cc/gaitel.htm' + '?phone=' + $('#phone').val() + '&user_id=' + url1,
+        type: 'get',
         dataType: 'json',
         success: function (res) {
           if (res) {
-            alert('提交成功')
+            alert('修改成功')
+          } else {
+            alert('修改失败')
           }
         }
       })

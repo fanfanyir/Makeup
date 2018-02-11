@@ -6,10 +6,10 @@
       <img src="../../assets/delete.png" class="feet-delete">
     </div>
     <div id="feet-data"  v-for=" item in items" v-bind:key="item.feet_id">
-        <p id="feet-time"> fdfvff{{item.feet_time}}</p>
+        <p id="feet-time">{{item.feet_time}}</p>
         <div class="feet-price">
         <div class="feet-pic">
-          <img v-bind:pro_shop_pic="item.pro_shop_pic"/>
+          <img @click="jumpGoodsId()" v-bind:key="item.pro_shop_pic"/>
           <p class="feet-back"><span class="feet-id"> ￥{{item.pro_shop_price}}</span><span class="feet-point"> . . . </span></p>
         </div>
         </div>
@@ -27,31 +27,36 @@ export default {
     }
   },
   methods: {
+    jumpGoodsId: function () {
+      alert('jumpGoodsId')
+      this.$router.push({
+        path: '/Choose_Address'
+      })
+    },
     feetData: function () {
       this.$router.go(-1)
     },
     init: function () {
+      var url1 = this.$route.query.user_id
+      var that = this
       $.ajax({
-        url: 'http://3j3xbd.natappfree.cc/zuji.htm?user_id=2',
+        url: 'http://8w6pvv.natappfree.cc/zuji.htm?user_id=' + url1,
         type: 'get',
         dataType: 'json',
         success: function (res) {
-          this.items = res
+          that.items = res
           var lastTime = 0
           var nowTime = 0
-          alert(res.length)
-          console.log(this.items)
-          alert(this.items)
+          console.log(that.items)
           for (var i = 0; i < res.length; i++) {
             nowTime = res[i].feet_time
             if (nowTime > lastTime) {
               var time1 = new Date(nowTime)
               var time2 = time1.getFullYear() + '年' + (time1.getMonth() + 1) + '月' + time1.getDate() + '日'
-              this.items[i].feet_time = time2
-              alert(this.items[i].feet_time)
+              that.items[i].feet_time = time2
               lastTime = nowTime
             } else {
-              this.items[i].feet_time = ''
+              that.items[i].feet_time = ''
             }
           }
         }

@@ -60,7 +60,7 @@ export default {
     pw: function () {
       if (this.$options.methods.pw1() && this.$options.methods.pw2() && this.$options.methods.pw3) {
         $.ajax({
-          url: 'aaaaas' + '?user_id=' + 2 + '&old_password=' + $('#pw1').val() + '&new_password=' + $('#pw2').val(),
+          url: 'http://swem5n.natappfree.cc/gaimima.htm' + '?user_id=' + 2 + '&old_password=' + $('#pw1').val() + '&new_password=' + $('#pw2').val(),
           type: 'get',
           dataType: 'json',
           success: function (res) {

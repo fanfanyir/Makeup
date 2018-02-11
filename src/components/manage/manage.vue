@@ -4,7 +4,7 @@
     <ul id="manage-information">
       <li>
         <p>用户名</p>
-        <a>{{msg1}}</a>
+        <a>{{manageData.user_name}}</a>
       </li>
       <li>
         <p >修改密码</p>
@@ -12,11 +12,11 @@
       </li>
       <li>
         <p >修改手机号码</p>
-        <a>{{msg2}} <span @click="jumpChangenum()"> > </span></a>
+        <a>{{manageData.user_tel}} <span @click="jumpChangenum()"> > </span></a>
       </li>
       <li>
         <p>修改默认收货地址</p>
-        <a>{{msg3}} <span> > </span></a>
+        <a>{{manageData.address_add}} <span @click="jumpAddress()"> > </span></a>
       </li>
     </ul>
   </div>
@@ -27,9 +27,7 @@ export default {
   name: 'manage',
   data () {
     return {
-      msg1: '小小小小的',
-      msg2: '132*****953',
-      msg3: '陕西省西安市长安区'
+      manageData: []
     }
   },
   methods: {
@@ -46,20 +44,30 @@ export default {
         path: '/changepw'
       })
     },
+    jumpAddress: function () {
+      this.$router.push({
+        path: '/Choose_Address'
+      })
+    },
     manage: function () {
+      var that = this
+      var url1 = this.$route.query.user_id
       $.ajax({
-        url: 'http://3j3xbd.natappfree.cc/',
-        type: 'post',
+        url: 'http://8w6pvv.natappfree.cc/gerenguanli.htm?user_id=' + url1,
+        type: 'get',
         dataType: 'json',
-        success: function (Rdata) {
-          console.log(Rdata)
-          this.msg = Rdata.msg
-          if (!Rdata) {
+        success: function (res) {
+          console.log(res)
+          that.manageData = res
+          if (!res) {
             alert('')
           }
         }
       })
     }
+  },
+  mounted: function () {
+    this.manage()
   }
 }
 </script>
