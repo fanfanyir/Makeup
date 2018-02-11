@@ -32,21 +32,21 @@ export default {
   },
   methods: {
     changeData: function () {
-      this.$router.go(-1)
+      this.$router.push({path: '/person?' + 'user_id=' + this.$route.query.user_id})
     },
     jumpChangepw: function () {
       this.$router.push({
-        path: '/changepw'
+        path: '/changepw?' + 'user_id=' + this.$route.query.user_id
       })
     },
     jumpChangenum: function () {
       this.$router.push({
-        path: '/changepw'
+        path: '/changenum?' + 'user_id=' + this.$route.query.user_id
       })
     },
     jumpAddress: function () {
       this.$router.push({
-        path: '/Choose_Address'
+        path: '/Choose_Address?' + 'user_id=' + this.$route.query.user_id
       })
     },
     manage: function () {

@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     changenumData: function () {
-      this.$router.go(-1)
+      this.$router.push({path: '/manage?' + 'user_id=' + this.$route.query.user_id})
     },
     changenum1: function () {
       var oReg1 = /^[1][3,4,5,7,8][0-9]{9}$/
@@ -35,7 +35,7 @@ export default {
     changenum2: function () {
       var url1 = this.$route.query.user_id
       $.ajax({
-        url: 'http://swem5n.natappfree.cc/gaitel.htm' + '?phone=' + $('#phone').val() + '&user_id=' + url1,
+        url: 'http://nrpi25.natappfree.cc/gaitel.htm' + '?phone=' + $('#phone').val() + '&user_id=' + url1,
         type: 'get',
         dataType: 'json',
         success: function (res) {

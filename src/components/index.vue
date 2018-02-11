@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import top from './top/top.vue'
 import slide from './slide/slide.vue'
 import goods from './goods/goods.vue'

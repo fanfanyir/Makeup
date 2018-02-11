@@ -31,16 +31,17 @@
 export default{
   methods: {
     home: function () {
-      this.$router.push({path: '/'})
+      this.$router.push({path: '/index?' + 'user_id=' + this.$route.query.user_id})
     },
     goodslist: function () {
-      this.$router.push({path: '/goodlist'})
+      alert(this.$route.query.user_id)
+      this.$router.push({path: '/goodlist?' + 'user_id=' + this.$route.query.user_id})
     },
     shop: function () {
-      this.$router.push({path: '/shopping'})
+      this.$router.push({path: '/shopping?' + 'user_id=' + this.$route.query.user_id})
     },
     jumpMy: function () {
-      this.$router.push({path: '/person'})
+      this.$router.push({path: '/person?' + 'user_id=' + this.$route.query.user_id})
     }
   }
 }

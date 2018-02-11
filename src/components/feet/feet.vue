@@ -9,7 +9,7 @@
         <p id="feet-time">{{item.feet_time}}</p>
         <div class="feet-price">
         <div class="feet-pic">
-          <img @click="jumpGoodsId()" v-bind:key="item.pro_shop_pic"/>
+          <img @click="jumpGoodsId(item.pro_shop_id)" v-bind:key="item.pro_shop_pic"/>
           <p class="feet-back"><span class="feet-id"> ￥{{item.pro_shop_price}}</span><span class="feet-point"> . . . </span></p>
         </div>
         </div>
@@ -18,6 +18,7 @@
 </template>
 <script>
 import $ from 'jquery'
+import bus from '../../assets/Bus'
 export default {
   name: 'person',
   data () {
@@ -27,14 +28,15 @@ export default {
     }
   },
   methods: {
-    jumpGoodsId: function () {
-      alert('jumpGoodsId')
+    jumpGoodsId: function (indexs) {
       this.$router.push({
-        path: '/Choose_Address'
-      })
+        path: '/details?' + 'user_id=' + this.$route.query.user_id})
+      bus.$emit('zmy', indexs)
     },
     feetData: function () {
-      this.$router.go(-1)
+      this.$router.push({
+        path: '/person?' + 'user_id=' + this.$route.query.user_id
+      })
     },
     init: function () {
       var url1 = this.$route.query.user_id

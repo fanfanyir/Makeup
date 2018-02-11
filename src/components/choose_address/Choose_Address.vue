@@ -42,37 +42,10 @@ export default {
     this.load()
   },
   methods: {
-    sure_address: function (index) {
-      // console.log(index)
-      // this.$http({
-      //   method: 'get',
-      //   url: 'http://192.168.0.200:8080/#/Choose_Address ',
-      //   xhrFields: {withCredentials: true}
-      // }).then(function (res) {
-      //   console.log(res)
-      //   console.log('给倪晨阳发送成功')
-      // }, function () {
-      //   console.log('给倪晨阳发送失败')
-      // })
-    },
     load: function () {
       let aSpan = document.getElementsByTagName('span')
       aSpan[0].innerHTML = '默认地址'
       aSpan[0].style.color = '#f19149'
-      // console.log(22)
-      // this.$http({
-      //   method: 'get',
-      //   url: 'http://swem5n.natappfree.cc/dizhi.htm?user_id=2',
-      //   xhrFields: {withCredentials: true}
-      //   // contextType: 'application/json',
-      //   // headers: {'X-Requested-With': 'XMLHttpRequest'},
-      //   // dataType: JSON
-      // }).then(function (res) {
-      //   this.address = JSON.parse(res.bodyText)
-      //   console.log('请求成功倪晨阳')
-      // }, function () {
-      //   console.log('请求失败倪晨阳')
-      // })
     },
     change: function (m) {
       let aInput = document.getElementsByTagName('input')
@@ -95,7 +68,7 @@ export default {
       console.log(m)
       this.$http({
         method: 'get',
-        url: 'http://swem5n.natappfree.cc/gaimorendizhi.htm?user_id=2&address_id=2',
+        url: 'http://nrpi25.natappfree.cc/gaimorendizhi.htm?user_id=2&address_id=2',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
         console.log(res, m)
@@ -117,10 +90,10 @@ export default {
       // console.log('click')
     },
     jump: function () {
-      this.$router.push({path: '/Add_Address'})
+      this.$router.push({path: '/Add_Address?' + 'user_id=' + this.$route.query.user_id})
     },
     returnjump: function () {
-      this.$router.push({path: '/pay'})
+      this.$router.push({path: '/pay?' + 'user_id=' + this.$route.query.user_id})
     }
   }
 }

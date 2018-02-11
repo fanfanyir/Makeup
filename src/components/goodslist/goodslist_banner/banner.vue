@@ -17,7 +17,7 @@ export default{
   },
   methods: {
     waitpay: function () {
-      this.$router.push('/')
+      this.$router.push('/index?' + 'user_id=' + this.$route.query.user_id)
     }
   }
 }

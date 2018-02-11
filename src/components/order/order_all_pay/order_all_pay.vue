@@ -121,7 +121,7 @@ export default{
     },
     waitpay: function () {
       this.$router.push({
-        path: '/paydetail'
+        path: '/paydetail?' + 'user_id=' + this.$route.query.user_id
       })
     }
   },

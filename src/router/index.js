@@ -36,7 +36,7 @@ export default new Router({
       title: '首页',
       path: '/index',
       name: 'index',
-      redirect: index
+      component: index
     },
     {
       title: '支付',

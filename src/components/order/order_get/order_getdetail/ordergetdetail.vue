@@ -99,10 +99,10 @@ export default{
   //      oAend.innerHTML = '￥' + (parseFloat(oAend.innerHTML) + 8.05)
   //    },
     jumpzmy: function () {
-      this.$router.push({path: '/details'})
+      this.$router.push({path: '/details?' + 'user_id=' + this.$route.query.user_id})
     },
     waitget: function () {
-      this.$router.go(-1)
+      this.$router.push({path: '/get?' + 'user_id=' + this.$route.query.user_id})
     }
   },
   mounted: function () {

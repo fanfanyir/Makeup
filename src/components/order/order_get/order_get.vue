@@ -45,7 +45,7 @@ export default{
     price: function () {
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://qeicvd.natappfree.ccs/someOrder.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/someOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 2)
       xhr.onreadystatechange = function () {
@@ -76,7 +76,7 @@ export default{
         str[0] = orderid
         this.getorders.splice(index, 1)
         let xhr = new XMLHttpRequest()
-        xhr.open('post', 'http://qeicvd.natappfree.cc/sureOrder.htm', true)
+        xhr.open('post', 'http://nrpi25.natappfree.cc/sureOrder.htm', true)
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
         xhr.send('sure_Order_id=' + JSON.stringify(str))
         xhr.onreadystatechange = function () {
@@ -89,7 +89,7 @@ export default{
       }
     },
     waitget: function () {
-      this.$router.push({path: '/getdetail'})
+      this.$router.push({path: '/getdetail?' + 'user_id=' + this.$route.query.user_id})
     },
     detial: function (index) {
       let xhr = new XMLHttpRequest()
@@ -101,7 +101,7 @@ export default{
           console.log('error')
         }
       }
-      xhr.open('post', 'http://7gdrgz.natappfree.cc/orderDetails.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/orderDetails.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('order_id=' + index)
     }

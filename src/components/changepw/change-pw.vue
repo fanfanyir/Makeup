@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     changepwData: function () {
-      this.$router.go(-1)
+      this.$router.push({path: '/manage?' + 'user_id=' + this.$route.query.user_id})
     },
     pw1: function () {
       var oReg = /^[a-zA-Z0-9]{6,15}$/
@@ -60,7 +60,7 @@ export default {
     pw: function () {
       if (this.$options.methods.pw1() && this.$options.methods.pw2() && this.$options.methods.pw3) {
         $.ajax({
-          url: 'http://swem5n.natappfree.cc/gaimima.htm' + '?user_id=' + 2 + '&old_password=' + $('#pw1').val() + '&new_password=' + $('#pw2').val(),
+          url: 'http://nrpi25.natappfree.cc/gaimima.htm' + '?user_id=' + 2 + '&old_password=' + $('#pw1').val() + '&new_password=' + $('#pw2').val(),
           type: 'get',
           dataType: 'json',
           success: function (res) {

@@ -35,19 +35,19 @@ export default{
     waitpay: function (name, index) {
       switch (name) {
         case 'msg':
-          this.$router.push({path: '/allmsg'})
+          this.$router.push({path: '/allmsg?' + 'user_id=' + this.$route.query.user_id})
           break
         case 'get':
-          this.$router.push({path: '/allget'})
+          this.$router.push({path: '/allget?' + 'user_id=' + this.$route.query.user_id})
           break
         case 'pay':
-          this.$router.push({path: '/allpay'})
+          this.$router.push({path: '/allpay?' + 'user_id=' + this.$route.query.user_id})
           break
         case 'end':
-          this.$router.push({path: '/allend'})
+          this.$router.push({path: '/allend?' + 'user_id=' + this.$route.query.user_id})
           break
         case 'all':
-          this.$router.push({path: '/allall'})
+          this.$router.push({path: '/allall?' + 'user_id=' + this.$route.query.user_id})
           break
       }
     }

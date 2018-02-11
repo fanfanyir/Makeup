@@ -21,6 +21,11 @@ export default{
     return {msg: '我的订单'}
   },
   components: {
+  },
+  methods: {
+    change: function () {
+      this.$router.push({path: '/manage?' + 'user_id=' + this.$route.query.user_id})
+    }
   }
 }
 </script>

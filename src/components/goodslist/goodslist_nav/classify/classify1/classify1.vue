@@ -24,7 +24,7 @@ export default {
     price: function () {
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://8w6pvv.natappfree.cc/kind.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/kind.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('kind_max=' + that.kindmaxx)
       xhr.onreadystatechange = function () {

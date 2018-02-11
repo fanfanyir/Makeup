@@ -1,7 +1,7 @@
 <template>
-    <div  v-show="picshow" id="paypic" @click="onload">
+    <div  v-show="picshow" id="paypic">
       <div @click="close()">X</div>
-      <p>支付总价：{{price}}</p>
+      <button @click="onload()">点击付款:￥{{price}}</button>
       <img :src="src"/>
     </div>
 </template>
@@ -18,11 +18,11 @@ export default {
     }
   },
   mounted () {
-    this.onload()
     Bus.$on('sendPri', (price) => {
       this.price = price
       console.log(this.price)
     })
+    //    this.onload()
   },
   methods: {
     close: function () {
@@ -32,7 +32,7 @@ export default {
       console.log(this.price)
       let pp = this.price
       console.log(pp)
-      this.src = 'http://8w6pvv.natappfree.cc/img.htm?price=' + pp
+      this.src = 'http://nrpi25.natappfree.cc/img.htm?price=' + pp
     }
   }
 }
@@ -55,12 +55,14 @@ export default {
     line-height: 40px;
     text-align: center;
   }
-  p{
+  button{
+    display: block;
+    margin-left: 250px;
     font-size: 30px;
     text-align: center;
   }
   img{
-    margin: 100px 0 50px 160px;
+    margin: 100px 0 50px 180px;
     width: 400px;
     height: 400px;
   }

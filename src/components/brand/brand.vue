@@ -20,13 +20,13 @@ export default{
   },
   methods: {
     jumping: function () {
-      this.$router.push({path: '/goodlist'})
+      this.$router.push({path: '/goodlist?' + 'user_id=' + this.$route.query.user_id})
     },
     ajax: function () {
       let that = this
       $.ajax({
         method: 'GET',
-        url: 'http://8w6pvv.natappfree.cc/index_kind_brands.htm',
+        url: 'http://nrpi25.natappfree.cc/index_kind_brands.htm',
         dataType: 'json',
         success: function (data) {
           console.log(data)

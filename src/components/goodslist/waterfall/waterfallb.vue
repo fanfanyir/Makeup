@@ -1,6 +1,6 @@
 <template>
   <div id="waterfall1">
-    <div class="waterfall1_box" v-for="lit in litss" v-bind:key="lit.pro_shop_id" @click="jumpzmy()">
+    <div class="waterfall1_box" v-for="lit in litss" v-bind:key="lit.pro_shop_id" @click="jumpzmy(lit.pro_shop_id)">
       <div class="box_img">
         <img :src="lit.pro_shop_pic"/>
         <p>{{lit.pro_shop_desc}}</p>
@@ -89,8 +89,11 @@ export default {
   },
   methods: {
     // 跳转页面
-    jumpzmy: function () {
-      this.$router.push({path: '/details'})
+    jumpzmy: function (indexs) {
+      bus.$emit('zmy', indexs)
+      console.log(indexs)
+      this.$router.push({path: '/details?' + 'user_id=' + this.$route.query.user_id
+      })
     },
     // 直接请求
     handleScroll: function () {
@@ -99,7 +102,7 @@ export default {
       this.$http({
         method: 'GET',
         // url: 'https://easy-mock.com/mock/5a6a99c0396ee930b9c4b92f',
-        url: 'http://8w6pvv.natappfree.cc/load.htm',
+        url: 'http://nrpi25.natappfree.cc/load.htm',
         dataType: 'json',
         async: false,
         xhrFields: {withCredentials: true}
@@ -123,7 +126,7 @@ export default {
       console.log('调用' + this.att)
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://8w6pvv.natappfree.cc/proList.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/proList.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('brand=' + this.brandd + '&' + 'classify=' + this.classifyy + '&' + 'sort=' + this.sortt)
       xhr.onreadystatechange = function () {
@@ -226,7 +229,7 @@ export default {
     .waterfall1_box{
       /*width: 320px;*/
       width: 50%;
-      /*padding: 5px;*/
+      padding: 5px;
       height: auto;
       /*position: relative;*/
       float: left;
@@ -234,7 +237,7 @@ export default {
         /*width: 306px;*/
         width: 100%;
         height: auto;
-        padding: 5px;
+        padding: 3px;
         background: #FFF;
         border: 1px #cccccc solid;
         box-shadow: 0 0 5px #ccc;

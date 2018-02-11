@@ -78,7 +78,7 @@ export default{
     price: function () {
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://7gdrgz.natappfree.cc/someOrder.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/someOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 3)
       xhr.onreadystatechange = function () {
@@ -95,7 +95,7 @@ export default{
         this.endorders.splice(index, 1)
       }
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://qeicvd.natappfree.cc/deleteOrder.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/deleteOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + orderid)
       xhr.onreadystatechange = function () {

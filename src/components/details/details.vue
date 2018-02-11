@@ -54,11 +54,13 @@
 <script>
 import DetailsHeader from '../details-header/details-header'
 import Detailsgoodsnorm from '../details_goods_norms/details_goods_norms'
+import bus from '../../assets/Bus'
 export default {
   components: {DetailsHeader, Detailsgoodsnorm},
   name: 'details',
   data () {
     return {
+      pro_shop_id: '',
       datas: [
         {'pro_shop_desc': '纪梵希口红定制小羊皮／小粉皮唇膏口红西柚色纪梵希口红定制小羊皮／小粉皮唇膏口红', 'pro_shop_price': '249', 'pro_shop_oldprice': '289', 'pro_shop_sale': '899'}
       ],
@@ -70,11 +72,22 @@ export default {
     }
   },
   mounted () {
+    this.getid()
     this.load()
   },
   methods: {
+    getid: function () {
+      let that = this
+      alert('zhang')
+      console.log('张梦莹')
+      console.log(that.pro_shop_id)
+      bus.$on('zmy', (indexs) => {
+        that.pro_shop_id = indexs
+      })
+    },
     jumpup: function () {
-      this.$router.push({path: '/goodlist'})
+      let that = this
+      this.$router.push({path: '/goodlist?' + 'user_id=' + this.$route.query.user_id})
       let oP = document.getElementById('collection')
       let xhr = new XMLHttpRequest()
       xhr.onreadystatechange = function () {
@@ -84,12 +97,13 @@ export default {
           console.log('error')
         }
       }
-      xhr.open('post', 'http://8w6pvv.natappfree.cc/insertCollect.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/insertCollect.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('ccc=' + oP.innerHTML.length + '&' + 'user_id=' + 1 + '&' + 'pro_shop_id=' + 1)
-      console.log(oP.innerHTML.length)
+      xhr.send('ccc=' + oP.innerHTML.length + '&' + 'user_id=' + that.$route.query.user_id + '&' + 'pro_shop_id=' + that.pro_shop_id)
+      //     console.log(oP.innerHTML.length)
     },
     join_shoppingcar: function () {
+      let that = this
       let numbers = document.getElementById('number')
       console.log(numbers.innerHTML)
       let xhr = new XMLHttpRequest()
@@ -100,27 +114,30 @@ export default {
           console.log('error join in李鑫')
         }
       }
-      xhr.open('post', 'http://n8sey7.natappfree.cc/success.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/success.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      xhr.send('user_id=' + 30 + '&' + 'pro_shop_id=' + 30 + '&' + 'cart_num=' + numbers.innerHTML)
+      xhr.send('user_id=' + that.$route.query.user_id + '&' + 'pro_shop_id=' + that.pro_shop_id + '&' + 'cart_num=' + numbers.innerHTML)
     },
     shshow: function (res) {
       console.log(res)
       this.des = res
     },
     load: function () {
+      let that = this
+      console.log(that.pro_shop_id)
       this.$http({
-        url: 'http://8w6pvv.natappfree.cc/detail.htm?user_id=1&pro_shop_id=1',
+        //        url: 'http://nrpi25.natappfree.cc/detail.htm?user_id=1&pro_shop_id=1',
+        url: 'http://nrpi25.natappfree.cc/detail.htm?user_id=' + that.$route.query.user_id + '&pro_shop_id=' + that.pro_shop_id,
         method: 'get',
         xhrFields: {withCredentials: true}
       }).then(function (res) {
         console.log(res)
         console.log(res.bodyText)
-        this.datas = JSON.parse(res.bodyText)
-        console.log(JSON.parse(res.bodyText))
-        console.log(typeof this.datas[0].pro_shop_pic.split(';'))
-        this.img = this.datas[0].pro_shop_pic.split(';')
-        console.log(this.img.length)
+        that.datas = JSON.parse(res.bodyText)
+        console.log(that.datas[0])
+        console.log(typeof that.datas[0].pro_shop_pic.split(';'))
+        that.img = that.datas[0].pro_shop_pic.split(';')
+        //        console.log(this.img.length)
         console.log('张雪华请求成功啦！！')
       }, function () {
         console.log('张雪华请求失败啦！！')

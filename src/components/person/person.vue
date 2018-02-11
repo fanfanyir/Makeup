@@ -49,32 +49,27 @@ export default {
   },
   methods: {
     jumpManan1: function () {
-      var that = this
-      console.log(that.$route.query)
-      that.$router.push({
-        path: 'manage',
-        params: {user_id: that.$route.query.user_id}
+      console.log(this.$route.query)
+      this.$router.push({
+        path: '/manage?' + 'user_id=' + this.$route.query.user_id
       })
     },
     jumpFeet: function () {
       this.$router.push({
-        path: '/feet'
+        path: '/feet?' + 'user_id=' + this.$route.query.user_id
       })
     },
     jumpOrd: function () {
-      var url1 = this.$route.query.user_id
-      this.$router.push({
-        path: '/allall?user_id=' + url1
-      })
+      this.$router.push({path: '/allall?' + 'user_id=' + this.$route.query.user_id})
     },
     personData: function () {
-      this.$router.go(-1)
+      this.$router.push({path: '/index?' + 'user_id=' + this.$route.query.user_id})
     },
     init: function () {
       var url1 = this.$route.query.user_id
       var that = this
       $.ajax({
-        url: 'http://8w6pvv.natappfree.cc/gerenziliao.htm' + '?user_id=' + url1,
+        url: 'http://nrpi25.natappfree.cc/gerenziliao.htm' + '?user_id=' + url1,
         type: 'get',
         dataType: 'json',
         success: function (res) {

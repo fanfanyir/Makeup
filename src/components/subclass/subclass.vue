@@ -20,7 +20,7 @@ export default{
   },
   methods: {
     jumping: function () {
-      this.$router.push({path: '/goodlist'})
+      this.$router.push({path: '/goodlist?' + 'user_id=' + this.$route.query.user_id})
     },
     ajax: function () {
       var that = this

@@ -3,7 +3,7 @@
     <div v-for="item in items" v-bind:key="item.id" id="login-pic">
       <img v-bind:src="item.src"/>
     </div>
-    <form id="login-input" name="login" >
+    <form id="login-input" name="login" @submit.prevent="false">
       <input type="text" placeholder="请输入账户名"  id="username"  name="user_name" v-on:blur="login1()" />
       <p></p>
       <input type="password" placeholder="请输入密码" id="password" name="pass_word"  v-on:blur="login2()"/>
@@ -34,21 +34,23 @@ export default {
     },
     jumpRegister: function () {
       this.$router.push({
-        path: '/register'
+        path: '/register?' + 'user_id=' + this.$route.query.user_id
       })
     },
     loginP: function () {
-      if (this.$options.methods.login1 && this.$options.methods.login2) {
+      var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
+      var reg1 = /^[a-zA-Z0-9]{6,15}$/
+      if (reg.test(document.login.user_name.value) && reg1.test(document.login.pass_word.value)) {
         var that = this
         $.ajax({
-          url: 'http://8w6pvv.natappfree.cc/denglu.htm?username=' + $('#username').val() + '&password=' + $('#password').val(),
+          url: 'http://nrpi25.natappfree.cc/denglu.htm?username=' + $('#username').val() + '&password=' + $('#password').val(),
           type: 'get',
           dataType: 'json',
           success: function (str) {
             if (str.state) {
               alert('登陆成功')
               that.$router.push({
-                path: '/person',
+                path: '/index',
                 query: {user_id: str.user_id}
               })
             } else {
@@ -94,48 +96,48 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   *{margin:0;
-  padding:0;}
+    padding:0;}
   .dis0{
     display: none;
   }
- #login {
-   width:100%;
-   height:100%;
- }
- #login-pic{
-   height:200px;
-   display:flex;
-   justify-content:center;
-   align-items: center;
- }
- #login-pic img{
-   width:150px;
-   height:150px;
- }
- #login-input{
-   display:flex;
-   justify-content:center;
-   align-items: flex-end;
-   flex-wrap: wrap;
-   width:100%;
-   height:400px;
- }
- #login-input input{
-   width:70%;
-   border:none;
-   border-bottom:1px #ff0000 solid;
-   color:black;
-   font-size:18px;
-   height:60px;
-   outline: none;
- }
+  #login {
+    width:100%;
+    height:100%;
+  }
+  #login-pic{
+    height:200px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+  }
+  #login-pic img{
+    width:150px;
+    height:150px;
+  }
+  #login-input{
+    display:flex;
+    justify-content:center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    width:100%;
+    height:400px;
+  }
+  #login-input input{
+    width:70%;
+    border:none;
+    border-bottom:1px #ff0000 solid;
+    color:black;
+    font-size:18px;
+    height:60px;
+    outline: none;
+  }
   #login-input p{
     width:70%;
     height:30px;
     color:red;
   }
- #login-input #username{
- }
+  #login-input #username{
+  }
   #login-input #password{
   }
   #login-input #forget{

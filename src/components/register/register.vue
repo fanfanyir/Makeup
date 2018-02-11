@@ -4,7 +4,7 @@
       <span @click="registerData()"> &lt;</span>欢迎注册
     </p>
     <!--<changeimg></changeimg>-->
-    <form method="post" id="register-input"  name="register" enctype="multipart/form-data">
+    <form method="get" action="" id="register-input"  name="register" @submit.prevent="false">
       <div id="register-pic" v-for ='item in items' v-bind:key="item.id">
         <img v-bind:src="item.src"  id="imgSdf"/>
       </div>
@@ -13,9 +13,9 @@
       <input type="text" placeholder="请输入身份证号" name="u2" v-on:blur="user2()"/>
       <p></p>
       <select name="sex" style=" color:#aeaaaa;" id="register-select" v-on:blur="user8()">
-        <option name="man" id="sex" selected="selected" >性别</option>
-        <option name="man" value="男" style=" color:#000;">男</option>
-        <option name="woman" value="女" style=" color:#000;">女</option>
+        <option id="sex" selected="selected" >性别</option>
+        <option value="男" style=" color:#000;">男</option>
+        <option value="女" style=" color:#000;">女</option>
       </select>
       <p></p>
       <input type="text" placeholder="邮箱" name="u4" v-on:blur="user4()"/>
@@ -43,7 +43,9 @@ export default {
   },
   methods: {
     registerData: function () {
-      this.$router.go(-1)
+      this.$router.push({
+        path: '/login'
+      })
     },
     user1: function () {
       var oReg1 = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
@@ -55,7 +57,7 @@ export default {
       } else {
         aP[1].innerHTML = ''
         $.ajax({
-          url: 'http://e2xh8u.natappfree.cc/check.htm?username=' + $('#u1').val(),
+          url: 'http://nrpi25.natappfree.cc/check.htm?username=' + $('#u1').val(),
           type: 'get',
           dataType: 'json',
           async: false,
@@ -135,19 +137,25 @@ export default {
         return true
       }
     },
-    f1: function () {
-      var that = this
-      if (this.$options.methods.user2() && this.$options.methods.user4() && this.$options.methods.user5() && this.$options.methods.user6() && this.$options.methods.user7()) {
+    f1: function (ev) {
+      var oReg1 = /[1-9]\d{14}|[1-9]\d{17}|[1-9]\d{16}x/
+      var oReg2 = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/
+      var oReg3 = /^[1][3,4,5,7,8][0-9]{9}$/
+      var oReg4 = /^[a-zA-Z0-9]{6,15}$/
+      if (oReg1.test(document.register.u2.value) && oReg2.test(document.register.u4.value) && oReg3.test(document.register.u5.value) && oReg4.test(document.register.u6.value) && (document.register.u6.value === document.register.u7.value)) {
         var formData = new FormData($('#register-input')[0])
+        var that = this
         $.ajax({
-          url: 'http://e2xh8u.natappfree.cc/register.htm',
+          url: 'http://nrpi25.natappfree.cc/register.htm',
           type: 'POST',
+          xhrFields: {withCredentials: true},
           data: formData,
           async: false,
           cache: false,
           contentType: false,
           processData: false,
           success: function (res) {
+            alert(res)
             if (res === 'true') {
               alert('注册成功')
               that.$router.push({
@@ -158,6 +166,7 @@ export default {
             }
           }
         })
+        console.log('success')
       } else {
         alert('请正确完善信息')
       }
@@ -228,11 +237,11 @@ export default {
     height:75px;
   }
   /*#register-footer{*/
-    /*width:100%;*/
-    /*height:100px;*/
-    /*display:flex;*/
-    /*justify-content: center;*/
-    /*align-items:flex-end;*/
+  /*width:100%;*/
+  /*height:100px;*/
+  /*display:flex;*/
+  /*justify-content: center;*/
+  /*align-items:flex-end;*/
   /*}*/
   #register-footer{
     margin:0 auto;

@@ -96,7 +96,7 @@ export default{
           console.log('error')
         }
       }
-      xhr.open('post', 'http://jlw.free.ngrok.cc/someOrder.htm', true)
+      xhr.open('post', 'http://8w6pvv.natappfree.cc/someOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 3)
     //      this.$http({
@@ -122,7 +122,7 @@ export default{
           console.log('error')
         }
       }
-      xhr.open('post', 'http://gd3k7g.natappfree.cc/orderDetails.htm', true)
+      xhr.open('post', 'http://8w6pvv.natappfree.cc/orderDetails.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('order_id=' + index)
     //      console.log(index)
@@ -148,7 +148,7 @@ export default{
       prompt('请您评价')
     },
     waitmsg: function () {
-      this.$router.push({path: '/msgdetail'})
+      this.$router.push({path: '/msgdetail?' + 'user_id=' + this.$route.query.user_id})
     }
   }
 }

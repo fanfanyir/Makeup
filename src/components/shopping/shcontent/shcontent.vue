@@ -37,7 +37,7 @@
         <span id="total">合计：<span>￥</span><span id="equalNum">0</span></span>
       </div>
       <div id="right">
-        <span id="account">结算：(<span id="all">0</span>)</span>
+        <span id="account" @click="jumpp">结算：(<span id="all">0</span>)</span>
       </div>
     </div>
   </div>
@@ -53,8 +53,11 @@ export default {
     }
   },
   methods: {
+    jumpp: function () {
+      this.$router.push({path: '/pay?' + 'user_id=' + this.$route.query.user_id})
+    },
     jumping: function () {
-      this.$router.push({path: '/details'})
+      this.$router.push({path: '/details?' + 'user_id=' + this.$route.query.user_id})
     },
     equal: function () {
       if ($('#btn').prop('checked')) {
@@ -66,9 +69,9 @@ export default {
     del: function () {
       $.ajax({
         method: 'POST',
-        url: 'http://8w6pvv.natappfree.cc/deleteCarts.htm?pro_shop_id=123',
+        url: 'http://nrpi25.natappfree.cc/deleteCarts.htm?pro_shop_id=123',
         dataType: 'json',
-        data: {user_id: 1},
+        data: {user_id: 30},
         success: function (data) {
           console.log(data)
         }
@@ -92,7 +95,7 @@ export default {
           console.log('修改成功')
         }
       }
-      xhr.open('post', 'http://8w6pvv.natappfree.cc/updateNum.htm', true)
+      xhr.open('post', 'http://nrpi25.natappfree.cc/updateNum.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + 1 + '&' + 'pro_shop_id=' + 123 + '&' + 'cart_num=' + a)
     },
@@ -112,9 +115,9 @@ export default {
       var that = this
       $.ajax({
         method: 'POST',
-        url: 'http://8w6pvv.natappfree.cc/selectCarts.htm',
+        url: 'http://nrpi25.natappfree.cc/selectCarts.htm',
         dataType: 'json',
-        data: {user_id: 1},
+        data: {user_id: 30},
         success: function (data) {
           console.log(data)
           var str = $.parseJSON(data)

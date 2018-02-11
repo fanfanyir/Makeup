@@ -25,7 +25,7 @@ export default{
     price: function () {
       this.$http({
         method: 'GET',
-        url: 'http://8w6pvv.natappfree.cc/brand.htm',
+        url: 'http://nrpi25.natappfree.cc/brand.htm',
         //        url: 'https://easy-mock.com/mock/5a6b0d092007214d6db2c394/pinpai',
         dataType: 'json',
         async: false,

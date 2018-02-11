@@ -71,14 +71,14 @@ export default {
             console.log('error给倪晨阳的')
           }
         }
-        xhr.open('post', 'http://8w6pvv.natappfree.cc/jiadizhi.htm', true)
+        xhr.open('post', 'http://nrpi25.natappfree.cc/jiadizhi.htm', true)
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
         // xhr.send('user_id=' + 2)
-        xhr.send('address_name=' + aInput[0].value + '&' + 'address_tel=' + aInput[1].value + '&' + 'address_add=' + add + '&' + 'user_id=' + 7)
+        xhr.send('address_name=' + aInput[0].value + '&' + 'address_tel=' + aInput[1].value + '&' + 'address_add=' + add + '&' + 'user_id=' + 30)
       }
     },
     jump: function () {
-      this.$router.push({path: '/Choose_Address'})
+      this.$router.push({path: '/Choose_Address?' + 'user_id=' + this.$route.query.user_id})
     }
   }
 }
