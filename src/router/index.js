@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import index from '@/components/index.vue'
 import shopping from '@/components/shopping/shopping.vue'
 import goodlist from '@/components/goodslist/goodlist.vue'
-import person from '@/components/person.vue'
 import Orderbanner from '@/components/order/order_banner/order_banner.vue'
 import allget from '@/components/order/get.vue'
 import allend from '@/components/order/end.vue'
@@ -21,8 +20,6 @@ import Chooseadress from '@/components/choose_address/Choose_Address'
 import Addaddress from '@/components/add_address/Add_Address'
 import detailstotal from '@/components/details/details'
 import goodsnorm from '@/components/details_goods_norms/details_goods_norms'
-import login from '@/components/login.vue'
-import register from '@/components/register.vue'
 import paypic from '@/components/paypic/paypic'
 Vue.use(Router)
 export default new Router({
@@ -40,19 +37,10 @@ export default new Router({
       component: pay
     },
     {
-      name: 'index',
-      component: index
-    },
-    {
       tite: '购物车',
       path: '/shopping',
       name: 'shopping',
       component: shopping
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: login
     },
     {
       title: '商品目录',
@@ -142,16 +130,6 @@ export default new Router({
     {path: '/Add_Address', component: Addaddress},
     {path: '/details', component: detailstotal},
     {path: '/details_goods_norms', component: goodsnorm},
-    {path: '/paypic', component: paypic},
-    {
-      path: '/register',
-      name: 'register',
-      component: register
-    },
-    {
-      path: '/person',
-      name: 'person',
-      component: person
-    }
+    {path: '/paypic', component: paypic}
   ]
 })
