@@ -1,12 +1,13 @@
 #detailstotal input {
   outline: none; }
 #detailstotal #section {
-  background-color: #e7e7e7; }
+  background-color: #e7e7e7 !important; }
   #detailstotal #section .clearfix, #detailstotal #section .descript, #detailstotal #section .descript1, #detailstotal #section .choose {
     background-color: white;
     padding: 0 20px; }
   #detailstotal #section .clearfix {
-    padding: 25px 20px 0 20px; }
+    padding: 25px 20px 0 20px;
+    margin-top: 3px; }
   #detailstotal #section #infor {
     font-size: 28px;
     line-height: 33px;
@@ -42,32 +43,31 @@
     #detailstotal #section .choose .partone p {
       float: left;
       width: 95%; }
+      #detailstotal #section .choose .partone p span {
+        margin-left: 400px; }
     #detailstotal #section .choose .partone img {
       width: 30px;
       height: 30px; }
   #detailstotal #section .choose .line1 {
-    background-color: #e7e7e7;
+    background-color: #e7e7e7 !important;
     height: 3px; }
   #detailstotal #section .choose .parttwo {
     padding: 0; }
     #detailstotal #section .choose .parttwo div:nth-of-type(1) {
       float: left;
-      width: 70%; }
+      width: 65%; }
     #detailstotal #section .choose .parttwo div:nth-of-type(2) {
       float: right;
-      width: 25%; }
+      width: 30%; }
     #detailstotal #section .choose .parttwo input {
       width: 45px;
       height: 40px;
-      background-color: #f7f7f7;
+      background-color: #f7f7f7 !important;
       font-size: 30px;
       text-align: center;
       line-height: 40px; }
     #detailstotal #section .choose .parttwo span {
       margin: 0 10px; }
-  #detailstotal #section .ceshi {
-    height: 500px;
-    background-color: #007aff; }
 #detailstotal footer {
   position: fixed;
   left: 0;
@@ -84,15 +84,15 @@
       width: 40px;
       height: 40px; }
     #detailstotal footer .collection p {
-      color: #898989; }
+      color: #898989 !important; }
   #detailstotal footer #join_shoppingcar {
     float: right;
     width: 200px;
-    height: 90px;
-    background-color: #ff0000;
+    height: 70px;
+    background-color: #ff0000 !important;
     color: white;
     text-align: center;
-    line-height: 90px;
+    line-height: 70px;
     font-size: 30px; }
 
 /*# sourceMappingURL=details.css.map */

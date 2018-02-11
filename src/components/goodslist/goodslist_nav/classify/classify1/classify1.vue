@@ -1,7 +1,7 @@
 <template>
   <div id="classify1">
-    <div id="classify1_1" v-for="item in itemsright1" v-bind:key="item.id">
-      <a href="#"><img :src="item.src"/><p>{{item.small}}</p></a>
+    <div id="classify1_1" v-for="item in itemsright1" v-bind:key="item.kind_id">
+      <a href="#"><img :src="item.min_photo"/><p>{{item.kind_min}}</p></a>
     </div>
   </div>
 </template>
@@ -11,49 +11,28 @@ export default {
   name: 'classify1',
   data () {
     return {
-      itemsright1: [
-        {
-          id: 'fy11',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '眼部护理'
-        },
-        {
-          id: 'fy12',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '咖喱'
-        },
-        {
-          id: 'fy13',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '精华'
-        },
-        {
-          id: 'fy14',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '乳液'
-        },
-        {
-          id: 'fy15',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '咖喱'
-        },
-        {
-          id: 'fy16',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '乳液'
-        },
-        {
-          id: 'fy17',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '咖喱'
-        },
-        {
-          id: 'fy18',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/a1.jpg',
-          small: '精华'
-        }
-      ]
+      itemsright1: []
     }
+  },
+  methods: {
+    price: function () {
+      this.$http({
+        method: 'GET',
+        url: 'http://zxhbzu.free.ngrok.cc/kind.htm?kind_max=底妆',
+        dataType: 'json',
+        async: false,
+        xhrFields: {withCredentials: true}
+      }).then(function (response) {
+        this.itemsright1 = JSON.parse(JSON.parse(response.data))
+      }, function () {
+        console.log('请求失败')
+      })
+    }
+  },
+  computed: {
+  },
+  mounted: function () {
+    this.price()
   }
 }
 </script>

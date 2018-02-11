@@ -1,13 +1,19 @@
 <template>
   <div id="orderall">
-    <orderallpay></orderallpay>
-    <orderget></orderget>
-    <ordermsg></ordermsg>
-    <orderend></orderend>
+    <orderbanner></orderbanner>
+    <ordernav></ordernav>
+    <div id="orderall1">
+      <orderallpay></orderallpay>
+      <orderget></orderget>
+      <ordermsg></ordermsg>
+      <orderend></orderend>
+    </div>
   </div>
 </template>
 
 <script>
+import orderbanner from '../order_banner/order_banner.vue'
+import ordernav from '../order_nav/order_nav.vue'
 import orderallpay from '../order_all_pay/order_all_pay'
 import orderget from '../order_get/order_get'
 import ordermsg from '../order_msg/order_msg'
@@ -23,7 +29,9 @@ export default{
     orderallpay,
     orderget,
     ordermsg,
-    orderend
+    orderend,
+    orderbanner,
+    ordernav
   },
   methods: {
     toggleTab (tab) {
@@ -33,7 +41,7 @@ export default{
 }
 </script>
 <style lang="scss" scoped>
-  #orderall{
+  #orderall1{
     width: 100%;
     background: #ffffff;
   }

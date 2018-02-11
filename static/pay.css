@@ -102,18 +102,20 @@
       #makesure .goods .goods_up p:nth-of-type(4) span {
         color: #ff0000;
         font-size: 28px; }
-    #makesure .goods .goods_down .footer_left {
+  #makesure .goods_down {
+    background-color: white; }
+    #makesure .goods_down .footer_left {
       padding: 0 15px;
       line-height: 70px;
       font-size: 25px;
       float: left;
       width: 500px; }
-      #makesure .goods .goods_down .footer_left input {
+      #makesure .goods_down .footer_left input {
         margin-left: 105px;
         width: 600px;
         border: none;
         outline: none; }
-    #makesure .goods .goods_down .footer_right {
+    #makesure .goods_down .footer_right {
       float: right;
       padding: 0 15px;
       line-height: 70px;

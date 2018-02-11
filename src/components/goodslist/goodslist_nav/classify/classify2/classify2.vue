@@ -1,7 +1,7 @@
 <template>
   <div id="classify2">
-    <div id="classify1_2" v-for="item in itemsright1" v-bind:key="item.id">
-      <a href="#"><img :src="item.src"/><p>{{item.small}}</p></a>
+    <div id="classify1_2" v-for="item in itemsright1" v-bind:key="item.kind_id">
+      <a href="#"><img :src="item.min_photo"/><p>{{item.kind_min}}</p></a>
     </div>
   </div>
 </template>
@@ -11,48 +11,28 @@ export default {
   name: 'classify2',
   data () {
     return {
-      itemsright1: [
-        {
-          id: 'fy21',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '眼部护理'
-        },
-        {
-          id: 'fy22',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '咖喱'
-        },
-        {
-          id: 'fy23',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '精华'
-        },
-        {
-          id: 'fy24',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '乳液'
-        },
-        {
-          id: 'fy25',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '咖喱'
-        },
-        {
-          id: 'fy26',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '乳液'
-        },
-        {
-          id: 'fy27',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '咖喱'
-        },
-        {
-          id: 'fy28',
-          src: 'http://ozxb0em6i.bkt.clouddn.com/aaaaa.jpg',
-          small: '精华'
-        }
-      ]
+      itemsright2: []
+    }
+  },
+  mounted: function () {
+    this.price()
+  },
+  methods: {
+    price: function () {
+      alert(345)
+      this.$http({
+        method: 'GET',
+        url: 'http://zxhbzu.free.ngrok.cc/kind.htm?kind_max=眼妆',
+        dataType: 'json',
+        async: false,
+        xhrFields: {withCredentials: true}
+      }).then(function (response) {
+        alert(345)
+        console.log(response.data)
+        this.itemsright2 = JSON.parse(JSON.parse(response.data))
+      }, function () {
+        console.log('请求失败')
+      })
     }
   }
 }

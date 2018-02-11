@@ -1,23 +1,33 @@
 <template>
-<<<<<<< HEAD
-  <div></div>
+  <div id="index">
+    <top></top>
+    <slide></slide>
+    <goods></goods>
+    <brand></brand>
+    <hot></hot>
+    <subclass></subclass>
+    <bottom></bottom>
+  </div>
 </template>
 
-<script>
-</script>
-
-<style scoped>
-=======
-<div>sss</div>
-</template>
-
-<script>
+<script type="text/javascript">
+import top from './top/top.vue'
+import slide from './slide/slide.vue'
+import goods from './goods/goods.vue'
+import brand from './brand/brand.vue'
+import hot from './hot/hot.vue'
+import subclass from './subclass/subclass.vue'
+import bottom from './bottom/bottom.vue'
 export default {
-  name: 'index'
+  name: 'index',
+  components: { top, slide, goods, brand, hot, subclass, bottom }
 }
 </script>
 
 <style scoped>
-
->>>>>>> abe88b5821dfc3e193d17998cd2a01dea77ff899
+  body{
+    margin:0;
+    padding:0;
+    background: #f4f4f4;
+  }
 </style>

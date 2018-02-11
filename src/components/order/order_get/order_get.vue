@@ -1,27 +1,27 @@
 <template>
   <div id="orderget">
-    <div class="ordergetbox" v-for='getorder in getorders' v-bind:key="getorder.id">
+    <div class="ordergetbox" v-for='(getorder, index) in getorders' v-bind:key="getorder.order_id">
       <p class="shopget"><span>美妆品牌店 ＞</span><span>卖家已发货</span></p>
-      <div class="boxget" v-for='getlist in getlists' v-bind:key="getlist.id">
-        <div class="imgboxget clearfix">
-          <img src="../../../assets/order/1.jpg"/>
-          <p id="decrisptget">{{getlist.descibe}}</p>
+      <div class="boxget" v-for='getlist in getorder.pro_shops' v-bind:key="getlist.pro_shop_orders.pro_shop_order_id">
+        <div class="imgboxget clearfix" @click="waitget()">
+          <img :src="getlist.pro_shop_pic"/>
+          <p id="decrisptget">{{getlist.pro_shop_desc}}</p>
           <div id="priceget">
-            <span>￥{{getlist.last}}</span>
-            <span>￥{{getlist.firstone}}</span>
-            <span>x{{getlist.num}}</span>
+            <span>￥{{getlist.pro_shop_orders.pro_shop_order_price}}</span>
+            <span>￥{{getlist.pro_shop_orders.pro_shop_order_oldprice}}</span>
+            <span>x{{getlist.pro_shop_orders.pro_shop_order_number}}</span>
           </div>
         </div>
       </div>
       <div id="okendget">
         <p id="resultendget">
-          <span>共2件商品</span>
-          <span>合计：￥1999.00(含运费 ￥{{0.00}})</span>
+          <span>共{{num}}件商品</span>
+          <span>合计：￥{{getorder.order_money}}(含运费 ￥{{0.00}})</span>
         </p>
         <p id="focendget">
           <input type="button" value="延长收货"/>
           <input type="button" value="查看物流"/>
-          <input type="button" value="确认收货" @click="del(endorder)"/>
+          <input type="button" value="确认收货" @click="sure(index)"/>
         </p>
     </div>
     </div>
@@ -33,40 +33,36 @@ export default{
   name: 'orderget',
   data () {
     return {
-      getorders: [{
-        id: 'payorder1'
-      },
-      {
-        id: 'payorder2'
-      }],
-      getlists: [{
-        id: 'pay1',
-        descibe: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        last: '999.00',
-        firstone: '1999.00',
-        num: '2'
-      },
-      {
-        id: 'pay2',
-        descibe: '迪奥17新款forev 垫bb底妆 迪奥17新款forever 粉底气 垫bb底妆',
-        last: '999.00',
-        firstone: '1999.00',
-        num: '2'
-      }]
+      num: '2',
+      getorders: []
     }
+  },
+  mounted: function () {
+    this.price()
   },
   methods: {
     price: function () {
-      this.$http.get('', {
-      }).then(function (data) {
+      this.$http({
+        method: 'GET',
+        url: 'http://jlw.free.ngrok.cc/someOrder.htm?user_id=5&user_sex=2',
+        dataType: 'json',
+        async: false,
+        xhrFields: {withCredentials: true}
+      }).then(function (response) {
+        alert(345)
+        this.getorders = JSON.parse(JSON.parse(response.data))
+        console.log(this.getorders)
       }, function () {
         console.log('请求失败')
       })
     },
-    del: function (endorder) {
+    sure: function (index) {
       if (confirm('确认收货?')) {
-        this.getorders.splice(endorder, 1)
+        this.getorders.splice(index, 1)
       }
+    },
+    waitget: function () {
+      this.$router.push({path: '/getdetail'})
     }
   }
 }
@@ -97,6 +93,8 @@ export default{
     .boxget{
       width: 100%;
       .imgboxget{
+        background: #f6f6f9;
+        margin-bottom: 10px;
         width: 100%;
         height: 160px;
         display: flex;

@@ -1,7 +1,7 @@
 <template>
     <ul id="brand">
-      <li v-for="(item,index) in items" :class="{'active':ind === index}" v-bind:key="item.id"  @click="changeBgc(index)">
-        {{item.brand}}
+      <li v-for="(item, index) in items" :class="{'active':ind === index}" v-bind:key="item.brand_id"  @click="changeBgc(index)">
+        {{item.brand_name}}
       </li>
     </ul>
 </template>
@@ -11,48 +11,44 @@ export default{
   name: 'brand',
   data () {
     return {
-      items: [
-        {id: 'brand_1', brand: '早安日记'},
-        {id: 'brand_2', brand: '韩都衣舍'},
-        {id: 'brand_3', brand: '初语'},
-        {id: 'brand_4', brand: '索尔利'},
-        {id: 'brand_5', brand: '伊芙丽'},
-        {id: 'brand_6', brand: '南极人'},
-        {id: 'brand_7', brand: '早安日记'},
-        {id: 'brand_8', brand: '韩都衣舍'},
-        {id: 'brand_9', brand: '初语'},
-        {id: 'brand_10', brand: '索尔利'},
-        {id: 'brand_11', brand: '南极人'},
-        {id: 'brand_12', brand: '早安日记'},
-        {id: 'brand_13', brand: '韩都衣舍'},
-        {id: 'brand_14', brand: '初语'},
-        {id: 'brand_15', brand: '索尔利'},
-        {id: 'brand_16', brand: '初语'},
-        {id: 'brand_17', brand: '索尔利'},
-        {id: 'brand_18', brand: '南极人'},
-        {id: 'brand_19', brand: '早安日记'},
-        {id: 'brand_20', brand: '韩都衣舍'},
-        {id: 'brand_21', brand: '初语'},
-        {id: 'brand_22', brand: '索尔利'}
-      ],
+      items: [],
       ind: ''
     }
   },
   methods: {
     changeBgc: function (index) {
       this.ind = index
+      var aLi = document.getElementsByTagName('li')
+      var attr = aLi[index].innerHTML
+      this.$http({
+        method: 'GET',
+        url: 'http://zxhbzu.free.ngrok.cc/brand.htm',
+        dataType: 'json',
+        data: {'brand': attr},
+        async: false,
+        xhrFields: {withCredentials: true}
+      }).then(function (response) {
+        this.items = JSON.parse(JSON.parse(response.data))
+      }, function () {
+        console.log('请求失败')
+      })
     },
     price: function () {
       this.$http({
         method: 'GET',
-        url: ' https://easy-mock.com/mock/5a6b0d092007214d6db2c394/pinpai',
-        data: {'name': 'brand'}
+        url: 'http://zxhbzu.free.ngrok.cc/brand.htm?name=zhang&price=liu',
+        dataType: 'json',
+        async: false,
+        xhrFields: {withCredentials: true}
       }).then(function (response) {
-        this.items = response.data
+        this.items = JSON.parse(JSON.parse(response.data))
       }, function () {
         console.log('请求失败')
       })
     }
+  },
+  mounted: function () {
+    this.price()
   }
 }
 </script>
@@ -78,6 +74,7 @@ export default{
       text-align: center;
       line-height: 50px;
       background: #e6e4e4;
+      overflow: hidden;
     }
     .active{
       color: #ff0000;

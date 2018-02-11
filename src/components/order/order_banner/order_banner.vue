@@ -1,19 +1,28 @@
 <template>
   <div id="orderbanner">
-      <img id="left" src="../../../assets/order/左箭头2.png">
+    <div id="orderbannerone">
+      <img id="left" src="../../../assets/order/左箭头2.png" @click="change()">
       <div id="top_search">
         <p>{{msg}}</p>
         <img id="search" src="../../../assets/order/搜索1.png"/>
       </div>
       <input id="order_more" type="button" value="●●●"/>
+    </div>
+    <!--<keep-alive>-->
+      <!--<ordernav></ordernav>-->
+    <!--</keep-alive>-->
   </div>
 </template>
 
 <script>
+import ordernav from '../order_nav/order_nav'
 export default{
   name: 'orderbanner',
   data () {
     return {msg: '我的订单'}
+  },
+  components: {
+    ordernav
   }
 }
 </script>
@@ -23,7 +32,7 @@ export default{
     outline: none;
     background: transparent;
   }
-  #orderbanner{
+  #orderbannerone{
     top: 0;
     z-index: 5;
     position: fixed;

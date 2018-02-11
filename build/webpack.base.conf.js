@@ -10,7 +10,6 @@ const postcss = require('postcss')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
@@ -39,13 +38,20 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'jquery': path.resolve(__dirname,'../node_modules/jquery/src/jquery')
     }
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
+      // webpack 2.0之后， 此配置不能直接写在自定义配置项中， 必须写在此处
       vue: {
         postcss: [require('postcss-px2rem')({ remUnit: 75, propWhiteList: [] })]
       },
+    }),
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.ProvidePlugin({
+      jQuery: "jquery",
+      $: "jquery"
     })
   ],
   module: {
@@ -73,6 +79,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -111,5 +121,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
-};
+  },
+}
