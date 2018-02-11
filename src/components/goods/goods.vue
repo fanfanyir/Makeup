@@ -33,7 +33,7 @@ export default{
     },
     jump: function () {
       var t = $(window).scrollTop()
-      $('body,html').animate({'scrollTop': t + 700}, 1000)
+      $('body,html').animate({'scrollTop': t + 1500}, 1000)
     }
   },
   mounted: function () {
