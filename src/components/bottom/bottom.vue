@@ -1,27 +1,27 @@
 <template>
   <ul id="bottom">
-    <li id="index">
+    <li id="index"  @click="home()">
       <a href="#">
         <img src="../../assets/bottom/index.png">
-        <span @click="home()">首页</span>
+        <span>首页</span>
       </a>
     </li>
-    <li id="list">
+    <li id="list" @click="goodslist()">
       <a href="#">
         <img src="../../assets/bottom/list.png">
-        <span @click="goodslist()">商品</span>
+        <span>商品</span>
       </a>
     </li>
-    <li id="shopping">
+    <li id="shopping" @click="shop()">
       <a href="#">
         <img src="../../assets/bottom/shopping.png">
-        <span @click="shop()">购物车</span>
+        <span>购物车</span>
       </a>
     </li>
-    <li id="my">
+    <li id="my" @click="jumpMy()">
       <a href="#">
         <img src="../../assets/bottom/mys.png">
-        <span @click="jumpMy()">我的</span>
+        <span>我的</span>
       </a>
     </li>
   </ul>
@@ -31,13 +31,13 @@
 export default{
   methods: {
     home: function () {
-      this.$router.push({path: '/index'})
+      this.$router.push({path: '/'})
     },
     goodslist: function () {
       this.$router.push({path: '/goodlist'})
     },
     shop: function () {
-      this.$router.push({push: '/shopping'})
+      this.$router.push({path: '/shopping'})
     },
     jumpMy: function () {
       this.$router.push({path: '/person'})

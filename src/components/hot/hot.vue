@@ -1,9 +1,9 @@
 <template>
   <div id="hot">
-    <div id="title"><p>{{ message }}</p></div>
+    <div id="title"><p>热销分类</p></div>
     <div id="hotcon">
-      <div v-for="item in items" v-bind:key="item.id">
-        <a href="#"><img v-bind:src="item.src"><p>{{ item.name }}</p><span >￥{{ item.price }}</span><span>月销售{{ item.sale }}笔</span></a>
+      <div v-for="item in items" v-bind:key="item in items" @click="jumping">
+        <img :src="item.pro_shop_pic.split(';')[Math.floor(Math.random() * 3)]"><p>{{item.products.product_name}}</p><span >￥<span class="price">{{item.pro_shop_price}}</span><br></span><span>月销售<span class="num">{{item.pro_shop_sale}}</span>笔</span>
       </div>
     </div>
   </div>
@@ -14,35 +14,31 @@ import $ from 'jquery'
 export default{
   data () {
     return {
-      message: '热销分类',
       items: [
-        {src: 'http://img4.imgtn.bdimg.com/it/u=1157426056,868484316&fm=27&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'},
-        {src: 'http://img0.imgtn.bdimg.com/it/u=3116795964,2644077454&fm=11&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'},
-        {src: 'http://img3.imgtn.bdimg.com/it/u=755604728,3756751505&fm=27&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'},
-        {src: 'http://img2.imgtn.bdimg.com/it/u=1430061192,652034414&fm=27&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'},
-        {src: 'http://img3.imgtn.bdimg.com/it/u=3326231650,828823529&fm=27&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'},
-        {src: 'http://img1.imgtn.bdimg.com/it/u=2920497050,2288777391&fm=27&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'},
-        {src: 'http://img1.imgtn.bdimg.com/it/u=3928369660,429502675&fm=27&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'},
-        {src: 'http://img4.imgtn.bdimg.com/it/u=2789478621,300658657&fm=27&gp=0.jpg', name: '昨日重现', price: '225', sale: '24'}
       ]
     }
   },
   methods: {
+    jumping: function () {
+      this.$router.push({path: '/goodlist'})
+    },
     ajax: function () {
+      var that = this
       $.ajax({
         method: 'GET',
-        url: '',
+        url: 'http://8w6pvv.natappfree.cc/index_kind_max3.htm',
         dataType: 'json',
         success: function (data) {
-          for (let i = 0; i < data.length; i++) {
-            $('#hotcon img').eq(i).attr('src', data[i].pro_shop_pic.split(';')[Math.floor(Math.random() * 3)])
-            $('#hotcon p').eq(i).html(data[i].product_name)
-            $('#hotcon span').eq(i).html(data[i].pro_shop_price)
-            $('#hotcon span').eq(i).html(data[i].pro_shop_sale)
-          }
+          console.log(data)
+          var str = $.parseJSON(data)
+          that.items = str
+          console.log(that.pro_shop_pic.split(';')[Math.floor(Math.random() * 3)])
         }
       })
     }
+  },
+  mounted: function () {
+    this.ajax()
   }
 }
 </script>
@@ -53,22 +49,23 @@ export default{
     background: #fff;
     font-size: 30px;
     border-bottom: 3px solid #e6e6e6;
+    overflow:hidden;
     #title p {
       padding: 5px;
       text-align: center;
       color: #ff0000;
     }
     #hotcon {
-      height: 460px;
+      height: 100%;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
       div {
         width: 25%;
-        height: 200px;
+        height: 100%;
         text-align: center;
-        a {
-          font-size: 14px;
+        p{
+          font-size:20px;
         }
         img {
           width: 130px;
@@ -77,7 +74,7 @@ export default{
         }
         span {
           margin: 5px 5px 0 0;
-          font-size: 20px;
+          font-size: 18px;
           text-align: center;
         }
         span:nth-of-type(1) {
