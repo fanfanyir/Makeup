@@ -81,7 +81,7 @@ export default{
     price: function () {
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://7gdrgz.natappfree.cc/someOrder.htm', true)
+      xhr.open('post', 'http://qeicvd.natappfree.cc/someOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 1)
       xhr.onreadystatechange = function () {

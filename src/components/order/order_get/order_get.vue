@@ -21,7 +21,7 @@
         <p id="focendget">
           <input type="button" value="延长收货"/>
           <input type="button" value="查看物流"/>
-          <input type="button" value="确认收货" @click="sure(index)"/>
+          <input type="button" value="确认收货" @click="sure(index, getorder.order_id)"/>
         </p>
     </div>
     </div>
@@ -45,7 +45,7 @@ export default{
     price: function () {
       let that = this
       let xhr = new XMLHttpRequest()
-      xhr.open('post', 'http://7gdrgz.natappfree.cc/someOrder.htm', true)
+      xhr.open('post', 'http://qeicvd.natappfree.ccs/someOrder.htm', true)
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.send('user_id=' + 5 + '&' + 'user_sex=' + 2)
       xhr.onreadystatechange = function () {
@@ -70,13 +70,15 @@ export default{
     //        console.log('请求失败')
     //      })
     },
-    sure: function (index) {
+    sure: function (index, orderid) {
       if (confirm('确认收货?')) {
+        let str = {}
+        str[0] = orderid
         this.getorders.splice(index, 1)
         let xhr = new XMLHttpRequest()
         xhr.open('post', 'http://qeicvd.natappfree.cc/sureOrder.htm', true)
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-        xhr.send('sure_Order_id=' + index)
+        xhr.send('sure_Order_id=' + JSON.stringify(str))
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('已收货')
