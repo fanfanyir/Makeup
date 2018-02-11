@@ -2,7 +2,6 @@
   <div id="app">
     <!--<index></index>-->
     <!--<shopping></shopping>-->
-    <!--<test></test>-->
     <!--<login></login>-->
     <!--<register></register>-->
     <!--<person></person>-->

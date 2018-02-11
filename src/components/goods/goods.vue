@@ -1,10 +1,10 @@
 <template>
   <div id="goods">
-    <div id="title"><p>{{ message }}</p></div>
+    <div id="title"><p>商品分类</p></div>
     <div id="goodscon" class="goodscon">
-      <!--<div v-for="item in items" v-bind:key="item.id">-->
-      <!--<a href="#"><img v-bind:src="item.src"><span >{{ item.id }}</span></a>-->
-      <!--</div>-->
+      <div v-for="item in items" v-bind:key="item in items" @click="jump">
+        <img :src="item.max_photo"><span id="span">{{item.kind_max}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -14,31 +14,30 @@ import $ from 'jquery'
 export default{
   data () {
     return {
-      message: '商品分类'
+      items: [
+      ]
     }
   },
   methods: {
-    get: function () {
-      this.$http({
+    ajax: function () {
+      var that = this
+      $.ajax({
         method: 'GET',
-        url: 'http://bzuhan.free.ngrok.cc/selectAllBigClass.htm',
+        url: 'http://8w6pvv.natappfree.cc/index_kind_max.htm',
         dataType: 'json',
-        async: false,
-        xhrFields: {withCredentials: true}
-      }).then(function (res) {
-        console.log(res.data)
-        var str = res.data
-        for (let i = 0; i <= str.length; i++) {
-          $('#goodscon img').eq(i).attr('src', str[i].max_photo)
-          $('#goodscon span').eq(i).html(str[i].kind_max)
+        success: function (data) {
+          console.log(data)
+          that.items = data
         }
-      }, function () {
-        console.log('请求失败')
       })
+    },
+    jump: function () {
+      var t = $(window).scrollTop()
+      $('body,html').animate({'scrollTop': t + 700}, 1000)
     }
   },
   mounted: function () {
-    this.get()
+    this.ajax()
   }
 }
 </script>
@@ -56,14 +55,14 @@ export default{
       color: #ff0000;
     }
     #goodscon {
-      height: 335px;
+      height: 100%;
       padding-top:10px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
        div {
         width: 25%;
-        height: 125px;
+        height: 100%;
         border-radius: 50%;
         text-align: center;
          img {

@@ -22,6 +22,7 @@ export default {
     height:100px;
     background-color:#ff0000;
     text-align: center;
+    position:relative;
     span{
       line-height:100px;
       color:#fff;
@@ -30,9 +31,9 @@ export default {
       font-size:30px;
     }
     #sp2{
+      position:absolute;
       font-size:25px;
-      float:right;
-      margin-right:50px;
+      right:50px;
       a{
         color:#fff;
       }
