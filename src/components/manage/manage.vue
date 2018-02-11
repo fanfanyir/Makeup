@@ -1,22 +1,22 @@
 <template>
   <div id="manage">
-    <p id="manage-data">账户管理</p>
+    <p id="manage-data"><img id="changedata1" src="../../assets/order/左箭头2.png" @click="changeData()">账户管理</p>
     <ul id="manage-information">
       <li>
         <p>用户名</p>
-        <a>{{msg1}}</a>
+        <a>{{manageData.user_name}}</a>
       </li>
       <li>
-        <p>修改密码</p>
-        <a><span> > </span></a>
+        <p >修改密码</p>
+        <a><span @click="jumpChangepw()"> > </span></a>
       </li>
       <li>
-        <p>修改手机号码</p>
-        <a>{{msg2}} <span> > </span></a>
+        <p >修改手机号码</p>
+        <a>{{manageData.user_tel}} <span @click="jumpChangenum()"> > </span></a>
       </li>
       <li>
         <p>修改默认收货地址</p>
-        <a>{{msg3}} <span> > </span></a>
+        <a>{{manageData.address_add}} <span @click="jumpAddress()"> > </span></a>
       </li>
     </ul>
   </div>
@@ -27,24 +27,47 @@ export default {
   name: 'manage',
   data () {
     return {
-      msg1: '小小小小的',
-      msg2: '132*****953',
-      msg3: '陕西省西安市长安区'
+      manageData: []
     }
   },
   methods: {
+    changeData: function () {
+      this.$router.go(-1)
+    },
+    jumpChangepw: function () {
+      this.$router.push({
+        path: '/changepw'
+      })
+    },
+    jumpChangenum: function () {
+      this.$router.push({
+        path: '/changepw'
+      })
+    },
+    jumpAddress: function () {
+      this.$router.push({
+        path: '/Choose_Address'
+      })
+    },
     manage: function () {
+      var that = this
+      var url1 = this.$route.query.user_id
       $.ajax({
-        url: '',
-        type: 'post',
+        url: 'http://8w6pvv.natappfree.cc/gerenguanli.htm?user_id=' + url1,
+        type: 'get',
         dataType: 'json',
-        success: function (Rdata) {
-          if (!Rdata) {
+        success: function (res) {
+          console.log(res)
+          that.manageData = res
+          if (!res) {
             alert('')
           }
         }
       })
     }
+  },
+  mounted: function () {
+    this.manage()
   }
 }
 </script>
@@ -57,16 +80,21 @@ export default {
     width:100%;
     height:80px;
     background-color: #ff0000;
-    text-align: center;
     color:white;
     font-size:30px;
     line-height:80px;
   }
+  #changedata1{
+    width:50px;
+    height:50px;
+    margin-left:10px;
+    margin-right:35%;
+  }
   #manage-information{
     width:100%;
     height:100%;
-    padding:10px 30px 0;
     display:flex;
+    padding:0 20px 0;
     justify-content:space-between;
     align-items: center;
     flex-wrap: wrap;

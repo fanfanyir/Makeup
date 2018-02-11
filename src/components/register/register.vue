@@ -1,13 +1,12 @@
 <template>
   <div id="register">
     <p id="register-header">
-      欢迎注册
+      <span @click="registerData()"> &lt;</span>欢迎注册
     </p>
     <!--<changeimg></changeimg>-->
-    <form method="post" action="http://c5ie4u.natappfree.cc/register.htm" @submit.prevent="check()" id="register-input" name="register" enctype="multipart/form-data">
+    <form method="post" id="register-input"  name="register" enctype="multipart/form-data">
       <div id="register-pic" v-for ='item in items' v-bind:key="item.id">
         <img v-bind:src="item.src"  id="imgSdf"/>
-        <input type="file" value="切换头像" name="file" v-on:change="changeImg(this)"/>
       </div>
       <input type="text" placeholder="账户名" name="u1" v-on:blur="user1()" id="u1"/>
       <p></p>
@@ -27,13 +26,12 @@
       <p></p>
       <input type="password" placeholder="确认密码" name="u7" v-on:blur="user7()"/>
       <p></p>
-      <input type="submit" value="立即注册"  id="register-footer"/>
+      <button v-on:click='f1()' id="register-footer">立即注册</button>
     </form>
   </div>
 </template>
 <script>
 import $ from 'jquery'
-var reader = new FileReader()
 export default {
   name: 'register',
   data () {
@@ -44,23 +42,8 @@ export default {
     }
   },
   methods: {
-    check: function () {
-      alert('fhfh')
-      if (this.$options.methods.user1() && this.$options.methods.user2 && this.$options.user3 && this.$options.user4 && this.$options.user5 && this.$options.user6 && this.$options.user7) {
-        return true
-      } else {
-        return false
-      }
-    },
-    changeImg: function (file) {
-      var that = this
-      reader.onload = function (ev) {
-        alert('225')
-        that.item.width = '100'
-        that.item.height = '100'
-        that.item.src = ev.target.result
-      }
-      reader.readAsDataURL(file)
+    registerData: function () {
+      this.$router.go(-1)
     },
     user1: function () {
       var oReg1 = /^[a-zA-Z0-9\u4e00-\u9fa5]{6,15}$/
@@ -72,11 +55,11 @@ export default {
       } else {
         aP[1].innerHTML = ''
         $.ajax({
-          url: 'http://c5ie4u.natappfree.cc/check.htm?username=' + $('#u1').val(),
+          url: 'http://e2xh8u.natappfree.cc/check.htm?username=' + $('#u1').val(),
           type: 'get',
           dataType: 'json',
+          async: false,
           success: function (str) {
-            alert(str)
             if (str === true) {
               $('p').eq(1).html('帐户名已注册过')
               return false
@@ -151,8 +134,39 @@ export default {
         aP[7].innerHTML = ''
         return true
       }
+    },
+    f1: function () {
+      var that = this
+      if (this.$options.methods.user2() && this.$options.methods.user4() && this.$options.methods.user5() && this.$options.methods.user6() && this.$options.methods.user7()) {
+        var formData = new FormData($('#register-input')[0])
+        $.ajax({
+          url: 'http://e2xh8u.natappfree.cc/register.htm',
+          type: 'POST',
+          data: formData,
+          async: false,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (res) {
+            if (res === 'true') {
+              alert('注册成功')
+              that.$router.push({
+                path: '/login'
+              })
+            } else {
+              alert('注册失败')
+            }
+          }
+        })
+      } else {
+        alert('请正确完善信息')
+      }
     }
   }
+
+//  mounted: function () {
+//    this.init()
+//  }
 }
 </script>
 <style scoped>
@@ -166,6 +180,12 @@ export default {
     line-height:100px;
     color:#ff0000;
     font-size:36px;
+  }
+  #register-header span{
+    color:#ff0000;
+    font-size:60px;
+    margin-left:30px;
+    margin-right:20px;
   }
   #register-pic{
     width:100%;
@@ -207,13 +227,13 @@ export default {
     width:80%;
     height:75px;
   }
-  #register-footer{
-    width:100%;
-    height:100px;
-    display:flex;
-    justify-content: center;
-    align-items:flex-end;
-  }
+  /*#register-footer{*/
+    /*width:100%;*/
+    /*height:100px;*/
+    /*display:flex;*/
+    /*justify-content: center;*/
+    /*align-items:flex-end;*/
+  /*}*/
   #register-footer{
     margin:0 auto;
     width:80%;
@@ -221,7 +241,7 @@ export default {
     background-color:#ff0000;
     border-radius:55px;
     font-size:36px;
-    color:white;
+    color:#fff;
     outline:none;
   }
   #register-select option{

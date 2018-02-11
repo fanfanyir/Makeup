@@ -37,7 +37,7 @@ export default{
       this.$router.push({path: '/goodlist'})
     },
     shop: function () {
-      this.$router.push({push: '/shopping'})
+      this.$router.push({path: '/shopping'})
     },
     jumpMy: function () {
       this.$router.push({path: '/person'})
