@@ -26,7 +26,7 @@ export default{
       var that = this
       $.ajax({
         method: 'POST',
-        url: 'http://8w6pvv.natappfree.cc/index_kind_max2.htm',
+        url: 'http://nrpi25.natappfree.cc/index_kind_max2.htm',
         dataType: 'json',
         data: {'name': '底妆'},
         success: function (data) {

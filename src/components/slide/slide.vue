@@ -47,7 +47,7 @@ export default {
       let that = this
       $.ajax({
         method: 'GET',
-        url: 'http://8w6pvv.natappfree.cc/index_kind_get_slideshow.htm',
+        url: 'http://nrpi25.natappfree.cc/index_kind_get_slideshow.htm',
         dataType: 'json',
         success: function (data) {
           let str = $.parseJSON(data)

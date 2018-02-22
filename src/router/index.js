@@ -31,6 +31,8 @@ import changenum from '@/components/changenum/change-num.vue'
 import changepw from '@/components/changepw/change-pw.vue'
 Vue.use(Router)
 export default new Router({
+  mode: 'history',
+  base: '/B_MakeupTao/',
   routes: [
     {
       title: '首页',
